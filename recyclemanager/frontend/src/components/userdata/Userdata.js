@@ -24,7 +24,8 @@ export class Userdata extends Component {
               <th>ID</th>
               <th>Name</th>
               <th>Email</th>
-              <th>Message</th>
+              <th>password</th>
+              <th>address</th>
               <th />
             </tr>
           </thead>
@@ -34,7 +35,7 @@ export class Userdata extends Component {
                 <td>{user.id}</td>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
-                <td>{user.message}</td>
+                <td>{user.address}</td>
                 <td>
                   <button
                     onClick={this.props.deleteLead.bind(this, user.id)}
