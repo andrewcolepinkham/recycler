@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'submissions',
     'rest_framework',
     'frontend',
+    'userdata'
 ]
 
 MIDDLEWARE = [

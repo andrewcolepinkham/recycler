@@ -15,4 +15,6 @@ In recycler folder:
 - npm install -D webpack webpack-cli
 - npm install -D @babel/core babel-loader @babel/preset-env @babel/preset-react babel-plugin-transform-class-properties
 - npm install react react-dom prop-types
+- (NEW)npm install redux react-redux redux-thunk redux-devtools-extension
+-(NEW) npm install axios
 - npm run dev
