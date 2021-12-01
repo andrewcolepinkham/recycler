@@ -21,6 +21,7 @@ export class Form extends Component {
     const { amount, comment, photo } = this.state;
     const userdata = { amount, comment, photo };
     this.props.addSubmission(submission);
+    e.target.reset();
   };
 
   render() {
@@ -33,7 +34,7 @@ export class Form extends Component {
             <label>Amount</label>
             <input
               className="form-control"
-              type="number"
+              type="text"
               name="amount"
               onChange={this.onChange}
               value={amount}
@@ -58,6 +59,11 @@ export class Form extends Component {
               onChange={this.onChange}
               value={photo}
             />
+          </div>
+          <div className="form-group">
+            <button type="submit" disabled={this.state.amount.length<1}  className="btn btn-primary">
+              Submit
+            </button>
           </div>
         </form>
       </div>
