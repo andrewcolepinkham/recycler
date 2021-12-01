@@ -6,5 +6,6 @@ import messages from "./messages";
 export default combineReducers({
         submissions,
         errors,
-        messages
+        messages,  
+        auth
 });
