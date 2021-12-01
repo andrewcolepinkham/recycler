@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
-import userdata from "./userdata";
+import submissions from "./submissions";
 
 export default combineReducers({
-        userdata
+        submissions
 });

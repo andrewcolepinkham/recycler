@@ -1,12 +1,12 @@
 import React, { Fragment } from "react";
 import Form from "./Form";
-import Userdata from "./Userdata";
+import Submissions from "./Submissions";
 
 export default function Dashboard() {
   return (
     <Fragment>
       <Form />
-      <Userdata />
+      <Submissions />
     </Fragment>
   );
 }

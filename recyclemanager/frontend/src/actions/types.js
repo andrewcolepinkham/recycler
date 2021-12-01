@@ -1,4 +1,4 @@
 
-export const GET_USERDATA = "GET_USERDATA";
-export const DELETE_USER = "DELETE_USER";
-export const ADD_USER = "ADD_USER";
+export const GET_SUBMISSIONS = "GET_SUBMISSIONS";
+export const DELETE_SUBMISSION = "DELETE_SUBMISSION";
+export const ADD_SUBMISSION = "ADD_SUBMISSION";
