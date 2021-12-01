@@ -17,4 +17,5 @@ In recycler folder:
 - npm install react react-dom prop-types
 - (NEW)npm install redux react-redux redux-thunk redux-devtools-extension
 -(NEW) npm install axios
+- npm install react-alert react-alert-template-basic
 - npm run dev
