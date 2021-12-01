@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --mode development ./recyclemanager/frontend/src/index.js --output-path ./recyclemanager/frontend/static/frontend/",
-    "build": "webpack --mode production ./recyclemanager/frontend/src/index.js --output-path ./recyclemanager/frontend/static/frontend/"
+    "dev": "webpack --mode development --watch ./recyclemanager/frontend/src/index.js --output-path ./recyclemanager/frontend/static/frontend",
+    "build": "webpack --mode production --watch ./recyclemanager/frontend/src/index.js --output-path ./recyclemanager/frontend/static/frontend"
   },
   "keywords": [],
   "author": "",

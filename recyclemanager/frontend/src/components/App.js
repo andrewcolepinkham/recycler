@@ -10,9 +10,9 @@ class App extends Component {
       <Provider store={store}>
         <Fragment>
           <Header />
-          <div className="container">
+           <div className="container">
             <Dashboard />
-          </div>
+          </div> 
         </Fragment>
       </Provider>
     );

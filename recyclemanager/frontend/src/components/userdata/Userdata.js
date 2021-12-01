@@ -1,13 +1,13 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { getUserdatas, deleteLead } from "../../actions/userdata";
+import { getUserdata, deleteUser } from "../../actions/userdata";
 
 export class Userdata extends Component {
   static propTypes = {
     userdata: PropTypes.array.isRequired,
     getUserdatas: PropTypes.func.isRequired,
-    deleteLead: PropTypes.func.isRequired
+    deleteUser: PropTypes.func.isRequired
   };
 
   componentDidMount() {
@@ -38,7 +38,7 @@ export class Userdata extends Component {
                 <td>{user.address}</td>
                 <td>
                   <button
-                    onClick={this.props.deleteLead.bind(this, user.id)}
+                    onClick={this.props.deleteUser.bind(this, user.id)}
                     className="btn btn-danger btn-sm"
                   >
                     {" "}

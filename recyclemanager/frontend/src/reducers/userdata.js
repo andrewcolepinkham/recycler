@@ -1,7 +1,7 @@
-import { GET_USERDATA, DELETE_LEAD, ADD_LEAD } from "../actions/types.js";
+import { GET_USERDATA, DELETE_USER, ADD_USER } from "../actions/types.js";
 
 const initialState = {
-  userdata: []
+  userdata: [],
 };
 
 export default function(state = initialState, action) {
