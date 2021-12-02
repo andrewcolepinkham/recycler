@@ -40,7 +40,7 @@ class App extends Component {
               <Alerts />
               <div className="container">
                 <Routes>
-                  {/* <PrivateRoute eact path ="/" component={Dashboard}/> */}
+                  <PrivateRoute eact path ="/" component={Dashboard}/>
                   <Route exact path ="/submissions" component={Dashboard}/> 
                   <Route exact path="/register" component={Register} />
                   <Route exact path="/login" component={Login} />
