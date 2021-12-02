@@ -1,10 +1,12 @@
 import React from 'react';
-import {Route, Redirect} from "react-router"; 
+// REACT v6 Redirect is now Navigate
+
+import {Routes, Route, Navigate } from "react-router-dom"; 
 import { connect } from "react-redux"; 
 import PropTypes from "prop-types"
 
 const PrivateRoute=({component: Component, auth, ...rest}) => (
-    <Route 
+     <Route 
     {...rest}
     render={props => {
         if(auth.isLoading) {
@@ -12,12 +14,13 @@ const PrivateRoute=({component: Component, auth, ...rest}) => (
 
         }
         else if (!auth.isAuthenticated) {
-            return <Redirect to ="/login" />
+            return <Navigate to ="./login" />
         }
         else {
         return <Component {...props} />
     }}}
     />
+  
 ); 
 
 
@@ -25,4 +28,4 @@ const mapStateToProps = state => ({
     auth : state.auth
 }); 
 
-export default PrivateRoute
+export default (PrivateRoute);

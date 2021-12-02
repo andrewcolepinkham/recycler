@@ -41,7 +41,7 @@ export class Login extends Component {
             
             <div className="form-group">
               <button type="login" className="btn btn-primary">
-                Register
+                Login
               </button>
             </div>
             <p>
@@ -54,4 +54,4 @@ export class Login extends Component {
     }
 }
 
-export default Register
+export default Login

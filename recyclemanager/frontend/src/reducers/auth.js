@@ -1,4 +1,4 @@
-import {USER_LOADED, USER_LOADING, AUTH_ERROR} from "../actionst/types"; 
+import {USER_LOADED, USER_LOADING, AUTH_ERROR} from "../actions/types"; 
 
 const initialState = {
     token: localStorage.getItem("token"), 
