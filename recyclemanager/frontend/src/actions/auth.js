@@ -17,7 +17,7 @@ export const loadUser = () => (dispatch, getState)=> {
     //headers 
     const config = {
         headers: {
-            'Content-type': 'application/json'
+            'Content-Type': 'application/json'
         }
     }
 

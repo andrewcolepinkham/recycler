@@ -1,31 +1,23 @@
 import React from 'react';
-// REACT v6 Redirect is now Navigate
+import { Route, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-import {Routes, Route, Navigate } from "react-router-dom"; 
-import { connect } from "react-redux"; 
-import PropTypes from "prop-types"
-
-const PrivateRoute=({component: Component, auth, ...rest}) => (
-     <Route 
+const PrivateRoute = ({ component: Component, auth,  ...rest }) => (
+  <Route
     {...rest}
-    render={props => {
-        if(auth.isLoading) {
-            return <h2> Loading...</h2> //COULD PUT IT IN LOADER 
+    render={(props) => {
+      if (!auth) {
+        return <Redirect to="/login" />;
+      } else {
+        return <Component {...props} />;
+      }
+    }}
+  />
+);
 
-        }
-        else if (!auth.isAuthenticated) {
-            return <Navigate to ="./login" />
-        }
-        else {
-        return <Component {...props} />
-    }}}
-    />
-  
-); 
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
 
-
-const mapStateToProps = state => ({
-    auth : state.auth
-}); 
-
-export default (PrivateRoute);
+export default connect(mapStateToProps)(PrivateRoute);

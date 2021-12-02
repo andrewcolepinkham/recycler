@@ -14,9 +14,9 @@ export class Form extends Component {
     addSubmission: PropTypes.func.isRequired
   };
 
-  onChange = e => this.setState({ [e.target.name]: e.target.value });
+  onChange = (e) => this.setState({ [e.target.name]: e.target.value });
 
-  onSubmit = e => {
+  onSubmit = (e) => {
     e.preventDefault();
     const { amount, comment, photo } = this.state;
     const submission = { amount, comment, photo };
@@ -61,7 +61,7 @@ export class Form extends Component {
             />
           </div>
           <div className="form-group">
-            <button type="submit"  className="btn btn-primary">
+            <button type="submit" className="btn btn-primary">
               Submit
             </button>
           </div>
@@ -74,5 +74,5 @@ export class Form extends Component {
 
 export default connect(
   null,
-  { addSubmission}
+  { addSubmission }
 )(Form);
