@@ -1,11 +1,13 @@
 import axios from "axios";
 import { createMessage } from "./messages";
 import { GET_SUBMISSIONS, DELETE_SUBMISSION, ADD_SUBMISSION, GET_ERRORS, GET_MESSAGES } from "./types";
+import { tokenConfig } from "./auth";
+
 
 // GET SUBMISSIONS
-export const getSubmissions = () => dispatch => {
+export const getSubmissions = () => (dispatch, getState) => {
   axios
-    .get("/api/submissions/")
+    .get("/api/submissions/", tokenConfig(getState))
     .then(res => {
       dispatch({
         type: GET_SUBMISSIONS,
@@ -25,9 +27,9 @@ export const getSubmissions = () => dispatch => {
 };
 
 // DELETE SUBMISSIONS
-export const deleteSubmission = id => dispatch => {
+export const deleteSubmission = id => (dispatch, getState) => {
   axios
-    .delete(`/api/submissions/${id}/`)
+    .delete(`/api/submissions/${id}/`, tokenConfig(getState))
     .then(res => {
       dispatch(createMessage({deleteSubmission: "Submission Deleted"}));
       dispatch({
@@ -48,9 +50,10 @@ export const deleteSubmission = id => dispatch => {
 };
 
 // ADD SUBMISSIONS
-export const addSubmission = submission => dispatch => {
+export const addSubmission = submission => (dispatch, getState) => {
+  console.log(submission);
   axios
-    .post("/api/submissions/", submission)
+    .post("/api/submissions/", submission, tokenConfig(getState))
     .then(res => {
       dispatch(createMessage({addSubmission: "Submission Added"}));
       dispatch({

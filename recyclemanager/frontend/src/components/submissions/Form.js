@@ -19,7 +19,8 @@ export class Form extends Component {
   onSubmit = (e) => {
     e.preventDefault();
     const { amount, comment, photo } = this.state;
-    const submission = { amount, comment, photo };
+    // const myphoto = "recyclemanager/IMG_0283_Kj8kCCB.JPG"; //testing
+    const submission = { amount, comment, photo }; 
     this.props.addSubmission(submission);
     e.target.reset();
   };
