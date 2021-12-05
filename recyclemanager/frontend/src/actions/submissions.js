@@ -53,7 +53,7 @@ export const deleteSubmission = id => (dispatch, getState) => {
 export const addSubmission = submission => (dispatch, getState) => {
   console.log(submission);
   axios
-    .post("/api/submissions/", submission, tokenConfig(getState))
+    .post("/api/submissions/", submission, formTokenConfig(getState))
     .then(res => {
       dispatch(createMessage({addSubmission: "Submission Added"}));
       dispatch({
@@ -62,6 +62,7 @@ export const addSubmission = submission => (dispatch, getState) => {
       });
     })
     .catch(err => {
+      console.log(err)
       const errors = {
         msg: err.response.data,
         status: err.response.status
@@ -71,4 +72,24 @@ export const addSubmission = submission => (dispatch, getState) => {
         payload: errors
       });
     });
+};
+
+// Setup config with token - helper function
+export const formTokenConfig = (getState) => {
+  // Get token from state
+  const token = getState().auth.token;
+
+  // Headers
+  const config = {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    },
+  };
+
+  // If token, add to headers config
+  if (token) {
+    config.headers['Authorization'] = `Token ${token}`;
+  }
+
+  return config;
 };
