@@ -8,7 +8,7 @@ from django.db.models.deletion import CASCADE
 class Account(models.Model): 
     user = models.OneToOneField(User, on_delete=CASCADE)
     username = models.CharField(max_length=150,blank=True)
-    score = 0
+    score = models.FloatField(default=0)
     password = ''
     email =""
 
@@ -18,6 +18,10 @@ class Account(models.Model):
         self.user = user
         return self
     def update_score(self, score_increase): 
-        self.score += score_increase
-        
+        self.score= self.score + score_increase
+    def get_score(self): 
+        return self.score
+    def __str__(self) -> str:
+        return self.username
+
 
