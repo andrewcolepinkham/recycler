@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import { logout } from "../../actions/auth";
+
+
+
 export class Header extends Component {
 
   static propTypes = {
@@ -19,10 +22,12 @@ export class Header extends Component {
           <strong>{user ? `Welcome ${user.username}` : ''}</strong>
         </span>
         <li className="nav-item">
+          <Link to="../../submissions/Leaderboard" className="nav-link btn btn-info btn-sm text-light">Dashboard</Link>
           <button onClick={this.props.logout} className="nav-link btn btn-info btn-sm text-light">
             Logout
           </button>
-        </li>
+          </li>
+                  
       </ul>
     );
 
