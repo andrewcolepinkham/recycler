@@ -3,32 +3,31 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Image from 'react-bootstrap/Image';
 import Submissions from './submissions';
+import {Container ,Row, Col} from "react-bootstrap"
+import UserProfile from './UserProfile';
+import Leaderboard from "./Leaderboard";
+import Map from "./Map";
+
 
 export class Profile extends Component {
   static propTypes = {
-    submissions: PropTypes.array.isRequired,
-    getSubmissions: PropTypes.func.isRequired,
-    deleteSubmission: PropTypes.func.isRequired
   };
 
   render() {
     return (
     
-    <Fragment>
-        {/* <h2>Submisions</h2>
-        <table className="table table-striped">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>User</th>
-              <th>Score</th>
-              <th />
-            </tr>
-          </thead>
-       </table> */}
-       <Submissions />
-    </Fragment>
+      <Container className = "p-5">
+        <Row className = "p-5">
+          <Col> <UserProfile/> </Col>
+          <Col> <Submissions /> </Col>
+        </Row>
+        <Row className = "p-5">
+          <Col> <Leaderboard/> </Col>
+          <Col> < Map/> </Col>
+        </Row>
+      </Container>
     );
+    
   }
 }
 
