@@ -51,7 +51,6 @@ export const deleteSubmission = id => (dispatch, getState) => {
 
 // ADD SUBMISSIONS
 export const addSubmission = submission => (dispatch, getState) => {
-  console.log(submission);
   axios
     .post("/api/submissions/", submission, formTokenConfig(getState))
     .then(res => {
