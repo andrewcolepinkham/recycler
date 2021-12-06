@@ -8,8 +8,8 @@ class SubmissionViewSet(viewsets.ModelViewSet):
         permissions.IsAuthenticated,
     ]
     serializer_class = SubmissionSerializer
-
     def get_queryset(self):
+
         return self.request.user.submissions.all()
 
     def perform_create(self, serializer):

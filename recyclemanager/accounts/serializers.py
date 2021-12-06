@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
+from .models import Account
 
 # User Serializer
 class UserSerializer(serializers.ModelSerializer):
@@ -16,10 +17,13 @@ class RegisterSerializer(serializers.ModelSerializer):
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
-        user = User.objects.create_user(validated_data
-        ['username'], validated_data['email'], 
-        validated_data['password'])
-        return user
+        user = User.objects.create_user(
+            **validated_data
+        )
+        username = validated_data['username']
+        profile = Account.objects.create(user=user,username=username)
+        user.set_password(validated_data['password'])
+        return profile, user
 
 # Login Serializer
 class LoginSerializer(serializers.Serializer):
