@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { getSubmissions, deleteSubmission } from "../../actions/submissions";
+import Image from 'react-bootstrap/Image';
 
 export class Submissions extends Component {
   static propTypes = {
@@ -17,13 +18,13 @@ export class Submissions extends Component {
   render() {
     return (
       <Fragment>
-        <h2>Submision</h2>
+        <h2>Submisions</h2>
         <table className="table table-striped">
           <thead>
             <tr>
               <th>ID</th>
               <th>Amount</th>
-              <th>Comment</th>
+              <th>Description</th>
               <th>Photo</th>
               <th />
             </tr>
@@ -33,8 +34,12 @@ export class Submissions extends Component {
               <tr key={submission.id}>
                 <td>{submission.id}</td>
                 <td>{submission.amount}</td>
-                <td>{submission.comment}</td>
-                <td>{submission.photo}</td>
+                <td>{submission.description} </td>
+                <td>
+                  <Image src={submission.photo}/>
+                </td>
+                {/* <Image src="recyclemanager/media/post_images/test.JPEG"/> */}
+                {/* <td>{submission.photo}</td> */}
                 <td>
                   <button
                     onClick={this.props.deleteSubmission.bind(this, submission.id)}

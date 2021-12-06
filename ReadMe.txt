@@ -2,8 +2,8 @@ Readme for recycler web app
 pipenv shell 
 
 first time after clone: 
-- python -m pip install Pillow
-- pipenv install django djangorestframework django-rest-knox
+python -m pip install Pillow 
+pipenv install django djangorestframework django-rest-knox
 From recycler 
 python manage.py makemigrations
 python manage.py migrate
