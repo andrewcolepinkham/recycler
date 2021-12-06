@@ -2,8 +2,9 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Image from 'react-bootstrap/Image';
+import Submissions from './submissions';
 
-export class Leaderboard extends Component {
+export class Profile extends Component {
   static propTypes = {
     submissions: PropTypes.array.isRequired,
     getSubmissions: PropTypes.func.isRequired,
@@ -14,7 +15,7 @@ export class Leaderboard extends Component {
     return (
     
     <Fragment>
-        <h2>Submisions</h2>
+        {/* <h2>Submisions</h2>
         <table className="table table-striped">
           <thead>
             <tr>
@@ -24,7 +25,8 @@ export class Leaderboard extends Component {
               <th />
             </tr>
           </thead>
-       </table>
+       </table> */}
+       <Submissions />
     </Fragment>
     );
   }
@@ -36,4 +38,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   {}
-)(Leaderboard);
+)(Profile);
