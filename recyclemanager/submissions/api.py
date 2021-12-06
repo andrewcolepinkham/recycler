@@ -2,6 +2,7 @@ from submissions.models import Submission
 from rest_framework import viewsets, permissions
 from .serializers import SubmissionSerializer
 from rest_framework.parsers import MultiPartParser, FormParser
+from .calculate_scores import score_calculator
 
  
 
@@ -12,17 +13,19 @@ class SubmissionViewSet(viewsets.ModelViewSet):
         permissions.IsAuthenticated,
     ]
     serializer_class = SubmissionSerializer
-    print("SubmissionViewSet")
     def get_queryset(self):
 
         return self.request.user.submissions.all()
 
     def perform_create(self, serializer):
-     
+       
         account = self.request.user.account
-        account.update_score(1)
+        
+        submission_data  = self.request.__dict__["_data"]
+        account.score = account.score + score_calculator(submission_data['type'], int(submission_data['amount']))
         account.save(update_fields=["score"]) 
-
+    #     return account
+     
         serializer.save(owner=self.request.user)
 
         
