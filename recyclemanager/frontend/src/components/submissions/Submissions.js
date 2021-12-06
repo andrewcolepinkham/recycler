@@ -23,6 +23,7 @@ export class Submissions extends Component {
           <thead>
             <tr>
               <th>ID</th>
+              <th>Type</th>
               <th>Amount</th>
               <th>Description</th>
               <th>Photo</th>
@@ -33,13 +34,12 @@ export class Submissions extends Component {
             {this.props.submissions.map(submission => (
               <tr key={submission.id}>
                 <td>{submission.id}</td>
+                <td>{submission.type}</td>
                 <td>{submission.amount}</td>
-                <td>{submission.description} </td>
+                <td>{submission.description}</td>
                 <td>
-                  <Image src={submission.photo}/>
+                  <img src={submission.photo} className='img-fluid hover-shadow' alt='' style={{ maxWidth: '5rem' }}/>
                 </td>
-                {/* <Image src="recyclemanager/media/post_images/test.JPEG"/> */}
-                {/* <td>{submission.photo}</td> */}
                 <td>
                   <button
                     onClick={this.props.deleteSubmission.bind(this, submission.id)}
