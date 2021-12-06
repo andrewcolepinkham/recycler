@@ -22,7 +22,8 @@ export class Header extends Component {
           <strong>{user ? `Welcome ${user.username}` : ''}</strong>
         </span>
         <li className="nav-item">
-          <Link to="../../submissions/Leaderboard" className="nav-link btn btn-info btn-sm text-light">Dashboard</Link>
+          <Link to="/" className="nav-link">Profile</Link>
+          <Link to="/submissionform" className="nav-link">New Submission</Link>
           <button onClick={this.props.logout} className="nav-link btn btn-info btn-sm text-light">
             Logout
           </button>

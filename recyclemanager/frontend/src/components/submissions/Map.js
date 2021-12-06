@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-export class Leaderboard extends Component {
+export class Map extends Component {
     static propTypes = {
 
     };
@@ -14,17 +14,7 @@ export class Leaderboard extends Component {
   render() {
     return (
       <Fragment>
-        <h2>Leaderboard</h2>
-        <table className="table table-striped">
-          <thead>
-            <tr>
-              <th>Rank</th>
-              <th>User</th>
-              <th>Amount</th>
-              <th />
-            </tr>
-          </thead>
-         </table>
+        <h2>Map</h2>
       </Fragment>
     );
   }
@@ -35,4 +25,4 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-)(Leaderboard);
+)(Map);
