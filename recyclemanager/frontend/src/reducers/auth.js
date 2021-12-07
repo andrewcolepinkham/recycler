@@ -5,7 +5,7 @@ const initialState = {
     isAuthenticated: null, 
     isLoading: false, 
     user: null,
-    account: {score: 0}
+    account: {score: "--"}
 }; 
 
 export default function(state=initialState, action){
@@ -18,7 +18,6 @@ export default function(state=initialState, action){
                 isLoading: true
             }; 
         case USER_LOADED: 
-            console.log(action.payload)
             return {
                 ...state, 
                 isAuthenticated: true,  
@@ -26,7 +25,6 @@ export default function(state=initialState, action){
                 user: action.payload,
             }; 
         case ACCOUNT_LOADED: 
-            console.log(action.payload)
             return {
                 ...state, 
                 isAuthenticated: true,  

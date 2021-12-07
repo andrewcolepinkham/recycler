@@ -14,6 +14,14 @@ class UserSerializer(serializers.ModelSerializer):
     #     print("update")
     #     print(account.username)
     #     return instance
+
+# User Serializer
+class AccountSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Account
+        fields = ('id', 'username', 'email', 'score')
+
+
 # Register Serializer
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:

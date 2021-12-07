@@ -12,6 +12,7 @@ import {
   LOGOUT_SUCCESS,
   REGISTER_SUCCESS,
   REGISTER_FAIL,
+  ACCOUNT_ERROR,
 } from './types';
 
 // CHECK TOKEN & LOAD USER
@@ -49,9 +50,10 @@ export const loadAccount = () => (dispatch, getState) => {
       });
     })
     .catch((err) => {
+      console.log(err)
       dispatch(returnErrors(err.response.data, err.response.status));
       dispatch({
-        type: AUTH_ERROR,
+        type: ACCOUNT_ERROR,
       });
     });
 };
