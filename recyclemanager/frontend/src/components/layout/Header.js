@@ -6,6 +6,7 @@ import { logout } from "../../actions/auth";
 
 
 
+
 export class Header extends Component {
 
   static propTypes = {
@@ -14,8 +15,8 @@ export class Header extends Component {
   };
 
   render() {
-    const { isAuthenticated, user } = this.props.auth;
-
+    const { isAuthenticated, user, account } = this.props.auth;
+    // console.log(user)
     const authLinks = (
       <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
         <span className="navbar-text mr-3">
