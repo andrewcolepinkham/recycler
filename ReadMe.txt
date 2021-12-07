@@ -1,5 +1,4 @@
 Readme for recycler web app
-pipenv shell 
 
 PYTHON PACKAGES
 - python -m pip install Pillow

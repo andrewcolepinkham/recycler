@@ -18,13 +18,14 @@ class SubmissionViewSet(viewsets.ModelViewSet):
         return self.request.user.submissions.all()
 
     def perform_create(self, serializer):
-       
+        ###################
+        # MAY NEED TO MOVE THIS
+        # logic to update score in the account 
         account = self.request.user.account
-        
         submission_data  = self.request.__dict__["_data"]
         account.score = account.score + score_calculator(submission_data['type'], int(submission_data['amount']))
         account.save(update_fields=["score"]) 
-    #     return account
+        ######################
      
         serializer.save(owner=self.request.user)
 

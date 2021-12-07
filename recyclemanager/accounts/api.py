@@ -46,3 +46,20 @@ class UserAPI(generics.RetrieveAPIView):
 
     def get_object(self):
         return self.request.user
+class AccountAPI(generics.GenericAPIView): 
+    permission_classes = [
+        permissions.IsAuthenticated,
+    ]
+    def get_object(self): 
+        return self.request.user.account
+   # serializer_class = UserSerializer
+    def update_score(self, new_score):
+       
+        pass
+    def get_score(self): 
+       pass
+    def add_to_score(self, score):
+        account = self.request.user.account
+        submission_data  = self.request.__dict__["_data"]
+        account.score = account.score + score_calculator(submission_data['type'], int(submission_data['amount']))
+        account.save(update_fields=["score"]) 
