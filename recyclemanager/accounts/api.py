@@ -44,7 +44,7 @@ class UserAPI(generics.RetrieveAPIView):
     def get_object(self):
         return self.request.user
 
-# Get User API
+# Get Account API
 class AccountAPI(generics.RetrieveAPIView):
     permission_classes = [
         permissions.IsAuthenticated,
@@ -52,4 +52,5 @@ class AccountAPI(generics.RetrieveAPIView):
     serializer_class = AccountSerializer
 
     def get_object(self):
+        print(self.request.user.account)
         return self.request.user.account

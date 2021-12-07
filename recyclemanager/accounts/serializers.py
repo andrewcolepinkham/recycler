@@ -19,7 +19,13 @@ class UserSerializer(serializers.ModelSerializer):
 class AccountSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
-        fields = ('id', 'username', 'email', 'score')
+        fields = (
+            'id', 
+            'username', 
+            'email', 
+            'score',
+            'num_submissions'
+        )
 
 
 # Register Serializer

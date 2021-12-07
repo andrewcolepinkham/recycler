@@ -24,6 +24,8 @@ class SubmissionViewSet(viewsets.ModelViewSet):
         submission_data  = self.request.__dict__["_data"]
         account.score = account.score + score_calculator(submission_data['type'], int(submission_data['amount']))
         account.save(update_fields=["score"]) 
+        account.num_submissions +=1
+        account.save(update_fields=["num_submissions"]) 
     #     return account
      
         serializer.save(owner=self.request.user)

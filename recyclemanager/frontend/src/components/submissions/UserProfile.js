@@ -21,9 +21,10 @@ export class UserProfile extends Component {
     return (
       <Fragment>
         <h2>Profile</h2>
-        <div> Username: {user.username} </div>
-        <div> Email: {user.email}  </div>
-        <div> Score: {account.score}  </div>
+        <h5>Username: {user.username}</h5>
+        <h5> Email: {user.email}</h5>
+        <h5> Score: {account.score}</h5>
+        <h5> Number of Submissions: {account.num_submissions}</h5>
       </Fragment>
     );
   }
