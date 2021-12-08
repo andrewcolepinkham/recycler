@@ -13,7 +13,10 @@ export class Header extends Component {
     auth: PropTypes.object.isRequired,
     logout: PropTypes.func.isRequired,
   };
-
+  alertInfo(){
+    alert("Welcome to Recyler! This is an interactive reacyling competiton application that allows you submit recyling receipts to gain point. Compete with your friends by submitting reciepts on the submission tab and see your progress and others by using the dashboard tab. Also present is a map of nearby recyling centers, so get to work. May the best win!");
+  };
+  
   render() {
     const { isAuthenticated, user, account } = this.props.auth;
     // console.log(user)
@@ -25,6 +28,9 @@ export class Header extends Component {
         <div class="navbar-nav justify-content-end">
           <Link to="/" className="nav-link">Profile</Link>
           <Link to="/submissionform" className="nav-link">New Submission</Link>
+          <button variant="outline-light" onClick={this.alertInfo} className="nav-link btn  " >
+            About
+          </button>
           <button onClick={this.props.logout} className="nav-link btn btn-info btn-sm text-light">
             Logout
           </button>
