@@ -46,6 +46,9 @@ export class Form extends Component {
     submission.append('photo', this.state.photo, this.state.photo.name);
     this.props.addSubmission(submission);
     e.target.reset();
+    alert("Submission Sucessful")
+    //should work but isnt
+    this.props.history.push('/');
   };
 
   render() {
