@@ -59,6 +59,7 @@ export const addSubmission = submission => (dispatch, getState) => {
         type: ADD_SUBMISSION,
         payload: res.data
       });
+    
     })
     .catch(err => {
       console.log(err)

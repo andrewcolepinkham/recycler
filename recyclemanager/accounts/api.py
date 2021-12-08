@@ -1,7 +1,7 @@
-from rest_framework import generics, permissions
+from rest_framework import generics, permissions, mixins, viewsets
 from rest_framework.response import Response
 from knox.models import AuthToken
-from .serializers import UserSerializer, RegisterSerializer, LoginSerializer
+from .serializers import UserSerializer, RegisterSerializer, LoginSerializer, AccountSerializer, UpdateScoreSerializer
 
 # Register API
 class RegisterAPI(generics.GenericAPIView):
@@ -10,10 +10,7 @@ class RegisterAPI(generics.GenericAPIView):
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        
-        profile, user= serializer.save()
-
-        
+        user, account= serializer.save()
         token = AuthToken.objects.create(user)[1]
         return Response({
             "user": UserSerializer(user, 
@@ -29,7 +26,7 @@ class LoginAPI(generics.GenericAPIView):
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        user = serializer.validated_data
+        user,account = serializer.validated_data
         token = AuthToken.objects.create(user)[1]
         return Response({
             "user": UserSerializer(user, 
@@ -46,20 +43,38 @@ class UserAPI(generics.RetrieveAPIView):
 
     def get_object(self):
         return self.request.user
-class AccountAPI(generics.GenericAPIView): 
+
+# Get User API
+class AccountAPI(generics.RetrieveAPIView):
     permission_classes = [
         permissions.IsAuthenticated,
     ]
-    def get_object(self): 
+    serializer_class = AccountSerializer
+    def get_object(self):
         return self.request.user.account
-   # serializer_class = UserSerializer
-    def update_score(self, new_score):
-       
-        pass
-    def get_score(self): 
-       pass
-    def add_to_score(self, score):
-        account = self.request.user.account
-        submission_data  = self.request.__dict__["_data"]
-        account.score = account.score + score_calculator(submission_data['type'], int(submission_data['amount']))
-        account.save(update_fields=["score"]) 
+    def edit_score(self, amount, type): 
+        print("edit score")
+
+# class EditScoreAPI(mixins.UpdateModelMixin):
+#     permission_classes = [
+#         permissions.IsAuthenticated,
+#     ]
+#     serializer_class = UpdateScoreSerializer
+#     def update(self, request, *args, **kwargs):
+#         print("here!!!!!")
+
+#         instance = self.get_object()
+#         serializer = self.get_serializer(instance, data=request.data)
+#         serializer.is_valid(raise_exception=True)
+#         self.perform_update(serializer)
+#         return Response(serializer.data)
+#     def perform_update(self, serializer):
+#         print("here!!!!!")
+        
+#     def get_score(self): 
+#        pass
+#     def add_to_score(self, score):
+#         account = self.request.user.account
+#         submission_data  = self.request.__dict__["_data"]
+#      #   account.score = account.score + score_calculator(submission_data['type'], int(submission_data['amount']))
+#         account.save(update_fields=["score"])

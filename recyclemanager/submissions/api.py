@@ -13,6 +13,7 @@ class SubmissionViewSet(viewsets.ModelViewSet):
         permissions.IsAuthenticated,
     ]
     serializer_class = SubmissionSerializer
+    print("here")
     def get_queryset(self):
 
         return self.request.user.submissions.all()
@@ -22,6 +23,7 @@ class SubmissionViewSet(viewsets.ModelViewSet):
         # MAY NEED TO MOVE THIS
         # logic to update score in the account 
         account = self.request.user.account
+
         submission_data  = self.request.__dict__["_data"]
         account.score = account.score + score_calculator(submission_data['type'], int(submission_data['amount']))
         account.save(update_fields=["score"]) 

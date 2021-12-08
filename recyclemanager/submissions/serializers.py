@@ -7,7 +7,9 @@ class SubmissionSerializer(serializers.ModelSerializer):
         model = Submission
         fields = '__all__'
     
-  # NOT BEING USED RIGHT NOW! IGNORE!!
+    #     instance = Account.objects.update_score(1)
+    #     account.save(update_fields=["score"]) 
+    #     return account
 class SubmissionUserUpdateSerializer(serializers.ModelSerializer): 
     class Meta:
         model = Account

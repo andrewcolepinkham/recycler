@@ -17,6 +17,8 @@ class Account(models.Model):
         self.score = 0
         self.user = user
         return self
+    def delete_score(self, score_decrease): 
+        self.score = self.score- score_decrease
     def update_score(self, score_increase): 
         self.score= self.score + score_increase
     def get_score(self): 

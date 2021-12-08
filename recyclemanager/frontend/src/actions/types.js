@@ -12,3 +12,7 @@ export const LOGIN_FAIL = "LOGIN_FAIL";
 export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS"; 
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS"; 
 export const REGISTER_FAIL = "REGISTER_FAIL"; 
+export const ACCOUNT_LOADING = "ACCOUNT_LOADING"; 
+export const ACCOUNT_LOADED = "ACCOUNT_LOADED"; 
+export const ACCOUNT_ERROR = "ACCOUNT_ERROR"; 
+export const ADD_SCORE = "ADD_SCORE"; 

@@ -14,6 +14,14 @@ class UserSerializer(serializers.ModelSerializer):
     #     print("update")
     #     print(account.username)
     #     return instance
+
+# User Serializer
+class AccountSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Account
+        fields = ('id', 'username', 'email', 'score')
+
+
 # Register Serializer
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
@@ -48,3 +56,15 @@ class LoginSerializer(serializers.Serializer):
             return user, account
         raise serializers.ValidationError("Incorrect Credientials")
 
+class UpdateScoreSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Account
+        fields = ('id', 'username', 'email', 'score')
+    def update(self, instance, validated_data):
+        print("update score")
+        print(instance) 
+        print(validated_data)
+
+        instance.save()
+
+        return instance

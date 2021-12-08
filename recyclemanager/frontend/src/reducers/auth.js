@@ -1,14 +1,17 @@
-import {USER_LOADED, USER_LOADING, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS, REGISTER_SUCCESS, REGISTER_FAIL} from "../actions/types"; 
+import {USER_LOADED, USER_LOADING, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS, REGISTER_SUCCESS, REGISTER_FAIL, ACCOUNT_LOADED, ACCOUNT_LOADING, ADD_SCORE} from "../actions/types"; 
 
 const initialState = {
     token: localStorage.getItem('token'), 
     isAuthenticated: null, 
     isLoading: false, 
-    user: null
+    user: null,
+    account: {score: "--"}
 }; 
 
 export default function(state=initialState, action){
+    
     switch(action.type){
+        case ACCOUNT_LOADING:
         case USER_LOADING: 
             return {
                 ...state, 
@@ -19,7 +22,14 @@ export default function(state=initialState, action){
                 ...state, 
                 isAuthenticated: true,  
                 isLoading: false, 
-                user: action.payload
+                user: action.payload,
+            }; 
+        case ACCOUNT_LOADED: 
+            return {
+                ...state, 
+                isAuthenticated: true,  
+                isLoading: false, 
+                account: action.payload,
             }; 
         case LOGIN_SUCCESS:
         case REGISTER_SUCCESS:
@@ -30,6 +40,7 @@ export default function(state=initialState, action){
                 isAuthenticated: true,  
                 isLoading: false, 
             }; 
+      
         case AUTH_ERROR:
         case LOGIN_FAIL:
         case LOGOUT_SUCCESS:

@@ -4,12 +4,15 @@ import { returnErrors } from './messages';
 import {
   USER_LOADED,
   USER_LOADING,
+  ACCOUNT_LOADED,
+  ACCOUNT_LOADING,
   AUTH_ERROR,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT_SUCCESS,
   REGISTER_SUCCESS,
   REGISTER_FAIL,
+  ACCOUNT_ERROR,
 } from './types';
 
 // CHECK TOKEN & LOAD USER
@@ -29,6 +32,28 @@ export const loadUser = () => (dispatch, getState) => {
       dispatch(returnErrors(err.response.data, err.response.status));
       dispatch({
         type: AUTH_ERROR,
+      });
+    });
+};
+
+// Get score
+export const loadAccount = () => (dispatch, getState) => {
+  // User Loading
+  dispatch({ type: ACCOUNT_LOADING });
+
+  axios
+    .get('/api/auth/account', tokenConfig(getState))
+    .then((res) => {
+      dispatch({
+        type: ACCOUNT_LOADED,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err)
+      dispatch(returnErrors(err.response.data, err.response.status));
+      dispatch({
+        type: ACCOUNT_ERROR,
       });
     });
 };
