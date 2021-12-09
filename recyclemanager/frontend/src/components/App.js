@@ -17,6 +17,7 @@ import PrivateRoute from './common/PrivateRoute';
 import { Provider } from 'react-redux';
 import store from '../store';
 import { loadUser } from '../actions/auth';
+import EditProfile from './submissions/EditProfile';
 
 
 
@@ -44,6 +45,7 @@ class App extends Component {
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
               <Route exact path='/account' component={Account}/>
+              <Route exact path = '/editer' component= {EditProfile} />
               <Route exact path="/submissionform" component={SubmissionForm} />
             </Switch>
            </div> 

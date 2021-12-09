@@ -45,6 +45,12 @@ export class Form extends Component {
     submission.append('amount', this.state.amount);
     submission.append('photo', this.state.photo, this.state.photo.name);
     this.props.addSubmission(submission);
+    this.setState({
+      type: "Aluminium Cans",
+      amount: "",
+      description: "",
+      photo: null
+    })
     e.target.reset();
     alert("Submission Sucessful")
   };

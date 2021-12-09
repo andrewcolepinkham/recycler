@@ -13,6 +13,7 @@ import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
   ACCOUNT_ERROR,
+  UPDATE_SUCCESS,
   ACCOUNT_REGISTER
 } from './types';
 
@@ -174,4 +175,31 @@ export const tokenConfig = (getState) => {
   }
 
   return config;
+};
+
+export const updateAccount = ({ username, password, email, community, profile_photo }) => (dispatch) => {
+  // Headers
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  // Request Body
+  const body = JSON.stringify({ username, email, password, community });
+
+  axios
+    .post('/api/auth/register', body, config)
+    .then((res) => {
+      dispatch({
+        type: UPDATE_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+      dispatch({
+        type: REGISTER_FAIL,
+      });
+    });
 };
