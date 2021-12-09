@@ -22,6 +22,7 @@ urlpatterns = [
     path('', include('frontend.urls')),
     path('', include('submissions.urls')),
     path('', include('accounts.urls')), 
+    path('', include('googlemaps.urls')), 
     path('admin/', admin.site.urls),
 ]
 
