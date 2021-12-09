@@ -32,16 +32,6 @@ class AccountSerializer(serializers.ModelSerializer):
             'num_submissions', 
             'profile_photo'
         )
-    def create(self, validated_data):
-        #validated_data['score'] = 0
-        user =     User.objects.create_user(
-            username=validated_data['username'], password=validated_data["password"], email=validated_data['email']
-        )
-        username = validated_data['username']
-        print(validated_data)
-        profile = Account.objects.create(user=user,username=username, profile_photo=None )
-        user.set_password(validated_data['password'])
-        return  profile
 
 
 
@@ -53,15 +43,11 @@ class RegisterSerializer(serializers.ModelSerializer):
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
-        #validated_data['score'] = 0
-        user =     User.objects.create_user(
+        user = User.objects.create_user(
             username=validated_data['username'], password=validated_data["password"], email=validated_data['email']
         )
-        username = validated_data['username']
-        print(validated_data)
-        profile = Account.objects.create(user=user,username=username, profile_photo=None )
         user.set_password(validated_data['password'])
-        return  user, profile
+        return  user
 
 # Login Serializer
 class LoginSerializer(serializers.Serializer):

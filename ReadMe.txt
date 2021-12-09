@@ -1,7 +1,9 @@
 Readme for recycler web app
 
 PYTHON PACKAGES
-- python -m pip install Pillow
+- pipenv install Pillow
+- pipenv install django-cors-headers
+- pipenv install requests
 - pipenv install django djangorestframework django-rest-knox
 
 DATABASE MIGRATIONS

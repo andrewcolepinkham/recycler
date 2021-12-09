@@ -17,6 +17,7 @@ export class Register extends Component {
     register: PropTypes.func.isRequired,
     isAuthenticated: PropTypes.bool,
   };
+
   onImageChange = e => {
     if (e.target.files && e.target.files[0]) {
       // let img = event.target.files[0];
@@ -40,9 +41,6 @@ export class Register extends Component {
         profile_photo
       }
       this.props.register(newUser);
-      print("yuh")
-      return <Redirect to="/account"/>
-     
     } 
     
 
