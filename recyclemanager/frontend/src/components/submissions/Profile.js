@@ -12,14 +12,19 @@ import MyMap from "./MyMap";
 export class Profile extends Component {
   static propTypes = {
   };
+  updateInfo(){
 
+  }
+  updateSubmissions(){
+    
+  }
   render() {
     return (
     
       <Container className = "p-5">
         <Row className = "p-5">
-          <Col> <UserProfile/> </Col>
-          <Col> <Submissions /> </Col>
+          <Col> <UserProfile updateInfo={this.updateInfo}/> </Col>
+          <Col> <Submissions update={this.updateSubmissions}/> </Col>
         </Row>
         <Row className = "p-5">
           <Col> <Leaderboard/> </Col>

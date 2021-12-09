@@ -3,16 +3,26 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { getSubmissions, deleteSubmission } from "../../actions/submissions";
 import Image from 'react-bootstrap/Image';
+import { loadAccount } from "../../actions/auth";
+
 
 export class Submissions extends Component {
   static propTypes = {
     submissions: PropTypes.array.isRequired,
     getSubmissions: PropTypes.func.isRequired,
-    deleteSubmission: PropTypes.func.isRequired
+    deleteSubmission: PropTypes.func.isRequired,
+    loadAccount: PropTypes.func.isRequired
   };
 
   componentDidMount() {
     this.props.getSubmissions();
+  }
+
+  handleDelete(id) {
+    this.props.deleteSubmission.bind(this, id);
+    console.log("here")
+    this.props.loadAccount()
+    this.props.update()
   }
 
   render() {
@@ -42,7 +52,7 @@ export class Submissions extends Component {
                 </td>
                 <td>
                   <button
-                    onClick={this.props.deleteSubmission.bind(this, submission.id)}
+                    onClick={this.handleDelete(submission.id)}
                     className="btn btn-danger btn-sm"
                   >
                     {" "}
@@ -64,5 +74,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getSubmissions, deleteSubmission }
+  { getSubmissions, deleteSubmission, loadAccount}
 )(Submissions);

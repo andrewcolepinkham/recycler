@@ -4,6 +4,9 @@ import PropTypes from "prop-types";
 import { loadAccount } from "../../actions/auth";
 
 export class UserProfile extends Component {
+    state = {
+    }
+
     static propTypes = {
       auth: PropTypes.object.isRequired,
       loadAccount: PropTypes.func.isRequired
@@ -12,6 +15,11 @@ export class UserProfile extends Component {
 
   componentDidMount() {
     this.props.loadAccount();
+  }
+
+  reload(){
+    console.log("in reload")
+    this.setState({ state: this.state });
   }
  
   render() {
@@ -39,3 +47,8 @@ const mapStateToProps = state => ({
 
 // export default connect(mapStateToProps, {login}) (Login)
 export default connect(mapStateToProps, {loadAccount})(UserProfile);
+
+function reloadUserProfile(){
+  console.log("in reloadUserProfile")
+  reload()
+}
