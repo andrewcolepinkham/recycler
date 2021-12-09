@@ -24,7 +24,7 @@ export class UserProfile extends Component {
         <div>
           <img src={account.photo} style={{ maxWidth: '6rem' }}/>
         </div>        
-        <h5>Username: {user.username}</h5>
+        <h5>Team Name: {user.username}</h5>
         <h5> Email: {user.email}</h5>
         <h5> Score: {account.score}</h5>
         <h5> Number of Submissions: {account.num_submissions}</h5>

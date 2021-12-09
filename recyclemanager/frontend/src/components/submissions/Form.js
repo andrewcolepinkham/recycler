@@ -16,7 +16,7 @@ export class Form extends Component {
   };
 
   static propTypes = {
-    addSubmission: PropTypes.func.isRequired
+    addSubmission: PropTypes.func.isRequired,
   };
 
   
@@ -47,8 +47,6 @@ export class Form extends Component {
     this.props.addSubmission(submission);
     e.target.reset();
     alert("Submission Sucessful")
-    //should work but isnt
-    this.props.history.push('/');
   };
 
   render() {
