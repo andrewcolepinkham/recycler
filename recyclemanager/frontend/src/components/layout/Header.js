@@ -22,13 +22,13 @@ export class Header extends Component {
         <span className="navbar-text mr-3">
           <strong>{user ? `Welcome ${user.username}` : ''}</strong>
         </span>
-        <li className="nav-item">
+        <div class="navbar-nav justify-content-end">
           <Link to="/" className="nav-link">Profile</Link>
           <Link to="/submissionform" className="nav-link">New Submission</Link>
           <button onClick={this.props.logout} className="nav-link btn btn-info btn-sm text-light">
             Logout
           </button>
-          </li>
+          </div>
                   
       </ul>
     );

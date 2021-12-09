@@ -14,7 +14,7 @@ export class Login extends Component {
     login: PropTypes.func.isRequired,
     isAuthenticated: PropTypes.bool,
   };
-
+  
   onSubmit = (e) => {
     e.preventDefault();
     this.props.login(this.state.username, this.state.password);
@@ -52,7 +52,7 @@ export class Login extends Component {
                 value={password}
               />
             </div>
-
+            
             <div className="form-group">
               <button type="login" className="btn btn-primary">
                 Login

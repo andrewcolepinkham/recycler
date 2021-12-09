@@ -1,7 +1,7 @@
 from rest_framework import generics, permissions, mixins, viewsets
 from rest_framework.response import Response
 from knox.models import AuthToken
-from .serializers import UserSerializer, RegisterSerializer, LoginSerializer, AccountSerializer, UpdateScoreSerializer
+from .serializers import UserSerializer, RegisterSerializer, CommunitySerializer, LoginSerializer, AccountSerializer, UpdateScoreSerializer
 
 # Register API
 class RegisterAPI(generics.GenericAPIView):
@@ -12,12 +12,35 @@ class RegisterAPI(generics.GenericAPIView):
         serializer.is_valid(raise_exception=True)
         user, account= serializer.save()
         token = AuthToken.objects.create(user)[1]
+    
         return Response({
             "user": UserSerializer(user, 
             context=self.get_serializer_context()).data, 
             "token": token
         })
+class CreateAccountAPI(generics.GenericAPIView):
+    serializer_class = AccountSerializer
 
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user, account= serializer.save()
+        token = AuthToken.objects.create(user)[1]
+    
+        return Response({
+            "account": AccountSerializer(account, 
+            context=self.get_serializer_context()).data, 
+            "token": token
+        })
+
+class CommunityAPI(generics.GenericAPIView): 
+    serializer_class = CommunitySerializer
+    def put(self, request, pk): 
+        # PUT a new user into community 
+        pass
+    def change_admin(self):
+        #change who the admin is 
+        pass
 
 # Login API
 class LoginAPI(generics.GenericAPIView):
@@ -28,6 +51,7 @@ class LoginAPI(generics.GenericAPIView):
         serializer.is_valid(raise_exception=True)
         user,account = serializer.validated_data
         token = AuthToken.objects.create(user)[1]
+        account.check_score()
         return Response({
             "user": UserSerializer(user, 
             context=self.get_serializer_context()).data, 
@@ -43,14 +67,17 @@ class UserAPI(generics.RetrieveAPIView):
 
     def get_object(self):
         return self.request.user
-
-# Get User API
+    def delete_user(self, request):
+        #deletes the user 
+        pass
+# Get Account API
 class AccountAPI(generics.RetrieveAPIView):
     permission_classes = [
         permissions.IsAuthenticated,
     ]
     serializer_class = AccountSerializer
     def get_object(self):
+        
         return self.request.user.account
     def edit_score(self, amount, type): 
         print("edit score")
@@ -78,3 +105,10 @@ class AccountAPI(generics.RetrieveAPIView):
 #         submission_data  = self.request.__dict__["_data"]
 #      #   account.score = account.score + score_calculator(submission_data['type'], int(submission_data['amount']))
 #         account.save(update_fields=["score"])
+        print(self.request.user.account)
+        return self.request.user.account
+
+
+#https://stackoverflow.com/questions/53460246/django-how-to-update-a-field-for-a-model-on-another-models-creation
+# https://docs.djangoproject.com/en/3.2/ref/models/instances/
+#https://github.com/andikawilliam/book-review-django/blob/master/andisbook/reviews/views.py

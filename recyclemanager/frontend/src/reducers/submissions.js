@@ -12,11 +12,13 @@ export default function(state = initialState, action) {
         submissions: action.payload
       };
     case DELETE_SUBMISSION:
+      console.log("DELETE SUB"); 
       return {
         ...state,
         submissions: state.submissions.filter(submission => submission.id !== action.payload)
       };
     case ADD_SUBMISSION:
+      console.log("HELLO")
       return {
         ...state,
         submissions: [...state.submissions, action.payload]

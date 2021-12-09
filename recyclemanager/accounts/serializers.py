@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
-from .models import Account
+from .models import Account, Community
 
 # User Serializer
 class UserSerializer(serializers.ModelSerializer):
@@ -14,12 +14,35 @@ class UserSerializer(serializers.ModelSerializer):
     #     print("update")
     #     print(account.username)
     #     return instance
-
+class CommunitySerializer(serializers.ModelSerializer): 
+    class Meta: 
+        model = Community
+        fields =(
+            'name', 'zip', 'admin_user'
+        )
 # User Serializer
 class AccountSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
-        fields = ('id', 'username', 'email', 'score')
+        fields = (
+            'id', 
+            'username', 
+            'email', 
+            'score',
+            'num_submissions', 
+            'profile_photo'
+        )
+    def create(self, validated_data):
+        #validated_data['score'] = 0
+        user =     User.objects.create_user(
+            username=validated_data['username'], password=validated_data["password"], email=validated_data['email']
+        )
+        username = validated_data['username']
+        print(validated_data)
+        profile = Account.objects.create(user=user,username=username, profile_photo=None )
+        user.set_password(validated_data['password'])
+        return  profile
+
 
 
 # Register Serializer
@@ -32,10 +55,11 @@ class RegisterSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         #validated_data['score'] = 0
         user =     User.objects.create_user(
-            **validated_data
+            username=validated_data['username'], password=validated_data["password"], email=validated_data['email']
         )
         username = validated_data['username']
-        profile = Account.objects.create(user=user,username=username)
+        print(validated_data)
+        profile = Account.objects.create(user=user,username=username, profile_photo=None )
         user.set_password(validated_data['password'])
         return  user, profile
 
@@ -49,7 +73,7 @@ class LoginSerializer(serializers.Serializer):
         try: 
             account = user.account
         except: 
-            account = Account.objects.create(user=user,username=user.get_username())
+            account = Account.objects.create(user=user,username=user.get_username(), profile_photo=None)
 
 
         if user and user.is_active:
@@ -59,7 +83,7 @@ class LoginSerializer(serializers.Serializer):
 class UpdateScoreSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
-        fields = ('id', 'username', 'email', 'score')
+        fields = ('id', 'username', 'email', 'score', "profile_photo")
     def update(self, instance, validated_data):
         print("update score")
         print(instance) 

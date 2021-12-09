@@ -5,7 +5,10 @@ const initialState = {
     isAuthenticated: null, 
     isLoading: false, 
     user: null,
-    account: {score: "--"}
+    account: {
+        score: "--",
+        num_submissions: "--"
+    }
 }; 
 
 export default function(state=initialState, action){

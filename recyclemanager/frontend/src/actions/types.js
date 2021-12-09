@@ -16,3 +16,4 @@ export const ACCOUNT_LOADING = "ACCOUNT_LOADING";
 export const ACCOUNT_LOADED = "ACCOUNT_LOADED"; 
 export const ACCOUNT_ERROR = "ACCOUNT_ERROR"; 
 export const ADD_SCORE = "ADD_SCORE"; 
+export const ACCOUNT_REGISTER = "ACCOUNT_REGISTER"; 

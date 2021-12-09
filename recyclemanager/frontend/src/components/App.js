@@ -10,6 +10,7 @@ import SubmissionForm from './submissions/SubmissionForm';
 import Profile from './submissions/Profile';
 import Alerts from './layout/Alerts';
 import Login from './accounts/Login';
+import Account from './accounts/Account'; 
 import Register from './accounts/Register';
 import PrivateRoute from './common/PrivateRoute';
 
@@ -42,6 +43,7 @@ class App extends Component {
               <PrivateRoute exact path="/" component={Profile} />
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
+              <Route exact path='/account' component={Account}/>
               <Route exact path="/submissionform" component={SubmissionForm} />
             </Switch>
            </div> 

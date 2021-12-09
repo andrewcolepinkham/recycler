@@ -8,12 +8,12 @@ export class UserProfile extends Component {
       auth: PropTypes.object.isRequired,
       loadAccount: PropTypes.func.isRequired
     };
-
+   
 
   componentDidMount() {
     this.props.loadAccount();
   }
-
+ 
   render() {
     const { isAuthenticated, user, account } = this.props.auth;
 
@@ -21,9 +21,13 @@ export class UserProfile extends Component {
     return (
       <Fragment>
         <h2>Profile</h2>
-        <div> Username: {user.username} </div>
-        <div> Email: {user.email}  </div>
-        <div> Score: {account.score}  </div>
+        <div>
+          <img src={account.photo} style={{ maxWidth: '6rem' }}/>
+        </div>        
+        <h5>Username: {user.username}</h5>
+        <h5> Email: {user.email}</h5>
+        <h5> Score: {account.score}</h5>
+        <h5> Number of Submissions: {account.num_submissions}</h5>
       </Fragment>
     );
   }
