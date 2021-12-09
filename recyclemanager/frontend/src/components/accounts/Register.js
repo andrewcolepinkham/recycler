@@ -10,6 +10,7 @@ export class Register extends Component {
     email: "",
     password: "",
     password2: "", 
+    community: "",
     profile_photo:""
   }; 
 
@@ -28,7 +29,7 @@ export class Register extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    const { username, email, password, password2, profile_photo } = this.state;
+    const { username, email, password, password2, community, profile_photo } = this.state;
     if(password !== password2) {
       this.props.createMessage({ passwordNotMatch: 'Passwords do not match!'})
     }
@@ -37,6 +38,7 @@ export class Register extends Component {
         username,
         password,
         email, 
+        community,
         profile_photo
       }
       this.props.register(newUser);
@@ -52,14 +54,14 @@ export class Register extends Component {
     if(this.props.isAuthenticated){
       return <Redirect to="/"/>;
     }
-    const { username, email, password, password2, profile_photo } = this.state; 
+    const { username, email, password, password2, community, profile_photo } = this.state; 
     return (
       <div className="col-md-6 m-auto">
         <div className="card card-body mt-5">
           <h2 className="text-center">Register</h2>
           <form onSubmit={this.onSubmit}>
             <div className="form-group">
-              <label>Username</label>
+              <label>Team Name</label>
               <input 
                 type="text"
                 className="form-control"
@@ -99,7 +101,17 @@ export class Register extends Component {
               />
             </div>
             <div className="form-group">
-              <label>Photo</label>
+              <label>Community</label>
+              <input 
+                type="text"
+                className="form-control"
+                name="community"
+                onChange={this.onChange}
+                value={community}
+              />
+            </div>
+            <div className="form-group">
+              <label>Team Photo</label>
               <input className="form-control" type="file" accept="image/png, image/jpeg" name="myImage" onChange={this.onImageChange} />
             </div>
             <div className="form-group">
