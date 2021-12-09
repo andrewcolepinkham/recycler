@@ -6,7 +6,7 @@ import Submissions from './submissions';
 import {Container ,Row, Col} from "react-bootstrap"
 import UserProfile from './UserProfile';
 import Leaderboard from "./Leaderboard";
-import Map from "./Map";
+import MyMap from "./MyMap";
 
 
 export class Profile extends Component {
@@ -23,7 +23,7 @@ export class Profile extends Component {
         </Row>
         <Row className = "p-5">
           <Col> <Leaderboard/> </Col>
-          <Col> < Map/> </Col>
+          <Col> < MyMap/> </Col>
         </Row>
       </Container>
     );
