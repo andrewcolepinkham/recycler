@@ -20,3 +20,5 @@ export const ACCOUNT_ERROR = "ACCOUNT_ERROR";
 export const PLACES_SUCCESS = "PLACES_SUCCESS"; 
 export const PLACES_FAIL = "PLACES_FAIL"; 
 export const GET_COMMUNITIES = "GET_COMMUNITIES"; 
+export const UPDATE_SUCCESS = "UPDATE_SUCCESS"; 
+export const UPDATE_FAIL = "UPDATE_FAIL";

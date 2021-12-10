@@ -54,6 +54,7 @@ export class Register extends Component {
         profile_photo
       }
       this.props.register(newUser);
+      return <Redirect to="/"/>
      
     } 
     

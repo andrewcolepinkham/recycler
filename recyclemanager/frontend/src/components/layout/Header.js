@@ -25,9 +25,10 @@ export class Header extends Component {
         <span className="navbar-text mr-3">
           <strong>{user ? `Welcome ${user.username}` : ''}</strong>
         </span>
-        <div class="navbar-nav justify-content-end">
-          <Link to="/" className="nav-link">Profile</Link>
-          <Link to="/submissionform" className="nav-link">New Submission</Link>
+        <div className="navbar-nav justify-content-end">
+          <Link to="/" className="nav-link">Profile</Link> 
+          <Link to="/editer" className="nav-link">Edit Profile</Link>
+          <Link to="/submissionform" className="nav-link">New Submission</Link> 
           <button variant="outline-light" onClick={this.alertInfo} className="nav-link btn  " >
             About
           </button>
