@@ -9,6 +9,7 @@ export class UserProfile extends Component {
 
     static propTypes = {
       auth: PropTypes.object.isRequired,
+
       loadAccount: PropTypes.func.isRequired
     };
    
@@ -30,13 +31,16 @@ export class UserProfile extends Component {
       <Fragment>
         <h2>Profile</h2>
         <div>
-          <img src={account.photo} style={{ maxWidth: '6rem' }}/>
+          <img src={account.profile_photo} className='img-fluid hover-shadow' style={{ maxWidth: '6rem' }}/>
         </div>        
         <h5>Team Name: {account.username}</h5>
         <h5> Email: {user.email}</h5>
         <h5> Score: {account.score}</h5>
         <h5> Number of Submissions: {account.num_submissions}</h5>
-      </Fragment>
+        <h5> Communities: {account.communities}</h5>
+
+        
+        </Fragment>
     );
   }
 }

@@ -19,7 +19,7 @@ export class Register extends Component {
     password: "",
     password2: "", 
     community: "",
-    profile_photo:""
+    profile_photo:null
   }; 
 
   static propTypes = {
@@ -31,17 +31,20 @@ export class Register extends Component {
 
   
   onImageChange = e => {
+    console.log(e.target.files[0])
     if (e.target.files && e.target.files[0]) {
       // let img = event.target.files[0];
       this.setState({
-        photo: e.target.files[0]
+        profile_photo: e.target.files[0]
       });
     }
   };
 
+
   onSubmit = e => {
     e.preventDefault();
     const { username, email, password, password2, community, profile_photo } = this.state;
+    console.log(profile_photo)
     if(password !== password2) {
       this.props.createMessage({ passwordNotMatch: 'Passwords do not match!'})
     }
@@ -54,7 +57,6 @@ export class Register extends Component {
         profile_photo
       }
       this.props.register(newUser);
-      return <Redirect to="/"/>
      
     } 
     
@@ -74,7 +76,8 @@ onDropdownSelected(e) {
    console.log("THE VAL", e.target.value);
    //here you will see the current selected value of the select input
 }
-  onChange = e => this.setState({ [e.target.name]: e.target.value });
+  onChange = e => {    
+  this.setState({ [e.target.name]: e.target.value });}
   render() {
     if(this.props.isAuthenticated){
       return <Redirect to="/"/>;
@@ -142,8 +145,8 @@ onDropdownSelected(e) {
      
     </div> */}
             <div className="form-group">
-              <label>Team Photo</label>
-              <input className="form-control" type="file" accept="image/png, image/jpeg" name="myImage" onChange={this.onImageChange} />
+              <label>Profile Photo</label>
+              <input className="form-control" type="file" accept="image/png, image/jpeg" name="profile_pic" onChange={this.onImageChange} />
             </div>
             <div className="form-group">
               <button type="submit" className="btn btn-primary">

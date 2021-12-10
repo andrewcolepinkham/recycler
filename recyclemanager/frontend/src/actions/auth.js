@@ -109,7 +109,8 @@ export const login = (username, password) => (dispatch) => {
 };
 
 // REGISTER USER
-export const register = ({ username, password, email, profile_photo }) => (dispatch) => {
+export const register = ({ username, password, email,community }, profile_photo) => (dispatch) => {
+  
   // Headers
   const config = {
     headers: {
@@ -118,8 +119,8 @@ export const register = ({ username, password, email, profile_photo }) => (dispa
   };
 
   // Request Body
-  const body = JSON.stringify({ username, email, password, profile_photo });
-
+  const body = JSON.stringify({ username, email, password, community }, profile_photo);
+  console.log(profile_photo)
   axios
     .post('/api/auth/register', body, config)
     .then((res) => {
@@ -128,12 +129,14 @@ export const register = ({ username, password, email, profile_photo }) => (dispa
         payload: res.data,
       });
     })
+
     .catch((err) => {
       dispatch(returnErrors(err.response.data, err.response.status));
       dispatch({
         type: REGISTER_FAIL,
       });
     });
+    console.log(res.data)
 };
 
 export const createAccount = ({ username, password, email, profile_photo }) => (dispatch) => {

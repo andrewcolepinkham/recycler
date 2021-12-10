@@ -16,9 +16,12 @@ class RegisterAPI(generics.GenericAPIView):
         token = AuthToken.objects.create(user)[1]
         communities_names = ["Colorado College"] #[request.data["communities"]]
         count = 0
-        
-        community = Community.objects.get(name="Default")
-        account = Account.objects.create(user=user,username=request.data['username'], profile_photo=request.data['profile_photo'])
+        print(request.__dict__)
+        #image = request.FILES['myImage']
+       # print(image)
+        community = Community.objects.get_or_create(name="Default")[0]
+        print(community)
+        account = Account.objects.create(user=user,username=request.data['username'], profile_photo=None)
         m1 = Membership.objects.create(account=account, community=community)
 
         m1.save()
@@ -81,11 +84,15 @@ class LoginAPI(generics.GenericAPIView):
         user,account = serializer.validated_data
         token = AuthToken.objects.create(user)[1]
         account.check_score()
+        account.communities  = "Default"
+        account.save()
+        
         if len(account.get_community()) == 0:
-            community = Community.objects.get(name="Default")
+            community = Community.objects.get_or_create(name="Default")[0]
 
             m1 = Membership.objects.create(account=account, community=community)
             m1.save()
+        print(account.get_community())
         return Response({
             "user": UserSerializer(user, 
             context=self.get_serializer_context()).data, 

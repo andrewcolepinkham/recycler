@@ -7,7 +7,8 @@ const initialState = {
     user: null,
     account: {
         score: "--",
-        num_submissions: "--"
+        num_submissions: "--", 
+        profile_photo:null
     }
 }; 
 
@@ -37,6 +38,9 @@ export default function(state=initialState, action){
         case LOGIN_SUCCESS:
         case REGISTER_SUCCESS:
             localStorage.setItem('token', action.payload.token);
+            console.log("hasdhfos"); 
+            console.log(state)
+            console.log(action.payload); 
             return {
                 ...state, 
                 ...action.payload,
