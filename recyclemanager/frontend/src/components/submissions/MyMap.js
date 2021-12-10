@@ -12,6 +12,7 @@ export class MyMap extends Component {
     const WrappedMap = withScriptjs(withGoogleMap(GoogleMapComponent))
     return (
       <div>
+        <h2>Find Recycling Centers</h2>
         < WrappedMap
           googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyCTWH7f7kKSSKxYvM9Hi1Tx9I9W-ODi35U`}
           loadingElement={<div style={{ height: `100%` }} />}
