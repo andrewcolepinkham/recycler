@@ -13,9 +13,28 @@ import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
   ACCOUNT_ERROR,
-  ACCOUNT_REGISTER
+  GET_COMMUNITIES
 } from './types';
-
+export const getCommunities = () => (dispatch, getState) => {
+  axios
+    .get("/api/communities/", tokenConfig(getState))
+    .then(res => {
+      dispatch({
+        type: GET_COMMUNITIES,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      const errors = {
+        msg: err.response.data,
+        status: err.response.status
+      }
+      dispatch({
+        type: GET_ERRORS,
+        payload: errors
+      });
+    });
+};
 // CHECK TOKEN & LOAD USER
 export const loadUser = () => (dispatch, getState) => {
   // User Loading

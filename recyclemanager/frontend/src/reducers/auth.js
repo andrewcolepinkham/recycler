@@ -1,4 +1,4 @@
-import {USER_LOADED, USER_LOADING, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS, REGISTER_SUCCESS, REGISTER_FAIL, ACCOUNT_LOADED, ACCOUNT_LOADING, ADD_SCORE} from "../actions/types"; 
+import {USER_LOADED, GET_COMMUNITIES, USER_LOADING, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS, REGISTER_SUCCESS, REGISTER_FAIL, ACCOUNT_LOADED, ACCOUNT_LOADING, ADD_SCORE} from "../actions/types"; 
 
 const initialState = {
     token: localStorage.getItem('token'), 
@@ -55,7 +55,14 @@ export default function(state=initialState, action){
                 user:null,
                 isAuthenticated:false, 
                 isLoading:false
-            }; 
+            };
+        case GET_COMMUNITIES: 
+            return {
+                ...state,
+                ...action.payload,
+ 
+
+            }
         default: 
             return state;
 

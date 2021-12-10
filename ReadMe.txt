@@ -4,7 +4,7 @@ PYTHON PACKAGES
 - pipenv install Pillow
 - pipenv install django-cors-headers
 - pipenv install requests
-- pipenv install django djangorestframework django-rest-knox
+- pipenv install django~=3.2.9 djangorestframework django-rest-knox
 
 DATABASE MIGRATIONS
 python manage.py makemigrations

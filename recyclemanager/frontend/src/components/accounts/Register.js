@@ -2,8 +2,16 @@ import React, { Component } from 'react';
 import { Link, Redirect } from "react-router-dom";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
-import {register} from '../../actions/auth';
+import {register, getCommunities} from '../../actions/auth';
 import {createMessage} from '../../actions/messages';
+const reduxStateData = getCommunities()
+
+// mapping options
+/**
+ * enter keys (which you wan to render as title and value in dropdown list) as value in title and value
+ */
+const mappingOptions = { title: "diveType", value: "diveTypeID" };
+
 export class Register extends Component {
   state = {
     username: "",
@@ -17,8 +25,11 @@ export class Register extends Component {
   static propTypes = {
     register: PropTypes.func.isRequired,
     isAuthenticated: PropTypes.bool,
+    getCommunities : PropTypes.func.isRequired,
+    
   };
 
+  
   onImageChange = e => {
     if (e.target.files && e.target.files[0]) {
       // let img = event.target.files[0];
@@ -48,6 +59,20 @@ export class Register extends Component {
     
 
   }
+  createSelectItems() {
+    let items = [];         
+    for (let i = 0; i <= 10; i++) {             
+         items.push(<option key={i} value={i}>{i}</option>);   
+         //here I will be creating my options dynamically based on
+         //what props are currently passed to the parent component
+    }
+    return items;
+}  
+
+onDropdownSelected(e) {
+   console.log("THE VAL", e.target.value);
+   //here you will see the current selected value of the select input
+}
   onChange = e => this.setState({ [e.target.name]: e.target.value });
   render() {
     if(this.props.isAuthenticated){
@@ -109,6 +134,12 @@ export class Register extends Component {
                 value={community}
               />
             </div>
+            {/* <div className="form-group">
+            <Input type="select" onChange={this.onDropdownSelected} label="Multiple Select" multiple>
+       {this.createSelectItems()}
+  </Input>
+     
+    </div> */}
             <div className="form-group">
               <label>Team Photo</label>
               <input className="form-control" type="file" accept="image/png, image/jpeg" name="myImage" onChange={this.onImageChange} />
@@ -133,4 +164,4 @@ const mapStateToProps = state => ({
 
 });
 
-export default connect(mapStateToProps, {register, createMessage}) (Register);
+export default connect(mapStateToProps, {register, createMessage, getCommunities}) (Register);

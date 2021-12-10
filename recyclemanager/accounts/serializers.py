@@ -18,8 +18,17 @@ class CommunitySerializer(serializers.ModelSerializer):
     class Meta: 
         model = Community
         fields =(
+            'name', 'zip'
+        )
+class CommunityCreationSerializer(serializers.Serializer): 
+    class Meta: 
+        model = Community
+        fields =(
             'name', 'zip', 'admin_user'
         )
+        def create(self, validated_data):
+            community = Community.objects.create(name=validated_data["name"], zip_code=validated_data["zip"])
+            return community
 # User Serializer
 class AccountSerializer(serializers.ModelSerializer):
     class Meta:
