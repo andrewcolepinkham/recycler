@@ -16,11 +16,6 @@ export class UserProfile extends Component {
   componentDidMount() {
     this.props.loadAccount();
   }
-
-  reload(){
-    console.log("in reload")
-    this.setState({ state: this.state });
-  }
  
   render() {
     const { isAuthenticated, user, account } = this.props.auth;
@@ -47,8 +42,3 @@ const mapStateToProps = state => ({
 
 // export default connect(mapStateToProps, {login}) (Login)
 export default connect(mapStateToProps, {loadAccount})(UserProfile);
-
-function reloadUserProfile(){
-  console.log("in reloadUserProfile")
-  reload()
-}

@@ -7,6 +7,7 @@ class PlacesAPI(viewsets.ViewSet):
     # serializer_class = PlacesSerializer
 
     def list(self, request):
+        print(self.request.data)
         lat = 38.8598724
         lng = -104.8230056
         url  = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?'
