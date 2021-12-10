@@ -18,13 +18,6 @@ export class Submissions extends Component {
     this.props.getSubmissions();
   }
 
-  handleDelete(id) {
-    this.props.deleteSubmission.bind(this, id);
-    console.log("here")
-    this.props.loadAccount()
-    this.props.update()
-  }
-
   render() {
     return (
       <Fragment>
@@ -52,7 +45,7 @@ export class Submissions extends Component {
                 </td>
                 <td>
                   <button
-                    onClick={this.handleDelete(submission.id)}
+                    onClick={this.props.deleteSubmission.bind(this, submission.id)}
                     className="btn btn-danger btn-sm"
                   >
                     {" "}

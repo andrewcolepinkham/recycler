@@ -7,7 +7,7 @@ import {
 } from './types';
 
 // LOGIN USER
-export const getPlaces = (lat, lng, keyword, key, radius) => (dispatch) => {
+export const getPlaces = (lat, lng, radius, keyword) => (dispatch) => {
   // Headers
   const config = {
     headers: {
@@ -16,10 +16,10 @@ export const getPlaces = (lat, lng, keyword, key, radius) => (dispatch) => {
   };
 
   // Request Body
-  const body = JSON.stringify({ lat, lng, keyword, key, radius});
+  const body = JSON.stringify({ lat, lng, radius, keyword});
 
   axios
-    .get('/api/places', body, config)
+    .post('/api/places/', body, config)
     .then((res) => {
       console.log(res)
       dispatch({
