@@ -25,6 +25,7 @@ export class Leaderboard extends Component {
             </tr>
           </thead>
          </table>
+         <div>TO DO</div>
       </Fragment>
     );
   }

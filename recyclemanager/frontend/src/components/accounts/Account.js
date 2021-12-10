@@ -68,7 +68,7 @@ export class Account extends Component {
             </div>
           
             <p>
-               Already have an account? <Link to="/login">Login</Link> 
+               Already have an Team? <Link to="/login">Login</Link> 
             </p>
           </form>
         </div>

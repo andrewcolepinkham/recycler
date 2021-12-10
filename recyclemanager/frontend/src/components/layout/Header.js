@@ -22,11 +22,11 @@ export class Header extends Component {
     // console.log(user)
     const authLinks = (
       <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
-        <span className="navbar-text mr-3">
+        {/* <span className="navbar-text mr-3">
           <strong>{user ? `Welcome ${user.username}` : ''}</strong>
-        </span>
+        </span> */}
         <div className="navbar-nav justify-content-end">
-          <Link to="/" className="nav-link">Profile</Link> 
+          <Link to="/" className="nav-link mr-3">{user ? `${user.username}` : ''}</Link> 
           <Link to="/editer" className="nav-link">Edit Profile</Link>
           <Link to="/submissionform" className="nav-link">New Submission</Link> 
           <button variant="outline-light" onClick={this.alertInfo} className="nav-link btn  " >
