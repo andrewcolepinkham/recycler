@@ -60,7 +60,7 @@ export class GoogleMapComponent extends Component {
 
 
   render() {
-    // console.log(this.state)
+    console.log(this.state)
     const { places } = this.props.google;
     const mapContainerStyle = {
       height: "300px",
@@ -68,7 +68,11 @@ export class GoogleMapComponent extends Component {
     };
     // this.props.getPlaces(this.state.center.lat, this.state.center.lng, 5000, 'recycling');
     return (
-        <div>
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
             <GoogleMap 
               defaultZoom={12} 
               defaultCenter={{lat:38.8598724, lng: -104.8230056}}

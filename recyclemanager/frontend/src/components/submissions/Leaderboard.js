@@ -13,7 +13,11 @@ export class Leaderboard extends Component {
 
   render() {
     return (
-      <Fragment>
+      <div  style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
         <h2>Leaderboard</h2>
         <table className="table table-striped">
           <thead>
@@ -26,7 +30,7 @@ export class Leaderboard extends Component {
           </thead>
          </table>
          <div>TO DO</div>
-      </Fragment>
+      </div>
     );
   }
 }

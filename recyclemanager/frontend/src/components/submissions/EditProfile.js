@@ -49,10 +49,8 @@ render() {
 
   // console.log(account)
   return (
-    <Container className = "p-5">
-      <div className = "fs-2">
-        Edit Profile
-        </div>
+    <div className="card card-body mt-4 mb-4">
+      <h2>Edit Profile</h2>
       <div className="form group">
       <label>Team Name</label>
         <input
@@ -96,17 +94,17 @@ render() {
           placeholder={"Change to community"}
         />
         <div className="form-group">
-              <label>Team Photo</label>
-              <input className="form-control" type="file" accept="image/png, image/jpeg" name="myImage" onChange={this.onImageChange} />
-            </div>
-        <button
-           type="submit" className="btn btn-primary"
-          onClick={this.onSubmit}
-        >
+          <label>Team Photo</label>
+          <input className="form-control" type="file" accept="image/png, image/jpeg" name="myImage" onChange={this.onImageChange} />
+        </div>
+        <div className="form-group">
+        <button type="submit" className="btn btn-primary" onClick={this.onSubmit}>
           Edit
         </button>
+        </div>
+        
       
-        </Container>
+        </div>
   );
 }
 }

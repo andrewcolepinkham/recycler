@@ -7,6 +7,7 @@ import {Container ,Row, Col} from "react-bootstrap"
 import UserProfile from './UserProfile';
 import Leaderboard from "./Leaderboard";
 import MyMap from "./MyMap";
+import Nav from 'react-bootstrap/Nav'
 
 
 export class Profile extends Component {
@@ -15,17 +16,33 @@ export class Profile extends Component {
 
   render() {
     return (
-    
       <Container className = "p-5">
-        <Row className = "p-5">
-          <Col> <UserProfile/> </Col>
-          <Col> <Submissions/> </Col>
-        </Row>
-        <Row className = "p-5">
-          <Col> <Leaderboard/> </Col>
-          <Col> < MyMap/> </Col>
-        </Row>
+        {/* <Col>
+          <Nav defaultActiveKey="/home" className="flex-column">
+            <Nav.Link href="/home">Active</Nav.Link>
+            <Nav.Link eventKey="link-1">Link</Nav.Link>
+            <Nav.Link eventKey="link-2">Link</Nav.Link>
+            <Nav.Link eventKey="disabled" disabled>
+              Disabled
+            </Nav.Link>
+          </Nav>
+        </Col> */}
+        {/* <Col> */}
+          <Container className = "p-5">
+            <Row className = "p-5">
+              <UserProfile/>
+            </Row>
+            <Row>
+            <Col> <Submissions/> </Col>
+            <Col> <Leaderboard/> </Col>
+            </Row>
+            <Row className = "p-5">
+              <Col> < MyMap/> </Col>
+            </Row>
+          </Container>
+        {/* </Col> */}
       </Container>
+      
     );
     
   }
