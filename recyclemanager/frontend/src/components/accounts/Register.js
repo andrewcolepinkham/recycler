@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect, Input } from "react-router-dom";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import {register, getCommunities} from '../../actions/auth';
@@ -64,6 +64,7 @@ export class Register extends Component {
   }
   createSelectItems() {
     let items = [];         
+    console.log("here")
     for (let i = 0; i <= 10; i++) {             
          items.push(<option key={i} value={i}>{i}</option>);   
          //here I will be creating my options dynamically based on
@@ -139,7 +140,7 @@ onDropdownSelected(e) {
               />
             </div>
             {/* <div className="form-group">
-            <Input type="select" onChange={this.onDropdownSelected} label="Multiple Select" multiple>
+            <Input type="select" onChange={this.onDropdownSelected} name ="community" label="Multiple Select" multiple>
        {this.createSelectItems()}
   </Input>
      

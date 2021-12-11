@@ -1,14 +1,16 @@
-import {USER_LOADED, GET_COMMUNITIES, USER_LOADING, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS, REGISTER_SUCCESS, REGISTER_FAIL, ACCOUNT_LOADED, ACCOUNT_LOADING, ADD_SCORE} from "../actions/types"; 
+import {USER_LOADED, MEMBERSHIP_INFO,GET_COMMUNITIES, USER_LOADING, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS, REGISTER_SUCCESS, REGISTER_FAIL, ACCOUNT_LOADED, ACCOUNT_LOADING, ADD_SCORE} from "../actions/types"; 
 
 const initialState = {
     token: localStorage.getItem('token'), 
     isAuthenticated: null, 
     isLoading: false, 
     user: null,
+    community:null, 
     account: {
         score: "--",
         num_submissions: "--", 
-        profile_photo:null
+        profile_photo:null, 
+        communities :null, 
     }
 }; 
 
@@ -29,18 +31,18 @@ export default function(state=initialState, action){
                 user: action.payload,
             }; 
         case ACCOUNT_LOADED: 
+           
             return {
                 ...state, 
                 isAuthenticated: true,  
                 isLoading: false, 
                 account: action.payload,
+
             }; 
         case LOGIN_SUCCESS:
         case REGISTER_SUCCESS:
             localStorage.setItem('token', action.payload.token);
-            console.log("hasdhfos"); 
-            console.log(state)
-            console.log(action.payload); 
+           
             return {
                 ...state, 
                 ...action.payload,
@@ -63,7 +65,7 @@ export default function(state=initialState, action){
         case GET_COMMUNITIES: 
             return {
                 ...state,
-                ...action.payload,
+                community: action.payload,
  
 
             }

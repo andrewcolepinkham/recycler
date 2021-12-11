@@ -12,9 +12,9 @@ from submissions.models import Submission
 class Account(models.Model): 
     user = models.OneToOneField(User, on_delete=CASCADE)
     username = models.CharField(max_length=150,blank=True)
-    score = models.DecimalField(max_digits=6, decimal_places=2, default=0)
+    score = models.FloatField( default=0)
     
-    profile_photo = models.ImageField(default= 'recycler/recyclemanager/media/default.jpg', upload_to="post_images" )
+    profile_photo = models.ImageField(default= '../media/default.jpg', upload_to="post_images" )
     num_submissions = models.IntegerField(default=0)
     email = ""
     password = ""
@@ -25,7 +25,7 @@ class Account(models.Model):
         self.score = 0
         self.num_submissions = 0
         self.user = user
-        self.profile_photo = profile_photo
+       # self.profile_photo = profile_photo
         return self
     def delete_score_and_submission(self, score_decrease): 
         self.score = self.score- score_decrease
@@ -51,18 +51,19 @@ class Account(models.Model):
         return self.username
     def get_community(self): 
         self.communities =  self.community_set.all()
+
         return self.community_set.all()
 class Community(models.Model): 
     zip_code = models.IntegerField(default=0)
     name = models.CharField(max_length=150,blank=True)
     accounts= models.ManyToManyField(Account,  through="Membership")    
-
     name2 = models.CharField(max_length=150,blank=True)
     def create(self, name, zip_code ): 
         self.name = name 
         self.zip_code=zip_code
         return self
-
+    def __str__(self) -> str:
+        return self.name
 
 class Membership(models.Model):
     account = models.ForeignKey(Account, on_delete=models.CASCADE, default="", db_constraint=False)
@@ -70,8 +71,6 @@ class Membership(models.Model):
     def create(self, account = account, community = community ): 
         self.community = community
         self.account= account
-        account.communities.append(community.name)
         return self
-    def __str__(self) -> str:
-        return self.username
+  
 

@@ -18,13 +18,13 @@ class CommunitySerializer(serializers.ModelSerializer):
     class Meta: 
         model = Community
         fields =(
-            'name', 'zip'
+            'name', 'zip_code'
         )
 class CommunityCreationSerializer(serializers.Serializer): 
     class Meta: 
         model = Community
         fields =(
-            'name', 'zip', 'admin_user'
+            'name', 'zip_code', 'admin_user'
         )
         def create(self, validated_data):
             community = Community.objects.create(name=validated_data["name"], zip_code=validated_data["zip"])
@@ -39,7 +39,9 @@ class AccountSerializer(serializers.ModelSerializer):
             'email', 
             'score',
             'num_submissions', 
-            'profile_photo'
+            'profile_photo', 
+            'communities'
+            
         )
 
 
@@ -52,7 +54,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
-        
+
         user = User.objects.create_user(
             username=validated_data['username'], password=validated_data["password"], email=validated_data['email']
         )

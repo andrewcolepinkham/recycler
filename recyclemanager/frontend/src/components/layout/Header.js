@@ -26,14 +26,9 @@ export class Header extends Component {
           <strong>{user ? `Welcome ${user.username}` : ''}</strong>
         </span>
         <div className="navbar-nav justify-content-end">
-<<<<<<< Updated upstream
           <Link to="/" className="nav-link">Profile</Link> 
           <Link to="/editer" className="nav-link">Edit Profile</Link>
           <Link to="/submissionform" className="nav-link">New Submission</Link> 
-=======
-          <Link to="/" className="nav-link">Profile</Link>
-          <Link to="/submissionform" className="nav-link">New Submission</Link>
->>>>>>> Stashed changes
           <button variant="outline-light" onClick={this.alertInfo} className="nav-link btn  " >
             About
           </button>

@@ -36,7 +36,7 @@ class SubmissionViewSet(viewsets.ModelViewSet):
         # logic to update score in the account 
         account = self.request.user.account
         submission_data  = self.request.__dict__["_data"]
-        account.update_score( score_calculator(submission_data['type'], int(submission_data['amount'])))
+        account.update_score( score_calculator(submission_data['type'], float(submission_data['amount'])))
         account.save(update_fields=["score"]) 
         account.add_num_submission()
         account.save(update_fields=["num_submissions"]) 

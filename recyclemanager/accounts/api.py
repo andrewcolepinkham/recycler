@@ -14,13 +14,8 @@ class RegisterAPI(generics.GenericAPIView):
         serializer.is_valid(raise_exception=True)
         user= serializer.save()
         token = AuthToken.objects.create(user)[1]
-        communities_names = ["Colorado College"] #[request.data["communities"]]
-        count = 0
-        print(request.__dict__)
-        #image = request.FILES['myImage']
-       # print(image)
+   
         community = Community.objects.get_or_create(name="Default")[0]
-        print(community)
         account = Account.objects.create(user=user,username=request.data['username'], profile_photo=None)
         m1 = Membership.objects.create(account=account, community=community)
 
@@ -31,6 +26,8 @@ class RegisterAPI(generics.GenericAPIView):
             "user": UserSerializer(user, 
             context=self.get_serializer_context()).data, 
             "account": AccountSerializer(account, 
+            context=self.get_serializer_context()).data, 
+            "community" : CommunitySerializer(community, 
             context=self.get_serializer_context()).data, 
             "token": token
         })
@@ -48,7 +45,10 @@ class CreateAccountAPI(generics.GenericAPIView):
             context=self.get_serializer_context()).data, 
             "token": token
         })
-
+class MembershipAPI(generics.GenericAPIView): 
+    def get(self): 
+        account = self.user.account
+        return account
 class CommunityAPI(generics.GenericAPIView): 
     serializer_class = CommunitySerializer
     def post(self, request, *args, **kwargs):
@@ -62,8 +62,17 @@ class CommunityAPI(generics.GenericAPIView):
     def put(self, request, pk): 
         # PUT a new user into community 
         pass
+
     def get(self, request): 
-        return Community.objects.all()
+        communities = []
+        
+        for community in Community.objects.all():
+            communities.append(CommunitySerializer(community, context=self.get_serializer_context()).data)
+        
+        return Response({
+           "communities" : Community.objects.all()
+        })
+
     def change_admin(self):
         #change who the admin is 
         pass
@@ -92,10 +101,13 @@ class LoginAPI(generics.GenericAPIView):
 
             m1 = Membership.objects.create(account=account, community=community)
             m1.save()
-        print(account.get_community())
+        community = account.get_community()[0]
         return Response({
             "user": UserSerializer(user, 
             context=self.get_serializer_context()).data, 
+            "account": AccountSerializer(account, 
+            context=self.get_serializer_context()).data, 
+            "community": CommunitySerializer(community, context=self.get_serializer_context()).data, 
             "token": token
         })
 
@@ -106,47 +118,27 @@ class UserAPI(generics.RetrieveAPIView):
     ]
     serializer_class = UserSerializer
 
-    def get_object(self):
+    def get(self):
         return self.request.user
     def delete_user(self, request):
         #deletes the user 
         pass
 # Get Account API
+
 class AccountAPI(generics.RetrieveAPIView):
     permission_classes = [
         permissions.IsAuthenticated,
     ]
     serializer_class = AccountSerializer
     def get_object(self):
-        
-        return self.request.user.account
+        account= Account.objects.get(username=self.request.user.account)
+        print(account.get_community())
+        print(AccountSerializer(account, 
+            context=self.get_serializer_context()).data)
+        return account
     def edit_score(self, amount, type): 
-        print("edit score")
 
-# class EditScoreAPI(mixins.UpdateModelMixin):
-#     permission_classes = [
-#         permissions.IsAuthenticated,
-#     ]
-#     serializer_class = UpdateScoreSerializer
-#     def update(self, request, *args, **kwargs):
-#         print("here!!!!!")
 
-#         instance = self.get_object()
-#         serializer = self.get_serializer(instance, data=request.data)
-#         serializer.is_valid(raise_exception=True)
-#         self.perform_update(serializer)
-#         return Response(serializer.data)
-#     def perform_update(self, serializer):
-#         print("here!!!!!")
-        
-#     def get_score(self): 
-#        pass
-#     def add_to_score(self, score):
-#         account = self.request.user.account
-#         submission_data  = self.request.__dict__["_data"]
-#      #   account.score = account.score + score_calculator(submission_data['type'], int(submission_data['amount']))
-#         account.save(update_fields=["score"])
-        print(self.request.user.account)
         return self.request.user.account
 
 

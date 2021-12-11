@@ -19,7 +19,7 @@ import {
 } from './types';
 export const getCommunities = () => (dispatch, getState) => {
   axios
-    .get("/api/communities/", tokenConfig(getState))
+    .get("/api/auth/communities", tokenConfig(getState))
     .then(res => {
       dispatch({
         type: GET_COMMUNITIES,
@@ -66,11 +66,14 @@ export const loadAccount = () => (dispatch, getState) => {
   axios
     .get('/api/auth/account', tokenConfig(getState))
     .then((res) => {
+      console.log()
+      console.log(res.data)
       dispatch({
         type: ACCOUNT_LOADED,
         payload: res.data,
       });
     })
+    
     .catch((err) => {
       console.log(err)
       dispatch(returnErrors(err.response.data, err.response.status));
@@ -78,6 +81,12 @@ export const loadAccount = () => (dispatch, getState) => {
         type: ACCOUNT_ERROR,
       });
     });
+};
+export const getMembership = () => (dispatch, getState) => {
+  // User Loading
+  dispatch({ type: MEMBERSHIP_INFO });
+
+  
 };
 
 // LOGIN USER
