@@ -32,9 +32,15 @@ export class Header extends Component {
   }
 
   handleProfileClose(){
+    // console.log("HERE!!!")
     this.setState({
       showProfile: false
     })
+  }
+
+  handleLogout(){
+    this.handleProfileClose()
+    this.props.logout()    
   }
   
   render() {
@@ -73,7 +79,7 @@ export class Header extends Component {
               <h5> Number of Submissions: {account ? `${account.num_submissions}` : 'Number of Submissions'}</h5>
               <h5> Communities: {community ? `${community.name}` : 'Communities'}</h5>
             </Row>
-            <Button variant="danger" onClick={() => {this.props.logout; this.handleProfileClose.bind(this)}} >
+            <Button variant="danger" onClick={this.handleLogout.bind(this)}>
               Logout
             </Button>
             
