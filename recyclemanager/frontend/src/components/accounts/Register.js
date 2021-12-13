@@ -5,6 +5,8 @@ import PropTypes from "prop-types";
 import {register, getCommunities} from '../../actions/auth';
 import {createMessage} from '../../actions/messages';
 const reduxStateData = getCommunities()
+import Dropdown from 'react-bootstrap/Dropdown';
+
 
 // mapping options
 /**
@@ -19,13 +21,15 @@ export class Register extends Component {
     password: "",
     password2: "", 
     community: "",
-    profile_photo:null
+    profile_photo:null,
+
   }; 
 
   static propTypes = {
     register: PropTypes.func.isRequired,
     isAuthenticated: PropTypes.bool,
     getCommunities : PropTypes.func.isRequired,
+    createMessage  : PropTypes.func.isRequired, 
     
   };
 
@@ -34,8 +38,9 @@ export class Register extends Component {
     console.log(e.target.files[0])
     if (e.target.files && e.target.files[0]) {
       // let img = event.target.files[0];
+      console.log(e.target.files[0])
       this.setState({
-        profile_photo: e.target.files[0]
+        profile_photo: e.target.files[0].name
       });
     }
   };
@@ -62,11 +67,26 @@ export class Register extends Component {
     
 
   }
-  createSelectItems() {
-    let items = [];         
-    console.log("here")
+ createSelectItems() {
+    // console.log("Create select items")
+    let items = []
+    const communities = this.props.getCommunities();
+    console.log("gotten communites in create")
+    console.log("communities:"); 
+    console.log(communities); 
+    // console.log('type of communities:')
+    // console.log(typeof communities)
+    //let { communities } = this.props.getCommunities()
+   // console.log(communities)
+
+    // for (const element of this.props.getCommunities()) {
+    //   console.log(element);
+    //  }    
+    // for (var i =0; i < communities.length; i++) {
+    //   console.log(communites[i])
+    // }
     for (let i = 0; i <= 10; i++) {             
-         items.push(<option key={i} value={i}>{i}</option>);   
+         items.push({name : i, value : i});   
          //here I will be creating my options dynamically based on
          //what props are currently passed to the parent component
     }
@@ -77,6 +97,7 @@ onDropdownSelected(e) {
    console.log("THE VAL", e.target.value);
    //here you will see the current selected value of the select input
 }
+
   onChange = e => {    
   this.setState({ [e.target.name]: e.target.value });}
   render() {
@@ -84,6 +105,7 @@ onDropdownSelected(e) {
       return <Redirect to="/"/>;
     }
     const { username, email, password, password2, community, profile_photo } = this.state; 
+    console.log(this.state)
     return (
       <div className="col-md-6 m-auto">
         <div className="card card-body mt-5">
@@ -130,14 +152,24 @@ onDropdownSelected(e) {
               />
             </div>
             <div className="form-group">
-              <label>Community</label>
+            <Dropdown>
+        <Dropdown.Toggle variant="success" id="dropdown-basic">
+          Change
+        </Dropdown.Toggle>
+
+        <Dropdown.Menu >
+        {this.createSelectItems().map((item, index) => <Dropdown.Item value={item.value}>{item.name}</Dropdown.Item>
+)}
+        </Dropdown.Menu>
+      </Dropdown>
+              {/* <label>Community</label>
               <input 
                 type="text"
                 className="form-control"
                 name="community"
                 onChange={this.onChange}
                 value={community}
-              />
+              /> */}
             </div>
             {/* <div className="form-group">
             <Input type="select" onChange={this.onDropdownSelected} name ="community" label="Multiple Select" multiple>
@@ -155,7 +187,7 @@ onDropdownSelected(e) {
               </button>
             </div>
             <p>
-               Already have an account? <Link to="/login">Login</Link> 
+               Already have an Team? <Link to="/login">Login</Link> 
             </p>
           </form>
         </div>

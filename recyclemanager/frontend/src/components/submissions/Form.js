@@ -3,8 +3,6 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { addSubmission } from "../../actions/submissions";
 import Dropdown from 'react-bootstrap/Dropdown';
-// import Image from 'react-bootstrap/Image';
-// import myimage from "../../../../media/post_images/test.jpg";
 
 
 export class Form extends Component {

@@ -60,7 +60,7 @@ export class GoogleMapComponent extends Component {
 
 
   render() {
-    // console.log(this.state)
+    console.log(this.state)
     const { places } = this.props.google;
     const mapContainerStyle = {
       height: "300px",
@@ -68,7 +68,11 @@ export class GoogleMapComponent extends Component {
     };
     // this.props.getPlaces(this.state.center.lat, this.state.center.lng, 5000, 'recycling');
     return (
-        <div>
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
             <GoogleMap 
               defaultZoom={12} 
               defaultCenter={{lat:38.8598724, lng: -104.8230056}}
@@ -95,9 +99,6 @@ export class GoogleMapComponent extends Component {
                   }}
                 />
               ))}
-              {/* <InfoWindow>
-                hello
-              </InfoWindow> */}
               {this.state.selectedPlace && (
                 <InfoWindow
                   position={{ 
@@ -120,9 +121,8 @@ export class GoogleMapComponent extends Component {
             </div>
             </GoogleMap>
             <Button variant="primary" onClick={this.handlePlacesSearch}>
-              {/* <div> */}
-              <div style={{margin: 'auto'}}> 
-                <h5 style={{color: 'black', textAlign: 'center'}}>Find Recycling Centers</h5>
+              <div style={{width: '600px'}}> 
+                <h5 style={{color: 'black', textAlign: 'center'}}>Go</h5>
               </div>
             </Button>
         </div>

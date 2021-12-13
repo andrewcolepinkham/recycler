@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { loadAccount } from "../../actions/auth";
+import { loadAccount, updateAccount } from "../../actions/auth";
 import {createMessage} from '../../actions/messages';
 import { Link, Redirect } from "react-router-dom";
 import { Container } from "react-bootstrap";
@@ -26,22 +26,21 @@ export class EditProfile extends Component {
 componentDidMount() {
   this.props.loadAccount();
 }
-onChange(e) {
+onChange = e =>  {
   this.setState({ value: e.target.value });
 }
 
-onSubmit(){
+onSubmit = e => {
   e.preventDefault();
   const { username, email, password, password2, community, profile_photo } = this.state;
-  const updateAcc = {
+  const updateAcc = { 
     username,
     password,
     email, 
     community,
     profile_photo
   }
-  this.props.updateAccount(updateAcc);
-      return <Redirect to="/"/>
+  this.props.updateAccount(updateAcc, "jawgg");
 }
 
 render() {
@@ -49,20 +48,21 @@ render() {
 
   // console.log(account)
   return (
-    <Container className = "p-5">
-      <div className = "fs-2">
-        Edit Profile
-        </div>
+    <div className="card card-body mt-4 mb-4">
+      <h2>Edit Profile</h2>
       <div className="form group">
-      <label>Team Name</label>
-        <input
+      <label >Team Name</label>
+      <input
           type="text"
           name="username"
           className="form-control ml-auto"
-          value={account.username}
+          placeholder={account.username}
+
           onChange={this.onChange}
-          placeholder={this.props.placeholder}
+         // placeholder={this.props.placeholder}
+          
         />
+   
         </div>
         <div className="form-group">
         <label>Email</label>
@@ -70,9 +70,10 @@ render() {
           type="text"
           name="email"
           className="form-control ml-auto "
-          value={account.email}
+          placeholder={account.email}
+          
           onChange={this.onChange}
-          placeholder={this.props.placeholder}
+          //placeholder={this.props.placeholder}
         />
         </div>
         <div className="form-group">
@@ -96,17 +97,17 @@ render() {
           placeholder={"Change to community"}
         />
         <div className="form-group">
-              <label>Team Photo</label>
-              <input className="form-control" type="file" accept="image/png, image/jpeg" name="myImage" onChange={this.onImageChange} />
-            </div>
-        <button
-           type="submit" className="btn btn-primary"
-          onClick={this.onSubmit}
-        >
+          <label>Team Photo</label>
+          <input className="form-control" type="file" accept="image/png, image/jpeg" name="myImage" onChange={this.onImageChange} />
+        </div>
+        <div className="form-group">
+        <button type="submit" className="btn btn-primary" onClick={this.onSubmit}>
           Edit
         </button>
+        </div>
+        
       
-        </Container>
+        </div>
   );
 }
 }
@@ -115,4 +116,4 @@ render() {
   });
   
   // export default connect(mapStateToProps, {login}) (Login)
-  export default connect(mapStateToProps, {loadAccount})(EditProfile);
+  export default connect(mapStateToProps, {loadAccount, updateAccount})(EditProfile);

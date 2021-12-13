@@ -19,8 +19,11 @@ import {
 } from './types';
 export const getCommunities = () => (dispatch, getState) => {
   axios
+  
     .get("/api/auth/communities", tokenConfig(getState))
     .then(res => {
+      console.log("auth action get communities")
+      console.log(res.data)
       dispatch({
         type: GET_COMMUNITIES,
         payload: res.data
@@ -66,7 +69,7 @@ export const loadAccount = () => (dispatch, getState) => {
   axios
     .get('/api/auth/account', tokenConfig(getState))
     .then((res) => {
-      console.log()
+      console.log(" jodsno")
       console.log(res.data)
       dispatch({
         type: ACCOUNT_LOADED,
@@ -118,7 +121,7 @@ export const login = (username, password) => (dispatch) => {
 };
 
 // REGISTER USER
-export const register = ({ username, password, email,community }, profile_photo) => (dispatch) => {
+export const register = ({ username, password, email,community, profile_photo }) => (dispatch) => {
   
   // Headers
   const config = {
@@ -128,8 +131,9 @@ export const register = ({ username, password, email,community }, profile_photo)
   };
 
   // Request Body
-  const body = JSON.stringify({ username, email, password, community }, profile_photo);
-  console.log(profile_photo)
+  const body = JSON.stringify({ username, email, password, community, profile_photo});
+  console.log("profiles")
+  console.log(body)
   axios
     .post('/api/auth/register', body, config)
     .then((res) => {
@@ -145,7 +149,6 @@ export const register = ({ username, password, email,community }, profile_photo)
         type: REGISTER_FAIL,
       });
     });
-    console.log(res.data)
 };
 
 export const createAccount = ({ username, password, email, profile_photo }) => (dispatch) => {
@@ -209,20 +212,23 @@ export const tokenConfig = (getState) => {
   return config;
 };
 
-export const updateAccount = ({ username, password, email, community, profile_photo }) => (dispatch) => {
+export const updateAccount = ({ username1, password, email, community, profile_photo }, username) => (dispatch) => {
   // Headers
   const config = {
     headers: {
       'Content-Type': 'application/json',
     },
   };
-
+  console.log("uPDAE")
+  console.log(username)
   // Request Body
-  const body = JSON.stringify({ username, email, password, community });
+  const body = JSON.stringify({ username1, email, password, community });
 
   axios
-    .post('/api/auth/register', body, config)
+    .patch('/api/auth/${username}', body, config)
     .then((res) => {
+      console.log("!")
+
       dispatch({
         type: UPDATE_SUCCESS,
         payload: res.data,

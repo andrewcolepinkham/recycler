@@ -2,9 +2,44 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { getSubmissions, deleteSubmission } from "../../actions/submissions";
-import Image from 'react-bootstrap/Image';
+import Modal from 'react-bootstrap/Modal'
+import Button from 'react-bootstrap/Button'
 import { loadAccount } from "../../actions/auth";
 
+function MyVerticallyCenteredModal(props) {
+  let {id, type, amount, description, photo} = "---";
+  if (props.submission !== null){
+    id = props.submission.id;
+    type = props.submission.type;
+    amount = props.submission.amount;
+    description = props.submission.description;
+    photo = props.submission.photo;
+  } 
+  return ( 
+    <Modal
+      {...props}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">
+          {type}
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <h4>${amount}</h4>
+        <h4>{description}</h4>
+        <img src={photo} className='img-fluid hover-shadow' alt='' style={{ maxWidth: '20rem' }}/>
+
+      </Modal.Body>
+      <Modal.Footer>
+        <Button onClick={props.onHide}>Close</Button>
+      </Modal.Footer>
+    </Modal>
+  );
+  
+}
 
 export class Submissions extends Component {
   static propTypes = {
@@ -13,15 +48,30 @@ export class Submissions extends Component {
     deleteSubmission: PropTypes.func.isRequired,
     loadAccount: PropTypes.func.isRequired
   };
+  state = {
+    imageModal: false,
+    selectedSubmission: null
+  }
 
   componentDidMount() {
     this.props.getSubmissions();
   }
 
+  handleEnlargeImage(submission) {
+    console.log("Here")
+    this.setState({selectedSubmission: submission, imageModal: true, })
+  }
+  
+  
   render() {
+    
     return (
-      <Fragment>
-        <h2>Submisions</h2>
+      <div className="card card-body mt-4 mb-4" style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
+        <h2>My Submissions</h2>
         <table className="table table-striped">
           <thead>
             <tr>
@@ -35,13 +85,13 @@ export class Submissions extends Component {
           </thead>
           <tbody>
             {this.props.submissions.map(submission => (
-              <tr key={submission.id}>
-                <td>{submission.id}</td>
-                <td>{submission.type}</td>
-                <td>{submission.amount}</td>
-                <td>{submission.description}</td>
+              <tr key={submission.id} >
+                <td onClick={this.handleEnlargeImage.bind(this, submission)} >{submission.id}</td>
+                <td onClick={this.handleEnlargeImage.bind(this, submission)} >{submission.type}</td>
+                <td onClick={this.handleEnlargeImage.bind(this, submission)} >{submission.amount}</td>
+                <td onClick={this.handleEnlargeImage.bind(this, submission)} >{submission.description}</td>
                 <td>
-                  <img src={submission.photo} className='img-fluid hover-shadow' alt='' style={{ maxWidth: '5rem' }}/>
+                  <img src={submission.photo} onClick={this.handleEnlargeImage.bind(this, submission)}className='img-fluid hover-shadow' alt='' style={{ maxWidth: '5rem' }}/>
                 </td>
                 <td>
                   <button
@@ -56,7 +106,12 @@ export class Submissions extends Component {
             ))}
           </tbody>
         </table>
-      </Fragment>
+        <MyVerticallyCenteredModal
+          show={this.state.imageModal}
+          onHide={() => this.setState({imageModal: false})}
+          submission={this.state.selectedSubmission}
+        />
+      </div>
     );
   }
 }

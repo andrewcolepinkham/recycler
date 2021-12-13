@@ -1,4 +1,4 @@
-import {USER_LOADED, MEMBERSHIP_INFO,GET_COMMUNITIES, USER_LOADING, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS, REGISTER_SUCCESS, REGISTER_FAIL, ACCOUNT_LOADED, ACCOUNT_LOADING, ADD_SCORE} from "../actions/types"; 
+import {USER_LOADED, MEMBERSHIP_INFO,GET_COMMUNITIES, USER_LOADING, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS, REGISTER_SUCCESS, REGISTER_FAIL, ACCOUNT_LOADED, ACCOUNT_LOADING, ADD_SCORE, UPDATE_SUCCESS} from "../actions/types"; 
 
 const initialState = {
     token: localStorage.getItem('token'), 
@@ -42,7 +42,8 @@ export default function(state=initialState, action){
         case LOGIN_SUCCESS:
         case REGISTER_SUCCESS:
             localStorage.setItem('token', action.payload.token);
-           
+            console.log("register")
+            console.log(action.payload)
             return {
                 ...state, 
                 ...action.payload,
@@ -63,12 +64,18 @@ export default function(state=initialState, action){
                 isLoading:false
             };
         case GET_COMMUNITIES: 
+            console.log("auth reducer get communities")
+            console.log(action.payload)
             return {
                 ...state,
-                community: action.payload,
+                communities: action.payload,
  
 
             }
+        case UPDATE_SUCCESS: 
+            return  {...state,
+            }
+
         default: 
             return state;
 

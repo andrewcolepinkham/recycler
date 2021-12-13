@@ -3,25 +3,25 @@ from rest_framework.response import Response
 from knox.models import AuthToken
 from .models import Account, Community, Membership
 from .serializers import UserSerializer, RegisterSerializer, CommunitySerializer, LoginSerializer, AccountSerializer, UpdateScoreSerializer
-
+from json import dumps
 # Register API
 class RegisterAPI(generics.GenericAPIView):
     serializer_class = RegisterSerializer
 
     def post(self, request, *args, **kwargs):
-        # Community.objects.all().delete()
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user= serializer.save()
         token = AuthToken.objects.create(user)[1]
    
         community = Community.objects.get_or_create(name="Default")[0]
-        account = Account.objects.create(user=user,username=request.data['username'], profile_photo=None)
+        username = request.data['username']
+        email = request.data['email']
+        profile_photo = request.data['profile_photo']
+        account = Account.objects.create(user=user,username=username, profile_photo=profile_photo, email=email )
         m1 = Membership.objects.create(account=account, community=community)
-
         m1.save()
 
-        #WILL NEED TO CHANGE IF ITS  ALIST
         return Response({
             "user": UserSerializer(user, 
             context=self.get_serializer_context()).data, 
@@ -45,16 +45,12 @@ class CreateAccountAPI(generics.GenericAPIView):
             context=self.get_serializer_context()).data, 
             "token": token
         })
-class MembershipAPI(generics.GenericAPIView): 
-    def get(self): 
-        account = self.user.account
-        return account
+
 class CommunityAPI(generics.GenericAPIView): 
     serializer_class = CommunitySerializer
     def post(self, request, *args, **kwargs):
         validated_data = request.data
         community = Community.objects.create(name=validated_data["name"], zipcode=validated_data["zip"])
-
         return Response({
             "community" : CommunitySerializer(community,  context=self.get_serializer_context()).data
 
@@ -62,16 +58,31 @@ class CommunityAPI(generics.GenericAPIView):
     def put(self, request, pk): 
         # PUT a new user into community 
         pass
+    # def get(self, request):
 
+    #     queryset = Community.objects.all()
+
+    #     # event_filter = self.request.query_params.get('event_filter', None)
+
+    #     # if event_filter == 'last':
+    #     #     return [queryset.order_by("-event_id")[0]]
+    #     # if event_filter == 'first':
+    #     #     return [queryset.order_by("event_id")[0]]
+    #     print("quererehsi")
+
+    #     return queryset
     def get(self, request): 
         communities = []
-        
+
+
+        # https://stackoverflow.com/questions/64829165/how-do-i-properly-use-javascript-axios-get-function-to-call-get-queryset-fu
         for community in Community.objects.all():
-            communities.append(CommunitySerializer(community, context=self.get_serializer_context()).data)
-        
-        return Response({
-           "communities" : Community.objects.all()
-        })
+            communities.append(CommunitySerializer(community,  context=self.get_serializer_context()).data)
+        print("In get communities python")
+        print("returning: ")
+        print(communities)
+        return Response({"communities" :communities})
+       
 
     def change_admin(self):
         #change who the admin is 
@@ -83,7 +94,7 @@ class LoginAPI(generics.GenericAPIView):
 
     def post(self, request, *args, **kwargs):
        
-        
+       
             
 
        # community = Community.objects.create(name="Default", zip_code=80903)
@@ -92,9 +103,14 @@ class LoginAPI(generics.GenericAPIView):
         serializer.is_valid(raise_exception=True)
         user,account = serializer.validated_data
         token = AuthToken.objects.create(user)[1]
+        ######################################
+        # DELETE LATER--- DEV PURPOSES 
         account.check_score()
-        account.communities  = "Default"
+        account.email = user.email
+
+        #account.communities  = "Default"
         account.save()
+
         
         if len(account.get_community()) == 0:
             community = Community.objects.get_or_create(name="Default")[0]
@@ -118,13 +134,28 @@ class UserAPI(generics.RetrieveAPIView):
     ]
     serializer_class = UserSerializer
 
-    def get(self):
+    def get(self, request):
         return self.request.user
     def delete_user(self, request):
         #deletes the user 
         pass
 # Get Account API
-
+class UpdateAccountUserApi(generics.RetrieveUpdateAPIView): 
+    permission_classes = (permissions.IsAuthenticated,)
+    serializer_class = UserSerializer
+    # def retrieve(self, request, *args, **kwargs):
+    #     serializer = self.serializer_class(request.user)
+    #     return Response(serializer.data)
+    def perforn_update(self, request, *args, **kwargs): 
+        print("up")
+    def update(self, request, *args, **kwargs):
+        print("update")
+        serializer = self.serializer_class(request.user, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        account = self.request.user.account 
+        account.update()
+        return Response(serializer.data)
 class AccountAPI(generics.RetrieveAPIView):
     permission_classes = [
         permissions.IsAuthenticated,
@@ -132,9 +163,8 @@ class AccountAPI(generics.RetrieveAPIView):
     serializer_class = AccountSerializer
     def get_object(self):
         account= Account.objects.get(username=self.request.user.account)
-        print(account.get_community())
-        print(AccountSerializer(account, 
-            context=self.get_serializer_context()).data)
+
+       
         return account
     def edit_score(self, amount, type): 
 

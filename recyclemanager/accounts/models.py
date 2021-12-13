@@ -14,18 +14,19 @@ class Account(models.Model):
     username = models.CharField(max_length=150,blank=True)
     score = models.FloatField( default=0)
     
-    profile_photo = models.ImageField(default= '../media/default.jpg', upload_to="post_images" )
+    profile_photo = models.ImageField(default= '../media/default.jpg', upload_to="profile_photos" )
     num_submissions = models.IntegerField(default=0)
-    email = ""
+    email = models.EmailField(max_length=254, default="")
     password = ""
     communities = models.CharField(max_length=150,blank=True)
 
-    def create(self, user, username, profile_photo): 
+    def create(self, user, username, profile_photo, email=""): 
         self.username = username
         self.score = 0
         self.num_submissions = 0
         self.user = user
-       # self.profile_photo = profile_photo
+        self.profile_photo = profile_photo
+        self.email = email
         return self
     def delete_score_and_submission(self, score_decrease): 
         self.score = self.score- score_decrease
@@ -49,10 +50,21 @@ class Account(models.Model):
         return self.num_submissions
     def __str__(self) -> str:
         return self.username
+    def update(self, data): 
+        for (key, value) in data.items():
+            if key == "email": 
+                self.update_email(value)
+            elif key == "username": 
+                self.update_username(value)
     def get_community(self): 
         self.communities =  self.community_set.all()
-
         return self.community_set.all()
+    def update_username(self, username):
+        self.username = username
+        self.user
+    def update_email(self, email): 
+        self.email = email
+
 class Community(models.Model): 
     zip_code = models.IntegerField(default=0)
     name = models.CharField(max_length=150,blank=True)
