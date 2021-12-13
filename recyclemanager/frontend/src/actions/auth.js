@@ -17,29 +17,7 @@ import {
   UPDATE_SUCCESS,
   ACCOUNT_REGISTER
 } from './types';
-export const getCommunities = () => (dispatch, getState) => {
-  axios
-  
-    .get("/api/auth/communities", tokenConfig(getState))
-    .then(res => {
-      console.log("auth action get communities")
-      console.log(res.data)
-      dispatch({
-        type: GET_COMMUNITIES,
-        payload: res.data
-      });
-    })
-    .catch(err => {
-      const errors = {
-        msg: err.response.data,
-        status: err.response.status
-      }
-      dispatch({
-        type: GET_ERRORS,
-        payload: errors
-      });
-    });
-};
+
 // CHECK TOKEN & LOAD USER
 export const loadUser = () => (dispatch, getState) => {
   // User Loading
@@ -69,8 +47,6 @@ export const loadAccount = () => (dispatch, getState) => {
   axios
     .get('/api/auth/account', tokenConfig(getState))
     .then((res) => {
-      console.log(" jodsno")
-      console.log(res.data)
       dispatch({
         type: ACCOUNT_LOADED,
         payload: res.data,
@@ -132,7 +108,7 @@ export const register = ({ username, password, email,community, profile_photo })
 
   // Request Body
   const body = JSON.stringify({ username, email, password, community, profile_photo});
-  console.log("profiles")
+  console.log("BODY:")
   console.log(body)
   axios
     .post('/api/auth/register', body, config)
@@ -219,16 +195,12 @@ export const updateAccount = ({ username1, password, email, community, profile_p
       'Content-Type': 'application/json',
     },
   };
-  console.log("uPDAE")
-  console.log(username)
   // Request Body
   const body = JSON.stringify({ username1, email, password, community });
 
   axios
     .patch('/api/auth/${username}', body, config)
     .then((res) => {
-      console.log("!")
-
       dispatch({
         type: UPDATE_SUCCESS,
         payload: res.data,

@@ -13,8 +13,10 @@ class RegisterAPI(generics.GenericAPIView):
         serializer.is_valid(raise_exception=True)
         user= serializer.save()
         token = AuthToken.objects.create(user)[1]
-   
-        community = Community.objects.get_or_create(name="Default")[0]
+        community = Community.objects.get_or_create(name='Colorado College', zip_code=80903)[0]
+        community = Community.objects.get_or_create(name='West Chester', zip_code=19382)[0] 
+        community = Community.objects.get_or_create(name='Default', zip_code=80903)[0]
+        community = Community.objects.get_or_create(name=request.data["community"])[0]
         username = request.data['username']
         email = request.data['email']
         profile_photo = request.data['profile_photo']

@@ -10,8 +10,8 @@ const initialState = {
         score: "--",
         num_submissions: "--", 
         profile_photo:null, 
-        communities :null, 
-    }
+        community:null, 
+    },
 }; 
 
 export default function(state=initialState, action){
@@ -42,8 +42,6 @@ export default function(state=initialState, action){
         case LOGIN_SUCCESS:
         case REGISTER_SUCCESS:
             localStorage.setItem('token', action.payload.token);
-            console.log("register")
-            console.log(action.payload)
             return {
                 ...state, 
                 ...action.payload,
@@ -63,15 +61,6 @@ export default function(state=initialState, action){
                 isAuthenticated:false, 
                 isLoading:false
             };
-        case GET_COMMUNITIES: 
-            console.log("auth reducer get communities")
-            console.log(action.payload)
-            return {
-                ...state,
-                communities: action.payload,
- 
-
-            }
         case UPDATE_SUCCESS: 
             return  {...state,
             }
