@@ -45,8 +45,6 @@ export class Header extends Component {
   
   render() {
     const { isAuthenticated, user, account, community } = this.props.auth;
-    console.log("estoy")
-    console.log(account.profile_photo)
     const authLinks = (
       <>
         <Nav className="me-auto">
@@ -77,7 +75,7 @@ export class Header extends Component {
               <h5> Email: {account ? `${account.email}` : 'email'}</h5>
               <h5> Score: {account ? `${account.score}` : 'score'}</h5>
               <h5> Number of Submissions: {account ? `${account.num_submissions}` : 'Number of Submissions'}</h5>
-              <h5> Communities: {community ? `${community.name}` : 'Communities'}</h5>
+              <h5> Community: {community ? `${community.name}` : 'Communities'}</h5>
             </Row>
             <Button variant="danger" onClick={this.handleLogout.bind(this)}>
               Logout
