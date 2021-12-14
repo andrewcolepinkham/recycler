@@ -40,7 +40,7 @@ export class Header extends Component {
 
   handleLogout(){
     this.handleProfileClose()
-    this.props.logout()    
+    this.props.logout()
   }
   
   render() {
@@ -131,7 +131,7 @@ export class Header extends Component {
       <>
         <Navbar bg="primary" variant="dark">
           <Container>
-          <Navbar.Brand href="/">Recycler</Navbar.Brand>
+          <Navbar.Brand href="/#/profile">Recycler</Navbar.Brand>
           {isAuthenticated?authLinks:guestLinks}
           {/* <Nav className="me-auto">
             

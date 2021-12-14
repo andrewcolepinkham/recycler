@@ -8,13 +8,19 @@ import UserProfile from './UserProfile';
 import Leaderboard from "./Leaderboard";
 import MyMap from "./MyMap";
 import Nav from 'react-bootstrap/Nav'
+import { Route, Redirect } from 'react-router-dom';
+
 
 
 export class Profile extends Component {
   static propTypes = {
+    isAuthenticated: PropTypes.bool,
   };
 
   render() {
+    if(!this.props.isAuthenticated){
+      return <Redirect to="/login" />;
+    }
     return (
       <Container className = "p-5">
         {/* <Col>
@@ -48,10 +54,7 @@ export class Profile extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
 });
-
-export default connect(
-  mapStateToProps,
-  {}
-)(Profile);
+export default connect(mapStateToProps)(Profile);

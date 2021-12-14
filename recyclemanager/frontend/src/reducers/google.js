@@ -1,53 +1,54 @@
 import { PLACES_SUCCESS } from "../actions/types.js";
 
 const initialState = {
-  places: [
-    {
-      name: "--",
-      geometry: {
-        location: {
-          lat: "---",
-          lng: "---",
-        }
-      }
-    },
-    {
-      name: "--",
-      geometry: {
-        location: {
-          lat: "---",
-          lng: "---",
-        }
-      }
-    },
-    {
-      name: "--",
-      geometry: {
-        location: {
-          lat: "---",
-          lng: "---",
-        }
-      }
-    },
-    {
-      name: "--",
-      geometry: {
-        location: {
-          lat: "---",
-          lng: "---",
-        }
-      }
-    },
-    {
-      name: "--",
-      geometry: {
-        location: {
-          lat: "---",
-          lng: "---",
-        }
-      }
-    },
-  ]
+  places: null
+  //[
+  //   {
+  //     name: "--",
+  //     geometry: {
+  //       location: {
+  //         lat: "---",
+  //         lng: "---",
+  //       }
+  //     }
+  //   },
+  //   {
+  //     name: "--",
+  //     geometry: {
+  //       location: {
+  //         lat: "---",
+  //         lng: "---",
+  //       }
+  //     }
+  //   },
+  //   {
+  //     name: "--",
+  //     geometry: {
+  //       location: {
+  //         lat: "---",
+  //         lng: "---",
+  //       }
+  //     }
+  //   },
+  //   {
+  //     name: "--",
+  //     geometry: {
+  //       location: {
+  //         lat: "---",
+  //         lng: "---",
+  //       }
+  //     }
+  //   },
+  //   {
+  //     name: "--",
+  //     geometry: {
+  //       location: {
+  //         lat: "---",
+  //         lng: "---",
+  //       }
+  //     }
+  //   },
+  // ]
 };
 
 export default function(state = initialState, action) {

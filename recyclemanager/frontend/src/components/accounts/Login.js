@@ -23,7 +23,7 @@ export class Login extends Component {
   onChange = (e) => this.setState({ [e.target.name]: e.target.value });
   render() {
     if(this.props.isAuthenticated) {
-      return <Redirect to="/" />;
+      return <Redirect to="/profile" />;
     }
     const { username, password } = this.state
     return (
