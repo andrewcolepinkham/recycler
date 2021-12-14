@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect, HashRouter } from 'react-router-dom';
 
 import { Provider as AlertProvider } from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
@@ -19,16 +19,22 @@ import store from '../store';
 import { loadUser } from '../actions/auth';
 import EditProfile from './submissions/EditProfile';
 import About from './layout/About';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 
 
 
 const alertOptions = {
-  timeout: 3000,
+  timeout: 6000,
   position: 'top center'
 }
 
 class App extends Component {
+  static propTypes = {
+    isAuthenticated: PropTypes.bool,
+  };
+
   componentDidMount() {
     store.dispatch(loadUser());
   }
@@ -36,13 +42,28 @@ class App extends Component {
     return (
       <Provider store={store}>
         <AlertProvider template={AlertTemplate} {...alertOptions}>
-         <Router>
+         <HashRouter>
           <Fragment>
           <Header />
           <Alerts />
           <div className="container">
             <Switch>
-              <PrivateRoute exact path="/" component={Profile} />
+            <Route
+              exact
+              path="/"
+              render={() => {
+                  console.log(this.props.isAuthenticated)
+                  if(this.props.isAuthenticated){
+                    return <Redirect to="/profile" />
+                  }
+                  else{
+                    return <Redirect to="/login" /> 
+                  }
+              }}
+            />
+              {/* <PrivateRoute exact path="/" component={Profile} /> */}
+              {/* <PrivateRoute exact path="/#/" component={Profile} /> */}
+              <Route exact path="/profile" component={Profile} />
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
               <Route exact path='/account' component={Account}/>
@@ -52,11 +73,15 @@ class App extends Component {
             </Switch>
            </div> 
           </Fragment>   
-         </Router>
+         </HashRouter>
         </AlertProvider>
       </Provider>
     );
   }
 }
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+connect(mapStateToProps)(App);
 
 ReactDOM.render(<App />, document.getElementById("app"));
