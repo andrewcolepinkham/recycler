@@ -97,20 +97,19 @@ export const login = (username, password) => (dispatch) => {
 };
 
 // REGISTER USER
-export const register = ({ username, password, email,community, profile_photo }) => (dispatch) => {
+export const register = newUser => (dispatch) => {
   
   // Headers
   const config = {
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'multipart/form-data'
     },
   };
 
-  // Request Body
-  const body = JSON.stringify({ username, email, password, community, profile_photo});
- 
+  // // Request Body
+  // const body = JSON.stringify({ username, email, password, community, profile_photo});
   axios
-    .post('/api/auth/register', body, config)
+    .post('/api/auth/register', newUser, config)
     .then((res) => {
       dispatch({
         type: REGISTER_SUCCESS,

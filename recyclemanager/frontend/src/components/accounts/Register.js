@@ -40,7 +40,7 @@ export class Register extends Component {
       // let img = event.target.files[0];
       // console.log(e.target.files[0])
       this.setState({
-        profile_photo: e.target.files[0].name
+        profile_photo: e.target.files[0]
       });
     }
   };
@@ -49,18 +49,23 @@ export class Register extends Component {
   onSubmit = e => {
     e.preventDefault();
     const { username, email, password, password2, community, profile_photo } = this.state;
-    console.log(profile_photo)
     if(password !== password2) {
       this.props.createMessage({ passwordNotMatch: 'Passwords do not match!'})
     }
     else {
-      const newUser = {
-        username,
-        password,
-        email, 
-        community,
-        profile_photo,
-      }
+      let newUser = new FormData();
+      newUser.append('username', username);
+      newUser.append('password', password);
+      newUser.append('email', email);
+      newUser.append('community', community);
+      newUser.append('profile_photo', profile_photo, profile_photo.name);
+      // const newUser = {
+      //   username,
+      //   password,
+      //   email, 
+      //   community,
+      //   profile_photo,
+      // }
       this.props.register(newUser);
     }
   }

@@ -13,8 +13,8 @@ class Account(models.Model):
     user = models.OneToOneField(User, on_delete=CASCADE)
     username = models.CharField(max_length=150,blank=True)
     score = models.FloatField( default=0)
-    
-    profile_photo = models.ImageField(default= '../media/default.jpg', upload_to="profile_photos" )
+    profile_photo = models.ImageField(upload_to="profile_images", default=0)
+    # profile_photo = models.ImageField(default= '../media/default.jpg', upload_to="profile_photos" )
     num_submissions = models.IntegerField(default=0)
     email = models.EmailField(max_length=254, default="")
     password = ""
