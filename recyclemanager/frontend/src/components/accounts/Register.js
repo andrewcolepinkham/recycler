@@ -70,6 +70,7 @@ export class Register extends Component {
     if (communities){
       for (let i = 0; i < communities.length; i++) {             
         items.push({name : communities[i].name, value : i});   
+        console.log(communities.accounts)
       }
       return items
     }

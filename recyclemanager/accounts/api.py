@@ -12,11 +12,12 @@ class RegisterAPI(generics.GenericAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user= serializer.save()
+
         token = AuthToken.objects.create(user)[1]
         community = Community.objects.get_or_create(name='Colorado College', zip_code=80903)[0]
         community = Community.objects.get_or_create(name='West Chester', zip_code=19382)[0] 
         community = Community.objects.get_or_create(name='Default', zip_code=80903)[0]
-        community = Community.objects.get_or_create(name=request.data["community"])[0]
+        community = Community.objects.get(name=request.data["community"])
         username = request.data['username']
         email = request.data['email']
         profile_photo = request.data['profile_photo']
@@ -48,6 +49,8 @@ class CreateAccountAPI(generics.GenericAPIView):
             "token": token
         })
 
+class CommunityAccountsAPI(generics.GenericAPIView): 
+    pass
 class CommunityAPI(generics.GenericAPIView): 
     serializer_class = CommunitySerializer
     def post(self, request, *args, **kwargs):
@@ -60,19 +63,7 @@ class CommunityAPI(generics.GenericAPIView):
     def put(self, request, pk): 
         # PUT a new user into community 
         pass
-    # def get(self, request):
 
-    #     queryset = Community.objects.all()
-
-    #     # event_filter = self.request.query_params.get('event_filter', None)
-
-    #     # if event_filter == 'last':
-    #     #     return [queryset.order_by("-event_id")[0]]
-    #     # if event_filter == 'first':
-    #     #     return [queryset.order_by("event_id")[0]]
-    #     print("quererehsi")
-
-    #     return queryset
     def get(self, request): 
         communities = []
 
@@ -80,9 +71,7 @@ class CommunityAPI(generics.GenericAPIView):
         # https://stackoverflow.com/questions/64829165/how-do-i-properly-use-javascript-axios-get-function-to-call-get-queryset-fu
         for community in Community.objects.all():
             communities.append(CommunitySerializer(community,  context=self.get_serializer_context()).data)
-        print("In get communities python")
-        print("returning: ")
-        print(communities)
+       
         return Response({"communities" :communities})
        
 
