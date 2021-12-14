@@ -83,10 +83,8 @@ class CommunityAPI(generics.GenericAPIView):
         community = Community.objects.get(name=community)
         accounts = []
         for account in community.accounts.all():
-            accounts.append({"account" : account.username, "score" : account.score})
 
-
-        print("!!!!")
+            accounts.append(AccountSerializer(account).data)
         return Response({"accounts" : accounts})
     def change_admin(self):
         #change who the admin is 

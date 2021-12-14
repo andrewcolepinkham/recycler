@@ -22,6 +22,7 @@ export class Leaderboard extends Component {
 
   render() {
     const {accounts} = this.props.communities
+    console.log(accounts)
     return (
 
       <div  style={{
