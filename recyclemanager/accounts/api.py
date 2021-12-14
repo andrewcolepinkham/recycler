@@ -33,7 +33,7 @@ class RegisterAPI(generics.GenericAPIView):
             context=self.get_serializer_context()).data, 
             "account": AccountSerializer(account, 
             context=self.get_serializer_context()).data, 
-            "community" : CommunitySerializer(community, 
+            "community" : CommunitySerializer(community,
             context=self.get_serializer_context()).data, 
             "token": token
         })
