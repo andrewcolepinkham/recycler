@@ -19,7 +19,7 @@ export class GoogleMapComponent extends Component {
         clickedLatLng: null,
         selectedPlace: null
     }
-    this.handlePlacesSearch = this.handlePlacesSearch.bind(this);
+    // this.handlePlacesSearch = this.handlePlacesSearch.bind(this);
     // this.handlePlacesSearch()
     // this.handleCenterChanged = this.handleCenterChanged.bind(this);
     // this.handleLoad = this.handleLoad.bind(this);
@@ -39,9 +39,9 @@ export class GoogleMapComponent extends Component {
     //       hasPlacesLoaded: true,
     //   })
     // }
+    this.props.getPlaces(this.state.center.lat, this.state.center.lng, 5000, 'recycling');
   }
   handlePlacesSearch() {
-    // console.log("handlePlacesSearch");
     this.props.getPlaces(this.state.center.lat, this.state.center.lng, 5000, 'recycling');
   };
 
@@ -60,7 +60,6 @@ export class GoogleMapComponent extends Component {
 
 
   render() {
-    console.log(this.state)
     const { places } = this.props.google;
     const mapContainerStyle = {
       height: "300px",
@@ -83,7 +82,8 @@ export class GoogleMapComponent extends Component {
 
               mapContainerStyle={mapContainerStyle}
             >
-              {places.map((place) => (
+              
+              {places ? places.map((place) => (
                 <Marker
                   key={place.geometry.location.lat + place.geometry.location.lng}
                   position={{ 
@@ -98,7 +98,7 @@ export class GoogleMapComponent extends Component {
                     scaledSize: new window.google.maps.Size(25,25)
                   }}
                 />
-              ))}
+              )) : <></>}
               {this.state.selectedPlace && (
                 <InfoWindow
                   position={{ 
@@ -120,11 +120,11 @@ export class GoogleMapComponent extends Component {
 
             </div>
             </GoogleMap>
-            <Button variant="primary" onClick={this.handlePlacesSearch}>
+            {/* <Button variant="primary" onClick={this.handlePlacesSearch.bind(this)}>
               <div style={{width: '600px'}}> 
                 <h5 style={{color: 'black', textAlign: 'center'}}>Go</h5>
               </div>
-            </Button>
+            </Button> */}
         </div>
         
     );

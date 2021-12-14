@@ -21,7 +21,6 @@ export const getPlaces = (lat, lng, radius, keyword) => (dispatch) => {
   axios
     .post('/api/places/', body, config)
     .then((res) => {
-      console.log(res)
       dispatch({
         type: PLACES_SUCCESS,
         payload: res.data,

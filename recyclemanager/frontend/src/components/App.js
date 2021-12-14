@@ -52,7 +52,6 @@ class App extends Component {
               exact
               path="/"
               render={() => {
-                  console.log(this.props.isAuthenticated)
                   if(this.props.isAuthenticated){
                     return <Redirect to="/profile" />
                   }
