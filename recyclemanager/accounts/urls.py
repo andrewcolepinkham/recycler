@@ -10,6 +10,8 @@ urlpatterns = [
     path('api/auth/createaccount', AccountAPI.as_view()),
     path('api/auth/:username', UpdateAccountUserApi.as_view()), 
     path('api/communities', CommunityAPI.as_view()),
+    path('api/communities/get_accounts<str:community>', CommunityAPI.get_accounts ), 
+
     path('api/auth/account', AccountAPI.as_view()),
     path('api/auth/logout', knox_views.LogoutView.as_view(), name='knox_logout')
 ]

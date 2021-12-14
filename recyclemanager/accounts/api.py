@@ -1,5 +1,8 @@
 from rest_framework import generics, permissions, mixins, viewsets
 from rest_framework.response import Response
+from rest_framework.decorators import api_view, renderer_classes
+from rest_framework.renderers import JSONRenderer, TemplateHTMLRenderer
+
 from knox.models import AuthToken
 from .models import Account, Community, Membership
 from .serializers import UserSerializer, RegisterSerializer, CommunitySerializer, LoginSerializer, AccountSerializer, UpdateScoreSerializer
@@ -49,8 +52,7 @@ class CreateAccountAPI(generics.GenericAPIView):
             "token": token
         })
 
-class CommunityAccountsAPI(generics.GenericAPIView): 
-    pass
+   
 class CommunityAPI(generics.GenericAPIView): 
     serializer_class = CommunitySerializer
     def post(self, request, *args, **kwargs):
@@ -73,8 +75,19 @@ class CommunityAPI(generics.GenericAPIView):
             communities.append(CommunitySerializer(community,  context=self.get_serializer_context()).data)
        
         return Response({"communities" :communities})
-       
 
+    @api_view(('GET',))
+    @renderer_classes((TemplateHTMLRenderer, JSONRenderer))  
+    def get_accounts(self, community): 
+
+        community = Community.objects.get(name=community)
+        accounts = []
+        for account in community.accounts.all():
+            accounts.append({"account" : account.username, "score" : account.score})
+
+
+        print("!!!!")
+        return Response({"accounts" : accounts})
     def change_admin(self):
         #change who the admin is 
         pass
@@ -138,9 +151,8 @@ class UpdateAccountUserApi(generics.RetrieveUpdateAPIView):
     #     serializer = self.serializer_class(request.user)
     #     return Response(serializer.data)
     def perforn_update(self, request, *args, **kwargs): 
-        print("up")
+        pass
     def update(self, request, *args, **kwargs):
-        print("update")
         serializer = self.serializer_class(request.user, data=request.data, partial=True)
         serializer.is_valid(raise_exception=True)
         serializer.save()

@@ -108,8 +108,7 @@ export const register = ({ username, password, email,community, profile_photo })
 
   // Request Body
   const body = JSON.stringify({ username, email, password, community, profile_photo});
-  console.log("BODY:")
-  console.log(body)
+ 
   axios
     .post('/api/auth/register', body, config)
     .then((res) => {
