@@ -2,7 +2,27 @@ import { GET_COMMUNITIES, GET_COMMUNITIES_ACCOUNTS } from "../actions/types.js";
 
 const initialState = {
   communities: null,
-  accounts: null
+  accounts: [
+    {
+      teamName: "team1",
+      score: 500},
+    {
+      teamName: "team2",
+      score: 400
+    },
+    {
+      teamName: "team3",
+      score: 300
+    },
+    {
+      teamName: "team4",
+      score: 200
+    },
+    {
+      teamName: "team5",
+      score: 100
+    }
+  ]
 };
 
 export default function(state = initialState, action) {

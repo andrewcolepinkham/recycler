@@ -11,7 +11,7 @@ export class MyMap extends Component {
   render() {
     const WrappedMap = withScriptjs(withGoogleMap(GoogleMapComponent))
     return (
-      <div className="card card-body mt-6 mb-6" >
+      <div className="card border-info card-body mt-6 mb-6" >
         <h2 style={{
         display: 'flex',
         alignItems: 'center',
