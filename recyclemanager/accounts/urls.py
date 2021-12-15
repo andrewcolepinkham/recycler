@@ -8,7 +8,7 @@ urlpatterns = [
     path('api/auth/login', LoginAPI.as_view()),
     path('api/auth/user', UserAPI.as_view()),
     path('api/auth/createaccount', AccountAPI.as_view()),
-    path('api/auth/:username', UpdateAccountUserApi.as_view()), 
+    path('api/auth/update', UpdateAccountUserApi.as_view()), 
     path('api/communities', CommunityAPI.as_view()),
     path('api/communities/get_accounts<str:community>', CommunityAPI.get_accounts ), 
 

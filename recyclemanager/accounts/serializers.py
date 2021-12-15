@@ -8,12 +8,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'username', 'email')
-    # def update(self, instance, validated_data): 
-    #     account_data = validated_data.pop('account')
-    #     account = instance.account
-    #     print("update")
-    #     print(account.username)
-    #     return instance
+ 
     def update(self, instance, validated_data):
 
         password = validated_data.pop('password', None)

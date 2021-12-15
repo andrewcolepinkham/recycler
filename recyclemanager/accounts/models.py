@@ -56,15 +56,19 @@ class Account(models.Model):
                 self.update_email(value)
             elif key == "username": 
                 self.update_username(value)
+            elif key == "profile_photo": 
+                self.profile_photo = value
     def get_community(self): 
         self.communities =  self.community_set.all()
         return self.community_set.all()
     def update_username(self, username):
         self.username = username
-        self.user
+        self.user.username = username 
+        self.user.save()
     def update_email(self, email): 
         self.email = email
-
+        self.user.email = email
+        self.user.save()
 class Community(models.Model): 
     zip_code = models.IntegerField(default=0)
     name = models.CharField(max_length=150,blank=True)

@@ -27,12 +27,14 @@ componentDidMount() {
   this.props.loadAccount();
 }
 onChange = e =>  {
-  this.setState({ value: e.target.value });
+  this.setState({ [e.target.name]: e.target.value });
 }
 
 onSubmit = e => {
   e.preventDefault();
+  // const updateAcc= new FormData(); 
   const { username, email, password, password2, community, profile_photo } = this.state;
+ 
   const updateAcc = { 
     username,
     password,
@@ -40,13 +42,13 @@ onSubmit = e => {
     community,
     profile_photo
   }
-  this.props.updateAccount(updateAcc, "jawgg");
+  console.log(updateAcc)
+  this.props.updateAccount(updateAcc);
 }
 
 render() {
   const { isAuthenticated, account, username, email, password, password2, community, profile_photo } = this.props.auth;
-
-  // console.log(account)
+  
   return (
     <div className="card card-body mt-4 mb-4">
       <h2>Edit Profile</h2>
@@ -57,7 +59,7 @@ render() {
           name="username"
           className="form-control ml-auto"
           placeholder={account.username}
-
+          value={username}
           onChange={this.onChange}
          // placeholder={this.props.placeholder}
           
@@ -71,8 +73,9 @@ render() {
           name="email"
           className="form-control ml-auto "
           placeholder={account.email}
-          
+
           onChange={this.onChange}
+          value = {email}
           //placeholder={this.props.placeholder}
         />
         </div>
@@ -82,7 +85,8 @@ render() {
           type="text"
           name="password"
           className="form-control ml-auto"
-          value={account.password}
+          // placeholder={account.password}
+
           onChange={this.onChange}
           placeholder="******"
         />
@@ -92,9 +96,9 @@ render() {
           type="text"
           name="community"
           className="form-control ml-auto"
-          value={account.username}
+          placeholder={account.community}
           onChange={this.onChange}
-          placeholder={"Change to community"}
+          
         />
         <div className="form-group">
           <label>Team Photo</label>

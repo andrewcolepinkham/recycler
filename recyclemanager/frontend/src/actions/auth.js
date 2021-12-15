@@ -105,9 +105,6 @@ export const register = newUser => (dispatch) => {
       'Content-Type': 'multipart/form-data'
     },
   };
-
-  // // Request Body
-  // const body = JSON.stringify({ username, email, password, community, profile_photo});
   axios
     .post('/api/auth/register', newUser, config)
     .then((res) => {
@@ -186,7 +183,7 @@ export const tokenConfig = (getState) => {
   return config;
 };
 
-export const updateAccount = ({ username1, password, email, community, profile_photo }, username) => (dispatch) => {
+export const updateAccount = ({ username, password, email, community, profile_photo }) => (dispatch, getState) => {
   // Headers
   const config = {
     headers: {
@@ -194,11 +191,14 @@ export const updateAccount = ({ username1, password, email, community, profile_p
     },
   };
   // Request Body
-  const body = JSON.stringify({ username1, email, password, community });
-
+  console.log("hosafhdoi")
+  const body = JSON.stringify({ username, email, password, community });
+  console.log(body)
   axios
-    .patch('/api/auth/${username}', body, config)
+    .patch("api/auth/account", body, tokenConfig(getState))
+    
     .then((res) => {
+      console.log("here")
       dispatch({
         type: UPDATE_SUCCESS,
         payload: res.data,

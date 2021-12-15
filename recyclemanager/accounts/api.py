@@ -2,6 +2,8 @@ from rest_framework import generics, permissions, mixins, viewsets
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, renderer_classes
 from rest_framework.renderers import JSONRenderer, TemplateHTMLRenderer
+from django.shortcuts import get_object_or_404
+from django.contrib.auth.models import User
 
 from knox.models import AuthToken
 from .models import Account, Community, Membership
@@ -136,28 +138,32 @@ class UserAPI(generics.RetrieveAPIView):
     ]
     serializer_class = UserSerializer
 
-    def get(self, request):
+    def get(self):
         return self.request.user
     def delete_user(self, request):
         #deletes the user 
         pass
 # Get Account API
-class UpdateAccountUserApi(generics.RetrieveUpdateAPIView): 
+class UpdateAccountUserApi(generics.UpdateAPIView): 
     permission_classes = (permissions.IsAuthenticated,)
-    serializer_class = UserSerializer
+    serializer_class = AccountSerializer
+    lookup_field = 'username'
     # def retrieve(self, request, *args, **kwargs):
     #     serializer = self.serializer_class(request.user)
     #     return Response(serializer.data)
-    def perforn_update(self, request, *args, **kwargs): 
-        pass
+    def get_object(self):
+        username = self.kwargs["username"]
+        return get_object_or_404(Account, username=username)
     def update(self, request, *args, **kwargs):
+     
         serializer = self.serializer_class(request.user, data=request.data, partial=True)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         account = self.request.user.account 
-        account.update()
-        return Response(serializer.data)
-class AccountAPI(generics.RetrieveAPIView):
+        account.update(request.data)
+   
+        return Response(request.data)
+class AccountAPI(generics.RetrieveUpdateAPIView):
     permission_classes = [
         permissions.IsAuthenticated,
     ]
@@ -167,6 +173,19 @@ class AccountAPI(generics.RetrieveAPIView):
 
        
         return account
+  
+    def update(self, request, *args, **kwargs):
+        serializer = self.serializer_class(request.user, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        
+        account = self.request.user.account 
+        
+        account.update(request.data)
+
+
+        return Response(serializer.data)
+   
     def edit_score(self, amount, type): 
 
 
