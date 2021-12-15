@@ -48,7 +48,7 @@ export class Leaderboard extends Component {
       }
       sortAccounts = newArray
     }
-    console.log("ACCOUNNTTSSS")
+
     console.log(accounts)
 
 

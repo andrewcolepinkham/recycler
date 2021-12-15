@@ -178,10 +178,20 @@ class AccountAPI(generics.RetrieveUpdateAPIView):
         serializer = self.serializer_class(request.user, data=request.data, partial=True)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-        
         account = self.request.user.account 
+
+        if 'password' in request.data.keys():
+            # self.request.user.password.set_password(request.data['password'])
+            # self.request.user.save()
+            print('password change')
+            
+        if 'community' in request.data.keys(): 
+           # membership = Membership.objects.get(account =account, communi )
+           print(request.data)
+        
         
         account.update(request.data)
+        
 
 
         return Response(serializer.data)
