@@ -9,10 +9,13 @@ export class Leaderboard extends Component {
       accounts: PropTypes.object.isRequired,
       getCommunitiesAccounts : PropTypes.func.isRequired,
       communities: PropTypes.object.isRequired, 
+      auth: PropTypes.object.isRequired,
     };
 
   componentDidMount() {
-    this.props.getCommunitiesAccounts("West Chester");
+    console.log("auth: ")
+    console.log(this.props.auth.community.name)
+    this.props.getCommunitiesAccounts(this.props.auth.community.name);
   }
   calculateWidth(topscore, score){
     if (score === 0){
@@ -100,8 +103,8 @@ export class Leaderboard extends Component {
 }
 
 const mapStateToProps = state => ({
-  communities : state.communities
-  //accounts: state.accounts
+  communities : state.communities,
+  auth: state.auth
 });
 
 export default connect(
