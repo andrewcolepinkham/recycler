@@ -11,6 +11,7 @@ import FormControl from 'react-bootstrap/FormControl'
 import Button from 'react-bootstrap/Button'
 import Offcanvas from 'react-bootstrap/Offcanvas'
 import {Container ,Row, Col} from "react-bootstrap"
+import Image from 'react-bootstrap/Image'
 
 
 export class Header extends Component {
@@ -66,16 +67,68 @@ export class Header extends Component {
             </Col>
           </Offcanvas.Header>
           <Offcanvas.Body>
-            <Row className="card card-body bg-primary mb-3">
-            
-              <div>
-                {/* <img src={account ? `${account.photo}` : 'photo'} className='img-fluid hover-shadow' style={{ maxWidth: '6rem' }}/> */}
-                <img src= {account ? `${account.profile_photo}` :'profile_photo'} className='img-fluid hover-shadow' style={{ maxWidth: '6rem' }}/>
-              </div>        
-              <h5> Email: {account ? `${account.email}` : 'email'}</h5>
+            <Row className="card card-body bg-black mb-3">
+              <legend>Account Info</legend> 
+              <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginBottom: '20px',
+              }}>
+                <Image src={account ? `${account.profile_photo}` :'profile_photo'} style={{ maxWidth: '10rem' }} roundedCircle />
+              </div>
+              <form>
+                <fieldset> 
+                  {/* <div className="form-group">
+                    <label for="staticEmail" className="col-sm-3 col-form-label">Email</label>
+                    <div className="col-sm-10">
+                      <input type="text" readonly="" className="form-control-plaintext" id="staticEmail" value={account ? `${account.email}` : '---'}/>
+                    </div>
+                  </div> */}
+                  <div className="form-group">
+                    <label for="exampleInputEmail1" className="form-label mt-4">Email address</label>
+                    <input type="email" readonly="" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder={account ? `${account.email}` : '---'}/>
+                    <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+                  </div>
+                  <div className="form-group">
+                    <label for="exampleInputEmail1" className="form-label mt-4">Score</label>
+                    <input type="email" readonly="" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder={account ? `${account.score}` : '---'}/>
+                    <small id="emailHelp" className="form-text text-muted">Keep making submissions to rack up more points.</small>
+                  </div>
+                  <div className="form-group">
+                    <label for="exampleInputEmail1" className="form-label mt-4">Number of Submissions</label>
+                    <input type="email" readonly="" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder={account ? `${account.num_submissions}` : '---'}/>
+                    <small id="emailHelp" className="form-text text-muted">There's still more time to recycle!</small>
+                  </div>
+                  <div className="form-group">
+                    <label for="exampleInputEmail1" className="form-label mt-4">Community</label>
+                    <input type="email" readonly="" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder={account ? `${account.community}` : '---'}/>
+                    <small id="emailHelp" className="form-text text-muted">Compete against those in your community.</small>
+                  </div>
+                  {/* <div className="form-group row">
+                    <label for="staticEmail" className="col-sm-3 col-form-label">Score</label>
+                    <div className="col-sm-10">
+                      <input type="text" readonly="" className="form-control-plaintext" id="staticEmail" value={account ? `${account.score}` : '---'}/>
+                    </div>
+                  </div>
+                  <div className="form-group row">
+                    <label for="staticEmail" className="col-sm-5 col-form-label">Number of Submissions</label>
+                    <div className="col-sm-10">
+                      <input type="text" readonly="" className="form-control-plaintext" id="staticEmail" value={account ? `${account.num_submissions}` : '---'}/>
+                    </div>
+                  </div>   
+                  <div className="form-group row">
+                    <label for="staticEmail" className="col-sm-5 col-form-label">Community</label>
+                    <div className="col-sm-10">
+                      <input type="text" readonly="" className="form-control-plaintext" id="staticEmail" value={community ? `${community.name}` : '---'}/>
+                    </div>
+                  </div> */}
+                </fieldset>
+              </form>
+              {/* <h5> Email: {account ? `${account.email}` : 'email'}</h5>
               <h5> Score: {account ? `${account.score}` : 'score'}</h5>
               <h5> Number of Submissions: {account ? `${account.num_submissions}` : 'Number of Submissions'}</h5>
-              <h5> Community: {community ? `${community.name}` : 'Communities'}</h5>
+              <h5> Community: {community ? `${community.name}` : 'Communities'}</h5> */}
             </Row>
             <Button variant="danger" onClick={this.handleLogout.bind(this)}>
               Logout

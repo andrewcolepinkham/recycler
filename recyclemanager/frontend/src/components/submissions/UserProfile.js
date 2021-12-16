@@ -18,37 +18,54 @@ export class UserProfile extends Component {
 
   componentDidMount() {
     this.props.loadAccount()
-    //this.props.getMembership()
-   // this.props.getCommunities() 
-    
+  }
+
+  getDaysLeft() {
+    let date = new Date().getDate()
+    let year = new Date().getFullYear()
+    let month = new Date().getMonth() 
+    let daysInMonth = new Date(year, month, 0).getDate();
+    let daysLeft = daysInMonth - date
+    let percent = `${(date/daysInMonth)*100}%`
+    return [daysLeft, percent]
   }
  
   render() {
     const { isAuthenticated, user, account, community} = this.props.auth;
-  
-    return (
-      // <Fragment>
-      //   <h2>Profile</h2>
-      //   <div>
-      //   <img src={account.profile_photo} className='img-fluid hover-shadow' alt=''style={{ maxWidth: '5rem' }}/>
-      //   </div>
-      //   <h5>Team Name: {account.username}</h5>
-      //   <h5> Email: {user.email}</h5>
-      //   <h5> Score: {account.score}</h5>
-      //   <h5> Number of Submissions: {account.num_submissions}</h5>
-      //   <h5> Communities: {community.name}</h5>
 
-        
-      //   </Fragment>
-      <div className="card border-info card-body mt-4 mb-4" style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-    }}>
-        <h1>Score</h1>
-        <h1 className="card card-body text-white bg-info mb-3" >{account.score}</h1>
-        <h5> {account.num_submissions} total submissions. Nice work!</h5>
-        <Link to="/submissionform" className="nav-link">New Submission</Link> 
+    return (
+      <div>
+        <div className="card border-info card-body mt-4 mb-4" style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+        }}>
+            <h1>Score</h1>
+            <h1 className="card card-body text-white bg-info mb-3" >{account.score}</h1>
+            <h5> {account.num_submissions} total submissions. Nice work!</h5>
+            <Link to="/submissionform" className="nav-link">New Submission</Link> 
+          </div>
+          <div>
+          
+          <div className="progress" style={{height:"3px", marginTop: "20px", marginBottom: "20px"}}>
+            <div className="progress-bar progress-bar-striped progress-bar-animated" 
+              role="progressbar" 
+              style={{width: this.getDaysLeft()[1]}} 
+              aria-valuenow="10" 
+              aria-valuemin="0" 
+              aria-valuemax="100">
+            </div>
+          </div>
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginBottom: '20px',
+        }}>
+            {this.getDaysLeft()[0]} days left to make additional submissions!
+          </div>
+        </div>
+
       </div>
     );
   }

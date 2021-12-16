@@ -13,8 +13,6 @@ export class Leaderboard extends Component {
     };
 
   componentDidMount() {
-    console.log("auth: ")
-    console.log(this.props.auth.community.name)
     this.props.getCommunitiesAccounts(this.props.auth.community.name);
   }
   calculateWidth(topscore, score){
@@ -26,15 +24,16 @@ export class Leaderboard extends Component {
 
   render() {
     const {accounts} = this.props.communities
+    const {community} = this.props.auth
     return (
       
       <div className="card border-info card-body mt-6 mb-6" >
-        <h2>Leaderboard</h2>
+        <h2>{community ? community.name : "Leaderboard"}</h2>
         <div>
           <div>
             <h5>{accounts ? accounts[0].username: "---"}</h5>
-            <div class="progress" style={{height:"50px", marginBottom: "10px"}}>
-              <div class="progress-bar progress-bar-striped progress-bar-animated" 
+            <div className="progress" style={{height:"50px", marginBottom: "10px"}}>
+              <div className="progress-bar progress-bar-striped progress-bar-animated" 
                 role="progressbar" 
                 style={{width: (accounts ? this.calculateWidth(accounts[0].score, accounts[0].score) : "0%" )}} 
                 aria-valuenow="10" 
@@ -46,8 +45,8 @@ export class Leaderboard extends Component {
           </div>
           <div>
             <h5>{accounts ? accounts[1].username: "---"}</h5>
-            <div class="progress" style={{height:"50px", marginBottom: "10px"}}>
-              <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" 
+            <div className="progress" style={{height:"50px", marginBottom: "10px"}}>
+              <div className="progress-bar progress-bar-striped progress-bar-animated bg-success" 
                 role="progressbar" 
                 style={{width:(accounts ? this.calculateWidth(accounts[0].score, accounts[1].score) : "0%" )}} 
                 aria-valuenow="25" 
@@ -59,8 +58,8 @@ export class Leaderboard extends Component {
           </div>
           <div>
             <h5>{accounts ? accounts[2].username: "---"}</h5>
-            <div class="progress" style={{height:"50px", marginBottom: "10px"}}>
-              <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" 
+            <div className="progress" style={{height:"50px", marginBottom: "10px"}}>
+              <div className="progress-bar progress-bar-striped progress-bar-animated bg-info" 
                 role="progressbar" 
                 style={{width:(accounts ? this.calculateWidth(accounts[0].score, accounts[2].score) : "0%" )}} 
                 aria-valuenow="50" 
@@ -72,8 +71,8 @@ export class Leaderboard extends Component {
           </div>
           <div>
             <h5>{accounts ? accounts[3].username: "---"}</h5>
-            <div class="progress" style={{height:"50px", marginBottom: "10px"}}>
-              <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" 
+            <div className="progress" style={{height:"50px", marginBottom: "10px"}}>
+              <div className="progress-bar progress-bar-striped progress-bar-animated bg-warning" 
                 role="progressbar" 
                 style={{width:(accounts ? this.calculateWidth(accounts[0].score, accounts[3].score) : "0%" )}} 
                 aria-valuenow="75" 
@@ -85,8 +84,8 @@ export class Leaderboard extends Component {
           </div>
           <div>
             <h5>{accounts ? accounts[4].username: "---"}</h5>
-            <div class="progress" style={{height:"50px", marginBottom: "10px"}}>
-              <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" 
+            <div className="progress" style={{height:"50px", marginBottom: "10px"}}>
+              <div className="progress-bar progress-bar-striped progress-bar-animated bg-danger" 
                 role="progressbar" 
                 style={{width:(accounts ? this.calculateWidth(accounts[0].score, accounts[4].score) : "0%" )}} 
                 aria-valuenow="100" 
