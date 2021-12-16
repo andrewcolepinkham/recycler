@@ -50,7 +50,7 @@ export class Form extends Component {
       amount: "",
       description: "",
       photo: null, 
-      unit : ''
+      unit : 'Number of Objects'
     })
     e.target.reset();
     alert("Submission Sucessful")

@@ -198,8 +198,9 @@ class AccountAPI(generics.RetrieveUpdateAPIView):
         account = self.request.user.account 
 
         if 'password' in request.data.keys():
-            #self.request.user.password.set_password(request.data['password'])
-            # self.request.user.save()
+            print(request.data)
+            self.request.user.set_password(request.data['password'])
+            self.request.user.save()
             print('password change')
             
         if 'community' in request.data.keys(): 
@@ -215,9 +216,7 @@ class AccountAPI(generics.RetrieveUpdateAPIView):
         
         
         account.update(request.data)
-        print("____")
-        print(request.data)
-
+       
 
         return Response(serializer.data)
    

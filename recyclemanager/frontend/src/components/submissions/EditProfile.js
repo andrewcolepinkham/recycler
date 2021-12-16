@@ -106,7 +106,7 @@ render() {
           className="form-control ml-auto"
           placeholder={account.community}
           onChange={this.onChange}
-          value={community}
+         // value={community}
           
         />
         <div className="form-group">
