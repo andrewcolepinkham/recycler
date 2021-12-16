@@ -22,6 +22,7 @@ NPM PACKAGES
 - npm install axios
 - npm install react-alert react-alert-template-basic
 - npm install --save google-map-react
+- npm i mdb-react-ui-kit --force
 
 START WEBPACK
 - npm run dev

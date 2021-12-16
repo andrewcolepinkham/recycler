@@ -6,106 +6,105 @@ import { getCommunitiesAccounts } from "../../actions/communities";
 
 export class Leaderboard extends Component {
     static propTypes = {
-      
       accounts: PropTypes.object.isRequired,
       getCommunitiesAccounts : PropTypes.func.isRequired,
       communities: PropTypes.object.isRequired, 
-
-
+      auth: PropTypes.object.isRequired,
     };
 
-
   componentDidMount() {
-    this.props.getCommunitiesAccounts("West Chester"); 
-   
+    console.log("auth: ")
+    console.log(this.props.auth.community.name)
+    this.props.getCommunitiesAccounts(this.props.auth.community.name);
+  }
+  calculateWidth(topscore, score){
+    if (score === 0){
+      return "5%"
+    }
+    return `${(score / topscore) * 100}%`
   }
 
   render() {
     const {accounts} = this.props.communities
-    console.log(accounts)
-
-    let sortAccounts = (accounts ? accounts.sort(function (a1 , a2){ return a2.score - a1.score}) : [])
-    console.log("SORTED ACCOUNTS")
-    console.log(sortAccounts)
-    if (sortAccounts.length > 5){
-      const size = 5
-      const items = sortAccounts.slice(0, size)
-      sortAccounts = items
-    }
-    if (sortAccounts.length < 5){
-      const size = sortAccounts.length
-      const maxSize = 5
-      var count = 0
-      let newArray = []
-      while (count < size-1){
-        newArray[count] = sortAccounts[count]
-        count = count + 1
-      } 
-      while (count < maxSize){
-        const account = {"account":"", "score": ""}
-        newArray[count] = account
-        count = count + 1
-      }
-      sortAccounts = newArray
-    }
-
-    console.log(accounts)
-
-
     return (
-
-      <div  style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}>
+      
+      <div className="card border-info card-body mt-6 mb-6" >
         <h2>Leaderboard</h2>
-        <table className="table table-striped">
-          <thead>
-            <tr>
-              <th>Rank</th>
-              <th>User</th>
-              <th>Amount</th>
-              <th />
-            </tr>
-            {/* PROBLEM IS HERE WHEN THIS IS ADDED IT CAUSES ARRAY OF ACCOUNTS TO GO NULL W
-            WHEN GONE ARRAY IS POPULATED ----  ALSO HAVE TO THINK ABOUT WHAT TO DO IF LESS THAN 5 
-            ACCOUNTS IN GIVEN COMMUNITY */}
-            <tr>
-              <td>1</td>
-              <td>{accounts.map(item => {return <li>{accounts[0].username}</li>; })}</td>
-              <td>{accounts.map(item => {return <li>{accounts[0].score}</li>; })}</td>
-            </tr>
-           <tr>
-              <td>2</td>
-              <td>{accounts.map(item => {return <li>{accounts[1].username}</li>; })}</td>
-              <td>{accounts.map(item => {return <li>{accounts[1].score}</li>; })}</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>{accounts.map(item => {return <li>{accounts[2].username}</li>; })}</td>
-              <td>{accounts.map(item => {return <li>{accounts[2].score}</li>; })}</td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td>{accounts.map(item => {return <li>{accounts[3].username}</li>; })}</td>
-              <td>{accounts.map(item => {return <li>{accounts[3].score}</li>; })}</td>
-            </tr>
-            <tr>
-              <td>5</td>
-              <td>{accounts.map(item => {return <li>{accounts[4].username}</li>; })}</td>
-              <td>{accounts.map(item => {return <li>{accounts[4].score}</li>; })}</td>
-            </tr>
-          </thead>
-         </table>
+        <div>
+          <div>
+            <h5>{accounts ? accounts[0].username: "---"}</h5>
+            <div class="progress" style={{height:"50px", marginBottom: "10px"}}>
+              <div class="progress-bar progress-bar-striped progress-bar-animated" 
+                role="progressbar" 
+                style={{width: (accounts ? this.calculateWidth(accounts[0].score, accounts[0].score) : "0%" )}} 
+                aria-valuenow="10" 
+                aria-valuemin="0" 
+                aria-valuemax="100">
+                  {accounts ? accounts[0].score: "---"}pts
+              </div>
+            </div>
+          </div>
+          <div>
+            <h5>{accounts ? accounts[1].username: "---"}</h5>
+            <div class="progress" style={{height:"50px", marginBottom: "10px"}}>
+              <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" 
+                role="progressbar" 
+                style={{width:(accounts ? this.calculateWidth(accounts[0].score, accounts[1].score) : "0%" )}} 
+                aria-valuenow="25" 
+                aria-valuemin="0" 
+                aria-valuemax="100">
+                  {accounts ? accounts[1].score: "---"}pts
+              </div>
+            </div>
+          </div>
+          <div>
+            <h5>{accounts ? accounts[2].username: "---"}</h5>
+            <div class="progress" style={{height:"50px", marginBottom: "10px"}}>
+              <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" 
+                role="progressbar" 
+                style={{width:(accounts ? this.calculateWidth(accounts[0].score, accounts[2].score) : "0%" )}} 
+                aria-valuenow="50" 
+                aria-valuemin="0" 
+                aria-valuemax="100">
+                  {accounts ? accounts[2].score: "---"}pts
+              </div>
+            </div>
+          </div>
+          <div>
+            <h5>{accounts ? accounts[3].username: "---"}</h5>
+            <div class="progress" style={{height:"50px", marginBottom: "10px"}}>
+              <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" 
+                role="progressbar" 
+                style={{width:(accounts ? this.calculateWidth(accounts[0].score, accounts[3].score) : "0%" )}} 
+                aria-valuenow="75" 
+                aria-valuemin="0" 
+                aria-valuemax="100">
+                  {accounts ? accounts[3].score: "---"}pts
+              </div>
+            </div>
+          </div>
+          <div>
+            <h5>{accounts ? accounts[4].username: "---"}</h5>
+            <div class="progress" style={{height:"50px", marginBottom: "10px"}}>
+              <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" 
+                role="progressbar" 
+                style={{width:(accounts ? this.calculateWidth(accounts[0].score, accounts[4].score) : "0%" )}} 
+                aria-valuenow="100" 
+                aria-valuemin="0" 
+                aria-valuemax="100">
+                  {accounts ? accounts[4].score: "---"}pts
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  communities : state.communities
-  //accounts: state.accounts
+  communities : state.communities,
+  auth: state.auth
 });
 
 export default connect(

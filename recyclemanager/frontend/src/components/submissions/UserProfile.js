@@ -40,7 +40,7 @@ export class UserProfile extends Component {
 
         
       //   </Fragment>
-      <div className="card card-body mt-4 mb-4" style={{
+      <div className="card border-info card-body mt-4 mb-4" style={{
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',

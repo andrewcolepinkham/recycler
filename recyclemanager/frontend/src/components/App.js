@@ -6,6 +6,7 @@ import { Provider as AlertProvider } from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
 
 import Header from './layout/Header';
+import Footer from './layout/Footer';
 import SubmissionForm from './submissions/SubmissionForm';
 import Profile from './submissions/Profile';
 import Alerts from './layout/Alerts';
@@ -21,9 +22,6 @@ import EditProfile from './submissions/EditProfile';
 import About from './layout/About';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
-
-
 
 const alertOptions = {
   timeout: 6000,
@@ -71,6 +69,7 @@ class App extends Component {
               <Route exact path="/submissionform" component={SubmissionForm} />
             </Switch>
            </div> 
+           <Footer />
           </Fragment>   
          </HashRouter>
         </AlertProvider>

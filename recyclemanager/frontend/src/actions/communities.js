@@ -40,7 +40,7 @@ export const getCommunities = () => (dispatch, getState) => {
     };
     console.log(community)
     axios
-      .get("/api/communities/get_accounts"+ community)
+      .get("/api/communities/get_accounts" + community)
       
       .then(res => {
         console.log("res.data")
