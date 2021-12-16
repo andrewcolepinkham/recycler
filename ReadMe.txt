@@ -14,15 +14,15 @@ START VIRTUAL ENVIORNMENT
 - pipenv shell
 
 NPM PACKAGES
-- npm install -D webpack webpack-cli
-- npm install -D @babel/core babel-loader @babel/preset-env @babel/preset-react babel-plugin-transform-class-properties
-- npm install react react-dom prop-types
-- npm install react-router@5.1.2 react-router-dom@5.1.2
-- npm install redux react-redux redux-thunk redux-devtools-extension
-- npm install axios
-- npm install react-alert react-alert-template-basic
+- npm install --save -D webpack webpack-cli
+- npm install --save -D @babel/core babel-loader @babel/preset-env @babel/preset-react babel-plugin-transform-class-properties
+- npm install --save react react-dom prop-types
+- npm install --save react-router@5.1.2 react-router-dom@5.1.2
+- npm install --save redux react-redux redux-thunk redux-devtools-extension
+- npm install --save axios
+- npm install --save react-alert react-alert-template-basic
 - npm install --save google-map-react
-- npm i mdb-react-ui-kit --force
+- npm install --save mdb-react-ui-kit --force 
 
 START WEBPACK
 - npm run dev
