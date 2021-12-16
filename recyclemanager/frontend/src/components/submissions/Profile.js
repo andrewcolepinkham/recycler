@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Image from 'react-bootstrap/Image';
-import Submissions from './submissions';
+import Submissions from './Submissions';
 import {Container ,Row, Col} from "react-bootstrap"
 import UserProfile from './UserProfile';
 import Leaderboard from "./Leaderboard";
