@@ -53,12 +53,14 @@ class Account(models.Model):
         return self.username
     def update(self, data): 
         for (key, value) in data.items():
-            if key == "email": 
+            if key == "email" and value !='undefined': 
                 self.update_email(value)
-            elif key == "username": 
-                self.update_username(value)
-            elif key == "profile_photo": 
-                self.profile_photo = value
+            elif key == "username" and value != 'undefined': 
+                print('undefined')
+                #self.update_username(value)
+            elif key == "profile_photo" and value  != 'undefined': 
+                print(value)
+                #self.profile_photo = value
     def get_community(self): 
         self.communities =  self.community_set.all()
         return self.community_set.all()

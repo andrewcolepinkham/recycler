@@ -123,7 +123,7 @@ class LoginAPI(generics.GenericAPIView):
         token = AuthToken.objects.create(user)[1]
         ######################################
         # DELETE LATER--- DEV PURPOSES
-        #account.check_score()
+        account.check_score()
         account.email = user.email
 
         #account.communities  = "Default"
@@ -192,24 +192,28 @@ class AccountAPI(generics.RetrieveUpdateAPIView):
         return account
   
     def update(self, request, *args, **kwargs):
+        print(request.data)
+        print(request.user)
+        print(request.data['password'])
+
         serializer = self.serializer_class(request.user, data=request.data, partial=True)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         account = self.request.user.account 
+        print(request.data['password'])
 
-        if 'password' in request.data.keys():
-            print(request.data)
-            self.request.user.set_password(request.data['password'])
-            self.request.user.save()
-            print('password change')
+        if 'password' in request.data.keys() and request.data['password'] != 'undefined':
+            print("password")
+            #self.request.user.set_password(request.data['password'])
+            #self.request.user.save()
             
-        if 'community' in request.data.keys(): 
+        if 'community' in request.data.keys() and request.data['community'] != 'undefined': 
            
            membership = Membership.objects.filter(account =account).first()
            membership.delete()
 
             
-       
+        
            m1 = Membership.objects.create(
                 account=account, community=Community.objects.get(name=request.data['community']))
            m1.save()

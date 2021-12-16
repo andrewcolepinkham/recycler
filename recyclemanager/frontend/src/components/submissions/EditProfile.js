@@ -32,22 +32,23 @@ onChange = e =>  {
 
 onSubmit = e => {
   e.preventDefault();
-  // const updateAcc= new FormData(); 
+  const updateAcc= new FormData(); 
   const { username, email, password, password2, community, profile_photo } = this.state;
   //const updateAcc= new FormData(); 
-  const updateAcc = { 
-    username,
-    password,
-    email, 
-    community, 
-    profile_photo
-   }
+  // const updateAcc = { 
+  //   username,
+  //   password,
+  //   email, 
+  //   community, 
+  //   profile_photo
+  //  }
     //updateAcc['profile_photo'] =  profile_photo.name
-  // updateAcc.append("username", username)
-  // updateAcc.append("password", password)
-  // updateAcc.append("email", email)
-  // updateAcc.append("community", community); 
-  // updateAcc.append('profile_photo', profile_photo, profile_photo.name);
+  
+  updateAcc.append("username", this.state.username)
+  updateAcc.append("password", this.state.password)
+  updateAcc.append("email", this.state.email)
+  updateAcc.append("community", this.state.community); 
+  //updateAcc.append('profile_photo', profile_photo, profile_photo.name);
 
 
   console.log(updateAcc); 

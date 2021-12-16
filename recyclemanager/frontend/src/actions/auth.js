@@ -183,19 +183,19 @@ export const tokenConfig = (getState) => {
   return config;
 };
 
-export const updateAccount = ({ username, password, email, community, profile_photo }) => (dispatch, getState) => {
+export const updateAccount = (updateAcc) => (dispatch, getState) => {
   // Headers
   const config = {
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'multipart/form-data',
     },
   };
   // Request Body
-  console.log("hosafhdoi")
-  const body = JSON.stringify({ username, email, password, community });
-  console.log(body)
+  // console.log("hosafhdoi")
+  // const body = JSON.stringify({ username, email, password, community });
+  // console.log(body)
   axios
-    .patch("api/auth/account", body, tokenConfig(getState))
+    .patch("api/auth/account", updateAcc, tokenConfig(getState))
     
     .then((res) => {
       console.log("here")
