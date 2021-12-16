@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import Form from './Form';
-import Submissions from './submissions';
+import Submissions from './Submissions';
 
 export default function SubmissionForm() {
   return (

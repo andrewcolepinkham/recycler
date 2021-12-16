@@ -193,22 +193,14 @@ class AccountAPI(generics.RetrieveUpdateAPIView):
   
     def update(self, request, *args, **kwargs):
         print(request.data)
-        print(request.user)
-        print(request.data['password'])
-
-        serializer = self.serializer_class(request.user, data=request.data, partial=True)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
         account = self.request.user.account 
-        print(request.data['password'])
+       
 
         if 'password' in request.data.keys() and request.data['password'] != 'undefined':
-            print("password")
-            #self.request.user.set_password(request.data['password'])
-            #self.request.user.save()
+            self.request.user.set_password(request.data['password'])
+            self.request.user.save()
             
         if 'community' in request.data.keys() and request.data['community'] != 'undefined': 
-           
            membership = Membership.objects.filter(account =account).first()
            membership.delete()
 
@@ -218,11 +210,12 @@ class AccountAPI(generics.RetrieveUpdateAPIView):
                 account=account, community=Community.objects.get(name=request.data['community']))
            m1.save()
         
-        
+        if User.objects.get(request.data['username']) != None: 
+            return Response(request.data)
         account.update(request.data)
        
 
-        return Response(serializer.data)
+        return Response(request.data)
    
 
     def edit_score(self, amount, type):
