@@ -17,7 +17,7 @@ export class EditProfile extends Component {
     if (e.target.files && e.target.files[0]) {
       // let img = event.target.files[0];
       this.setState({
-        photo: e.target.files[0]
+        profile_photo: e.target.files[0]
       });
     }
   };
@@ -34,15 +34,23 @@ onSubmit = e => {
   e.preventDefault();
   // const updateAcc= new FormData(); 
   const { username, email, password, password2, community, profile_photo } = this.state;
- 
+  //const updateAcc= new FormData(); 
   const updateAcc = { 
     username,
     password,
     email, 
-    community,
+    community, 
     profile_photo
-  }
-  console.log(updateAcc)
+   }
+    //updateAcc['profile_photo'] =  profile_photo.name
+  // updateAcc.append("username", username)
+  // updateAcc.append("password", password)
+  // updateAcc.append("email", email)
+  // updateAcc.append("community", community); 
+  // updateAcc.append('profile_photo', profile_photo, profile_photo.name);
+
+
+  console.log(updateAcc); 
   this.props.updateAccount(updateAcc);
 }
 
@@ -98,11 +106,12 @@ render() {
           className="form-control ml-auto"
           placeholder={account.community}
           onChange={this.onChange}
+          value={community}
           
         />
         <div className="form-group">
           <label>Team Photo</label>
-          <input className="form-control" type="file" accept="image/png, image/jpeg" name="myImage" onChange={this.onImageChange} />
+          <input className="form-control" type="file" accept="image/png, image/jpeg" value = {profile_photo} name="profile_photo" onChange={this.onImageChange} />
         </div>
         <div className="form-group">
         <button type="submit" className="btn btn-primary" onClick={this.onSubmit}>

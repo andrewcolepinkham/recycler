@@ -18,6 +18,7 @@ class Account(models.Model):
     num_submissions = models.IntegerField(default=0)
     email = models.EmailField(max_length=254, default="")
     password = ""
+    
     communities = models.CharField(max_length=150,blank=True)
 
     def create(self, user, username, profile_photo, email=""): 

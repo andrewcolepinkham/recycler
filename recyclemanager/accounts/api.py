@@ -101,7 +101,6 @@ class CommunityAPI(generics.GenericAPIView):
             accounts.append({'id': 100+count, 'username': str('DefaultTeam' + str(count)), 'email': str('dummy' + str(count) + '@gmail.com'), 'score': 100*count,
                             'num_submissions': 0, 'profile_photo': '/media/profile_images/Aluminium_cans.jpg', 'communities': ''})
         sorted_accounts = sorted(accounts, key = lambda i: i['score'],reverse=True)[0:5]
-        print(sorted_accounts)
         return Response({"accounts": sorted_accounts})
 
     def change_admin(self):
@@ -162,31 +161,25 @@ class UserAPI(generics.RetrieveAPIView):
         # deletes the user
         pass
 # Get Account API
-<<<<<<< HEAD
-class UpdateAccountUserApi(generics.UpdateAPIView): 
-=======
-
-
-class UpdateAccountUserApi(generics.RetrieveUpdateAPIView):
->>>>>>> febda76fc940316fa391005d4270b08f0321d99b
-    permission_classes = (permissions.IsAuthenticated,)
-    serializer_class = AccountSerializer
-    lookup_field = 'username'
-    # def retrieve(self, request, *args, **kwargs):
-    #     serializer = self.serializer_class(request.user)
-    #     return Response(serializer.data)
-    def get_object(self):
-        username = self.kwargs["username"]
-        return get_object_or_404(Account, username=username)
-    def update(self, request, *args, **kwargs):
+# class UpdateAccountUserApi(generics.UpdateAPIView): 
+#     permission_classes = (permissions.IsAuthenticated,)
+#     serializer_class = AccountSerializer
+#     lookup_field = 'username'
+#     # def retrieve(self, request, *args, **kwargs):
+#     #     serializer = self.serializer_class(request.user)
+#     #     return Response(serializer.data)
+#     def get_object(self):
+#         username = self.kwargs["username"]
+#         return get_object_or_404(Account, username=username)
+#     def update(self, request, *args, **kwargs):
      
-        serializer = self.serializer_class(request.user, data=request.data, partial=True)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        account = self.request.user.account 
-        account.update(request.data)
+#         serializer = self.serializer_class(request.user, data=request.data, partial=True)
+#         serializer.is_valid(raise_exception=True)
+#         serializer.save()
+#         account = self.request.user.account 
+#         account.update(request.data)
    
-        return Response(request.data)
+#         return Response(request.data)
 class AccountAPI(generics.RetrieveUpdateAPIView):
     permission_classes = [
         permissions.IsAuthenticated,
@@ -205,17 +198,25 @@ class AccountAPI(generics.RetrieveUpdateAPIView):
         account = self.request.user.account 
 
         if 'password' in request.data.keys():
-            # self.request.user.password.set_password(request.data['password'])
+            #self.request.user.password.set_password(request.data['password'])
             # self.request.user.save()
             print('password change')
             
         if 'community' in request.data.keys(): 
-           # membership = Membership.objects.get(account =account, communi )
-           print(request.data)
+           
+           membership = Membership.objects.filter(account =account).first()
+           membership.delete()
+
+            
+       
+           m1 = Membership.objects.create(
+                account=account, community=Community.objects.get(name=request.data['community']))
+           m1.save()
         
         
         account.update(request.data)
-        
+        print("____")
+        print(request.data)
 
 
         return Response(serializer.data)
