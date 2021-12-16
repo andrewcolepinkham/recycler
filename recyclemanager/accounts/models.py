@@ -63,9 +63,10 @@ class Account(models.Model):
         self.communities =  self.community_set.all()
         return self.community_set.all()
     def update_username(self, username):
-        self.username = username
         self.user.username = username 
         self.user.save()
+        self.username = username
+        
     def update_email(self, email): 
         self.email = email
         self.user.email = email

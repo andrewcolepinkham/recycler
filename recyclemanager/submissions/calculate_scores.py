@@ -23,9 +23,10 @@ POINTS = {
 }
 # UNITS TO DIVIDE BY 
 UNITS ={
-    "number of objects" : 2, 
-    "weight": 1, 
-    "money" : 1,
+    "Number of Objects" : 2, 
+    "Weight(lbs)": 1, 
+    "Money" : 1,
+    "":1,
     
 }
 
@@ -43,4 +44,5 @@ def score_calculator(type, amount, unit):
     try: 
        return POINTS[type]['value'] * (( amount * POINTS[type]['amount_weighted'])/UNITS[unit]) 
     except: 
+       print(("%s is not a reconginzed type of recycling or %s is not a reconginzed type of unit" % (type, unit) ))
        return ("%s is not a reconginzed type of recycling or %s is not a reconginzed type of unit" % (type, unit) )
