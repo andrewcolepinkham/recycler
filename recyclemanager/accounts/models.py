@@ -55,8 +55,8 @@ class Account(models.Model):
         for (key, value) in data.items():
             if key == "email": 
                 self.update_email(value)
-            elif key == "username": 
-                self.update_username(value)
+            # elif key == "username": 
+            #     self.update_username(value)
             elif key == "profile_photo": 
                 self.profile_photo = value
     def get_community(self): 

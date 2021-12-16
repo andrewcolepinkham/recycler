@@ -123,7 +123,7 @@ class LoginAPI(generics.GenericAPIView):
         token = AuthToken.objects.create(user)[1]
         ######################################
         # DELETE LATER--- DEV PURPOSES
-        account.check_score()
+        #account.check_score()
         account.email = user.email
 
         #account.communities  = "Default"

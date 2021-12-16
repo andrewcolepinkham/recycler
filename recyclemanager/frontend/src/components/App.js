@@ -35,6 +35,8 @@ class App extends Component {
 
   componentDidMount() {
     store.dispatch(loadUser());
+    // console.log("isauth")
+    // console.log(this.props.isAuthenticated)
   }
   render() {
     return (
@@ -50,12 +52,12 @@ class App extends Component {
               exact
               path="/"
               render={() => {
-                  if(this.props.isAuthenticated){
+                  // if(this.props.isAuthenticated){
                     return <Redirect to="/profile" />
-                  }
-                  else{
-                    return <Redirect to="/login" /> 
-                  }
+                  // }
+                  // else{
+                  //   return <Redirect to="/login" /> 
+                  // }
               }}
             />
               {/* <PrivateRoute exact path="/" component={Profile} /> */}

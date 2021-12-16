@@ -9,7 +9,8 @@
 POINTS = { 
     "Mixed Recycling" : {
         "value" : 5, 
-        "amount_weighted" : 1
+        "amount_weighted" : 1, 
+    
     } , 
     "Aluminium Cans" : {
         "value" : 4, 
@@ -19,6 +20,13 @@ POINTS = {
         "value" : 3, 
         "amount_weighted" : 1
     } , 
+}
+# UNITS TO DIVIDE BY 
+UNITS ={
+    "number of objects" : 2, 
+    "weight": 1, 
+    "money" : 1,
+    
 }
 
 #########################################################
@@ -30,9 +38,9 @@ POINTS = {
 #            OR returns an error reporting the type is not 
 #                                       reconginzed 
 ##########################################################
-def score_calculator(type, amount): 
+def score_calculator(type, amount, unit): 
 
     try: 
-       return POINTS[type]['value'] * ( amount * POINTS[type]['amount_weighted'])
+       return POINTS[type]['value'] * (( amount * POINTS[type]['amount_weighted'])/UNITS[unit]) 
     except: 
-       return ("%s is not a reconginzed type of recycling" % type)
+       return ("%s is not a reconginzed type of recycling or %s is not a reconginzed type of unit" % (type, unit) )

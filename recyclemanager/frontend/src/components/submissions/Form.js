@@ -10,7 +10,8 @@ export class Form extends Component {
     type: "Aluminium Cans",
     amount: "",
     description: "",
-    photo: null
+    photo: null, 
+    unit: "Number of Objects"
   };
 
   static propTypes = {
@@ -33,7 +34,7 @@ export class Form extends Component {
 
   onSubmit = (e) => {
     e.preventDefault();
-    const { type, description, amount, photo } = this.state;
+    const { type, description, amount, photo, unit } = this.state;
     // const myphoto = "recyclemanager/IMG_0283_Kj8kCCB.JPG"; //testing
     // const submission = { type, amount, description, photo };
     // const submission = { type, amount, description, photo };
@@ -42,22 +43,29 @@ export class Form extends Component {
     submission.append('description', this.state.description);
     submission.append('amount', this.state.amount);
     submission.append('photo', this.state.photo, this.state.photo.name);
+    submission.append('unit',this.state.unit )
     this.props.addSubmission(submission);
     this.setState({
       type: "Aluminium Cans",
       amount: "",
       description: "",
-      photo: null
+      photo: null, 
+      unit : ''
     })
     e.target.reset();
     alert("Submission Sucessful")
   };
 
   render() {
-    const { type, amount, description, photo } = this.state;
-    const handleSelect = (eventKey) => {
+    const { type, amount, description, photo, unit } = this.state;
+    const handleTypeSelect = (eventKey) => {
       this.setState({
         type: eventKey
+      })
+    };
+    const handleUnitSelect = (eventKey) => {
+      this.setState({
+        unit: eventKey
       })
     };
     
@@ -68,7 +76,7 @@ export class Form extends Component {
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
             <label>Type of Submission</label>
-            <Dropdown onSelect={handleSelect}>
+            <Dropdown onSelect={handleTypeSelect}>
               <Dropdown.Toggle variant="primary" id="dropdown-basic"  >
                 {this.state.type}
               </Dropdown.Toggle>
@@ -76,6 +84,19 @@ export class Form extends Component {
                 <Dropdown.Item eventKey="Aluminium Cans">Aluminium Cans</Dropdown.Item>
                 <Dropdown.Item eventKey="Mixed Recycling">Mixed Recyling</Dropdown.Item>
                 <Dropdown.Item eventKey="Sorted Recycling">Sorted Recycling</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+          </div>
+          <div className="form-group">
+            <label>Amount Unit</label>
+            <Dropdown onSelect={handleUnitSelect}>
+              <Dropdown.Toggle variant="primary" id="dropdown-basic"  >
+                {this.state.unit}
+              </Dropdown.Toggle>
+              <Dropdown.Menu  >
+                <Dropdown.Item eventKey="Number of Objects">Number of Objects</Dropdown.Item>
+                <Dropdown.Item eventKey="Weight(lbs)">Weight(lbs)</Dropdown.Item>
+                <Dropdown.Item eventKey="Money">Money</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           </div>
