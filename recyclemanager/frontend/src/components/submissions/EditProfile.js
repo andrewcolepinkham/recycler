@@ -48,8 +48,13 @@ onSubmit = e => {
   updateAcc.append("password", this.state.password)
   updateAcc.append("email", this.state.email)
   updateAcc.append("community", this.state.community); 
-  //updateAcc.append('profile_photo', profile_photo, profile_photo.name);
+  if (profile_photo == !'undefined'){
 
+   
+    console.log(profile_photo)
+
+    updateAcc.append('profile_photo', profile_photo, profile_photo.name);
+  }
 
   console.log(updateAcc); 
   this.props.updateAccount(updateAcc);

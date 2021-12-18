@@ -203,19 +203,14 @@ class AccountAPI(generics.RetrieveUpdateAPIView):
         if 'community' in request.data.keys() and request.data['community'] != 'undefined': 
            membership = Membership.objects.filter(account =account).first()
            membership.delete()
-
-            
-        
            m1 = Membership.objects.create(
                 account=account, community=Community.objects.get(name=request.data['community']))
            m1.save()
-        
-        if User.objects.get(request.data['username']) != None: 
-            return Response(request.data)
-        account.update(request.data)
+       
+        status =  account.update(request.data)
        
 
-        return Response(request.data)
+        return Response(status)
    
 
     def edit_score(self, amount, type):

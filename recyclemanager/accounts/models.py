@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.deletion import CASCADE
@@ -56,25 +57,39 @@ class Account(models.Model):
         for (key, value) in data.items():
             print("ajnfosjn")
             if key == "email" and value !='undefined':
-                self.update_email(value)
+                return self.update_email(value)
             elif key == "username" and value != 'undefined': 
-                self.update_username(value)
+               return self.update_username(value)
                 
             elif key == "profile_photo" and value  != 'undefined': 
+             
+
                 self.profile_photo = value
+                self.save()
                 return "Succes"
     def get_community(self): 
         self.communities =  self.community_set.all()
         return self.community_set.all()
     def update_username(self, username):
-        self.user.username = username 
-        self.user.save()
-        self.username = username
+        if User.objects.filter(username=username).exists(): 
+            raise ValidationError(u'Username "%s" is already in use.' % username)
+
+        else:
+            self.user.username = username 
+            self.user.save()
+            self.username = username
+            self.save()
+            return username
+        
+
+            
         
     def update_email(self, email): 
         self.email = email
         self.user.email = email
         self.user.save()
+        self.save()
+        return email
 class Community(models.Model): 
     zip_code = models.IntegerField(default=0)
     name = models.CharField(max_length=150,blank=True)

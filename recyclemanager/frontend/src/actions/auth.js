@@ -89,6 +89,7 @@ export const login = (username, password) => (dispatch) => {
       });
     })
     .catch((err) => {
+      console.log(err)
       dispatch(returnErrors(err.response.data, err.response.status));
       dispatch({
         type: LOGIN_FAIL,
@@ -198,7 +199,6 @@ export const updateAccount = (updateAcc) => (dispatch, getState) => {
     .patch("api/auth/account", updateAcc, tokenConfig(getState))
     
     .then((res) => {
-      console.log("here")
       dispatch({
         type: UPDATE_SUCCESS,
         payload: res.data,
