@@ -91,6 +91,7 @@ export const login = (username, password) => (dispatch) => {
     .catch((err) => {
       console.log(err)
       dispatch(returnErrors(err.response.data, err.response.status));
+      alert("Incorrect Login Information - Retry or Register if Account not yet Created")
       dispatch({
         type: LOGIN_FAIL,
       });
@@ -206,6 +207,7 @@ export const updateAccount = (updateAcc) => (dispatch, getState) => {
     })
     .catch((err) => {
       dispatch(returnErrors(err.response.data, err.response.status));
+      alert("Username Taken")
       dispatch({
         type: REGISTER_FAIL,
       });
