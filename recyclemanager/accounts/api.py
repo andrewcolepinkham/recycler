@@ -27,6 +27,8 @@ class RegisterAPI(generics.GenericAPIView):
             name='West Chester', zip_code=19382)[0]
         community = Community.objects.get_or_create(
             name='Default', zip_code=80903)[0]
+        if (request.data["community"])  == None: 
+            request.data["community"] = 'Default'
         community = Community.objects.get(name=request.data["community"])
         username = request.data['username']
         email = request.data['email']
