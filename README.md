@@ -3,7 +3,8 @@
 This is an interactive recycling competiton application that allows you submit recyling receipts and accumulate points.
 Compete with your friends by submitting reciepts on the submission tab and view progress by using the dashboard tab.
 Also present is a map of nearby recyling centers, so get to work. May the most enviornmentally friendly win!
-This project uses React/Redux to build an interactive webpage and uses Django for the backend
+## Technical Requirements: 
+This system uses REACT/REDUX to build the interactive web-app on the front end and is integrated with Django to build the backend 
 ## Set-up and installing 
 Clone git repo
 ### For development: 
