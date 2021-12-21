@@ -59,13 +59,6 @@ export class Register extends Component {
       newUser.append('email', email);
       newUser.append('community', community);
       newUser.append('profile_photo', profile_photo, profile_photo.name);
-      // const newUser = {
-      //   username,
-      //   password,
-      //   email, 
-      //   community,
-      //   profile_photo,
-      // }
       this.props.register(newUser);
     }
   }
@@ -163,21 +156,7 @@ componentDidMount(){
               )}
               </Dropdown.Menu>
             </Dropdown>
-              {/* <label>Community</label>
-              <input 
-                type="text"
-                className="form-control"
-                name="community"
-                onChange={this.onChange}
-                value={community}
-              /> */}
             </div>
-            {/* <div className="form-group">
-            <Input type="select" onChange={this.onDropdownSelected} name ="community" label="Multiple Select" multiple>
-       {this.createSelectItems()}
-  </Input>
-     
-    </div> */}
             <div className="form-group">
               <label>Profile Photo</label>
               <input className="form-control" type="file" accept="image/png, image/jpeg" name="profile_pic" onChange={this.onImageChange} />

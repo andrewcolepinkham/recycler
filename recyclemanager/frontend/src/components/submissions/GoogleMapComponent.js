@@ -5,8 +5,7 @@ import PropTypes from "prop-types";
 import {GoogleMap, withScriptjs, withGoogleMap, Marker, InfoWindow} from 'react-google-maps';
 import { getPlaces } from "../../actions/google";
 import mapStyles from "../../mapStyles";
-// import * as Permissions from 'expo-permissions';
-// import * as Location from 'expo-location';
+
 
 export class GoogleMapComponent extends Component {
   constructor(props){
@@ -19,11 +18,7 @@ export class GoogleMapComponent extends Component {
         clickedLatLng: null,
         selectedPlace: null
     }
-    // this.handlePlacesSearch = this.handlePlacesSearch.bind(this);
-    // this.handlePlacesSearch()
-    // this.handleCenterChanged = this.handleCenterChanged.bind(this);
-    // this.handleLoad = this.handleLoad.bind(this);
-
+   
 }
   
   static propTypes = {
@@ -32,31 +27,12 @@ export class GoogleMapComponent extends Component {
   };
   
   componentDidMount() {
-    // if(this.state.hasPlacesLoaded == false){
-    //   console.log("inside")
-    //   this.handlePlacesSearch
-    //   this.setState({
-    //       hasPlacesLoaded: true,
-    //   })
-    // }
+  
     this.props.getPlaces(this.state.center.lat, this.state.center.lng, 5000, 'recycling');
   }
   handlePlacesSearch() {
     this.props.getPlaces(this.state.center.lat, this.state.center.lng, 5000, 'recycling');
   };
-
-  // handleCenterChanged(){
-  //   if (!this.state.mapRef.current) return;
-  //   const newPos = this.state.mapRef.current.getCenter().toJSON();
-  //   setPosition(newPos);
-  // }
-
-  // handleLoad(map){
-  //   console.log("Lodded")
-  //   this.setState({
-  //     mapRef: map,
-  //   })
-  // }
 
 
   render() {
@@ -65,7 +41,6 @@ export class GoogleMapComponent extends Component {
       height: "300px",
       width: "100%"
     };
-    // this.props.getPlaces(this.state.center.lat, this.state.center.lng, 5000, 'recycling');
     return (
         <div style={{
           display: 'flex',
@@ -76,10 +51,7 @@ export class GoogleMapComponent extends Component {
               defaultZoom={12} 
               defaultCenter={{lat:38.8598724, lng: -104.8230056}}
               defaultOptions={{styles: mapStyles}}
-              // onLoad={this.handleLoad}
-              // onCenterChanged={this.handleCenterChanged}
-              // center={this.state.center}
-
+             
               mapContainerStyle={mapContainerStyle}
             >
               

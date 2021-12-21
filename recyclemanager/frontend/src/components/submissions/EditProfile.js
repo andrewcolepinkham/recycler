@@ -15,7 +15,6 @@ export class EditProfile extends Component {
   };
   onImageChange = e => {
     if (e.target.files && e.target.files[0]) {
-      // let img = event.target.files[0];
       this.setState({
         profile_photo: e.target.files[0]
       });
@@ -34,15 +33,7 @@ onSubmit = e => {
   e.preventDefault();
   const updateAcc= new FormData(); 
   const { username, email, password, password2, community, profile_photo } = this.state;
-  //const updateAcc= new FormData(); 
-  // const updateAcc = { 
-  //   username,
-  //   password,
-  //   email, 
-  //   community, 
-  //   profile_photo
-  //  }
-    //updateAcc['profile_photo'] =  profile_photo.name
+  
   
   updateAcc.append("username", this.state.username)
   updateAcc.append("password", this.state.password)
@@ -75,7 +66,6 @@ render() {
           placeholder={account.username}
           value={username}
           onChange={this.onChange}
-         // placeholder={this.props.placeholder}
           
         />
    
@@ -90,7 +80,6 @@ render() {
 
           onChange={this.onChange}
           value = {email}
-          //placeholder={this.props.placeholder}
         />
         </div>
         <div className="form-group">
@@ -99,7 +88,6 @@ render() {
           type="text"
           name="password"
           className="form-control ml-auto"
-          // placeholder={account.password}
 
           onChange={this.onChange}
           placeholder="******"
@@ -112,7 +100,6 @@ render() {
           className="form-control ml-auto"
           placeholder={account.community}
           onChange={this.onChange}
-         // value={community}
           
         />
         <div className="form-group">
@@ -134,5 +121,4 @@ render() {
     auth: state.auth
   });
   
-  // export default connect(mapStateToProps, {login}) (Login)
   export default connect(mapStateToProps, {loadAccount, updateAccount})(EditProfile);

@@ -162,26 +162,7 @@ class UserAPI(generics.RetrieveAPIView):
     def delete_user(self, request):
         # deletes the user
         pass
-# Get Account API
-# class UpdateAccountUserApi(generics.UpdateAPIView): 
-#     permission_classes = (permissions.IsAuthenticated,)
-#     serializer_class = AccountSerializer
-#     lookup_field = 'username'
-#     # def retrieve(self, request, *args, **kwargs):
-#     #     serializer = self.serializer_class(request.user)
-#     #     return Response(serializer.data)
-#     def get_object(self):
-#         username = self.kwargs["username"]
-#         return get_object_or_404(Account, username=username)
-#     def update(self, request, *args, **kwargs):
-     
-#         serializer = self.serializer_class(request.user, data=request.data, partial=True)
-#         serializer.is_valid(raise_exception=True)
-#         serializer.save()
-#         account = self.request.user.account 
-#         account.update(request.data)
-   
-#         return Response(request.data)
+
 class AccountAPI(generics.RetrieveUpdateAPIView):
     permission_classes = [
         permissions.IsAuthenticated,

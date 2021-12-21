@@ -31,16 +31,13 @@ class SubmissionViewSet(viewsets.ModelViewSet):
         instance.delete()
     def perform_create(self, serializer):
 
-        ###################
-        # MAY NEED TO MOVE THIS
-        # logic to update score in the account 
+        
         account = self.request.user.account
         submission_data  = self.request.__dict__["_data"]
         account.update_score( score_calculator(submission_data['type'], float(submission_data['amount']), submission_data['unit']))
         account.save(update_fields=["score"]) 
         account.add_num_submission()
         account.save(update_fields=["num_submissions"]) 
-    #     return account
        
         serializer.save(owner=self.request.user)
         

@@ -80,7 +80,7 @@ export class Footer extends Component {
     );
 
 
-    return ( //style={{ position:"absolute", bottom:"0", width:"100%", height: "100%", left:0, right:0}}
+    return ( 
         <div style={{position:"relative", padding: "100px 100px 0px 100px", bottom:0, left:0, right:0}}>
             {isAuthenticated?authComponents:guestComponents}
             <MDBFooter style={{position:"fixed", bottom:0, left:0, right:0}} bgColor='light' className='text-center text-lg-left'>

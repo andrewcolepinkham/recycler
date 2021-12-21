@@ -200,6 +200,7 @@ export const updateAccount = (updateAcc) => (dispatch, getState) => {
     .patch("api/auth/account", updateAcc, tokenConfig(getState))
     
     .then((res) => {
+      alert("Update Success")
       dispatch({
         type: UPDATE_SUCCESS,
         payload: res.data,

@@ -138,28 +138,6 @@ export class Header extends Component {
           </Offcanvas.Body>
         </Offcanvas>
       </>
-
-        
-
-
-      // <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
-      //   {/* <span className="navbar-text mr-3">
-      //     <strong>{user ? `Welcome ${user.username}` : ''}</strong>
-      //   </span> */}
-      //   <div className="navbar-nav justify-content-end">
-      //     <Link to="/" className="nav-link mr-3">{user ? `${user.username}` : ''}</Link> 
-      //     <Link to="/editer" className="nav-link">Edit Profile</Link>
-      //     <Link to="/submissionform" className="nav-link">New Submission</Link> 
-      //     <Link to="/about" className="nav-link">About</Link> 
-      //     {/* <button variant="outline-light" onClick={this.alertInfo} className="nav-link btn  " >
-      //       About
-      //     </button> */}
-      //     <button onClick={this.props.logout} className="nav-link btn btn-info btn-sm text-light">
-      //       Logout
-      //     </button>
-      //     </div>
-                  
-      // </ul>
     );
 
     const guestLinks = (
@@ -169,14 +147,7 @@ export class Header extends Component {
           <Link to="/register" className="nav-link"> Register </Link>
         </Nav>   
       </>
-      // <ul className="navbar-nav mr-auto mt-2 mt-lg-0" >
-      //   <li className="nav-item">
-      //     <Link to="/register" className="nav-link"> Register </Link>
-      //   </li>
-      //   <li className="nav-item">
-      //     <Link to="/login" className="nav-link"> Login </Link>
-      //   </li> 
-      // </ul>
+      
     );
 
 
@@ -186,78 +157,9 @@ export class Header extends Component {
           <Container>
           <Navbar.Brand href="/#/profile">Recycler</Navbar.Brand>
           {isAuthenticated?authLinks:guestLinks}
-          {/* <Nav className="me-auto">
-            
-          </Nav>
-          <Button variant="primary" onClick={this.handleProfileOpen.bind(this)}>
-          {user.username}
-          </Button>
-          <Offcanvas show={this.state.showProfile} onHide={this.handleProfileClose.bind(this)} placement='end'>
-            <Offcanvas.Header closeButton>
-              <Offcanvas.Title>Offcanvas</Offcanvas.Title>
-            </Offcanvas.Header>
-            <Offcanvas.Body>
-              Some text as placeholder. In real life you can have the elements you
-              have chosen. Like, text, images, lists, etc.
-            </Offcanvas.Body>
-          </Offcanvas> */}
-          {/* <Navbar.Toggle aria-controls="offcanvasNavbar" />
-          <Navbar.Offcanvas
-            id="offcanvasNavbar"
-            aria-labelledby="offcanvasNavbarLabel"
-            placement="end"
-          >
-            <Offcanvas.Header closeButton>
-              <Offcanvas.Title id="offcanvasNavbarLabel">Offcanvas</Offcanvas.Title>
-            </Offcanvas.Header>
-            <Offcanvas.Body>
-              <Nav className="justify-content-end flex-grow-1 pe-3">
-                <Nav.Link href="#action1">Home</Nav.Link>
-                <Nav.Link href="#action2">Link</Nav.Link>
-                <NavDropdown title="Dropdown" id="offcanvasNavbarDropdown">
-                  <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-                  <NavDropdown.Item href="#action4">Another action</NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item href="#action5">
-                    Something else here
-                  </NavDropdown.Item>
-                </NavDropdown>
-              </Nav>
-              <Form className="d-flex">
-                <FormControl
-                  type="search"
-                  placeholder="Search"
-                  className="me-2"
-                  aria-label="Search"
-                />
-                <Button variant="outline-success">Search</Button>
-              </Form>
-            </Offcanvas.Body>
-          </Navbar.Offcanvas> */}
           </Container>
         </Navbar>
       </>
-      // <nav className="navbar navbar-expand-sm navbar-light bg-light">.
-      //   <div className="container">
-      //     <button
-      //       className="navbar-toggler"
-      //       type="button"
-      //       data-toggle="collapse"
-      //       data-target="#navbarTogglerDemo01"
-      //       aria-controls="navbarTogglerDemo01"
-      //       aria-expanded="false"
-      //       aria-label="Toggle navigation"
-      //     >
-      //       <span className="navbar-toggler-icon" />
-      //     </button>
-      //     <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-      //       <a className="navbar-brand" href="#">
-      //         Recycler
-      //       </a>
-      //     </div>
-      //     {isAuthenticated?authLinks:guestLinks}
-      //   </div>
-      // </nav>
     );
   }
 }

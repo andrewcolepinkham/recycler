@@ -4,8 +4,7 @@ import PropTypes from "prop-types";
 import {GoogleMap, withScriptjs, withGoogleMap, Marker, InfoWindow} from 'react-google-maps';
 import { getPlaces } from "../../actions/google";
 import GoogleMapComponent from  "./GoogleMapComponent";
-// import * as Permissions from 'expo-permissions';
-// import * as Location from 'expo-location';
+
 
 export class MyMap extends Component {
   render() {

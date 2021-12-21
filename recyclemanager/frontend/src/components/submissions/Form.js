@@ -24,7 +24,6 @@ export class Form extends Component {
 
   onImageChange = event => {
     if (event.target.files && event.target.files[0]) {
-      // let img = event.target.files[0];
       this.setState({
         photo: event.target.files[0]
       });
@@ -35,9 +34,7 @@ export class Form extends Component {
   onSubmit = (e) => {
     e.preventDefault();
     const { type, description, amount, photo, unit } = this.state;
-    // const myphoto = "recyclemanager/IMG_0283_Kj8kCCB.JPG"; //testing
-    // const submission = { type, amount, description, photo };
-    // const submission = { type, amount, description, photo };
+
     let submission = new FormData();
     submission.append('type', this.state.type);
     submission.append('description', this.state.description);
@@ -72,7 +69,6 @@ export class Form extends Component {
     return (
       <div className="card card-body mt-4 mb-4">
         <h2>Add Submission</h2>
-        {/* <Image src={myimage}/> */}
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
             <label>Type of Submission</label>
