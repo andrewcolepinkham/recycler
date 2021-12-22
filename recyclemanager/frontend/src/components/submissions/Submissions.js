@@ -88,7 +88,7 @@ export class Submissions extends Component {
               <tr key={submission.id} >
                 <td onClick={this.handleEnlargeImage.bind(this, submission)} >{submission.id}</td>
                 <td onClick={this.handleEnlargeImage.bind(this, submission)} >{submission.type}</td>
-                <td onClick={this.handleEnlargeImage.bind(this, submission)} >{submission.amount, submission.unit}</td>
+                <td onClick={this.handleEnlargeImage.bind(this, submission)} >{submission.amount} {submission.unit}</td>
                 <td onClick={this.handleEnlargeImage.bind(this, submission)} >{submission.description}</td>
                 <td>
                   <img src={submission.photo} onClick={this.handleEnlargeImage.bind(this, submission)}className='img-fluid hover-shadow' alt='' style={{ maxWidth: '5rem' }}/>
